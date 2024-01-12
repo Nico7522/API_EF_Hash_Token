@@ -4,7 +4,6 @@ using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Methods;
 
 Console.WriteLine("Hello, World!");
-
 DataContext dataContext = new DataContext();
 string pepper = "cr2bPd0Cl4vGhjBMhqVWApY651YzyJB0\r\n";
 int iteration = 3;
