@@ -4,6 +4,7 @@ using API_EF_Hash_Token.DAL.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_EF_Hash_Token.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240114095627_ajout table category")]
+    partial class ajouttablecategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,21 +109,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductCategoryEntity", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("ProductCategoryEntity");
-                });
-
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("PrdoductId")
@@ -188,42 +175,7 @@ namespace API_EF_Hash_Token.DAL.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("ProductOrder");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.SizeEntity", b =>
-                {
-                    b.Property<int>("SizeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SizeId"), 1L, 1);
-
-                    b.Property<int>("Size")
-                        .HasMaxLength(3)
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
-                    b.HasKey("SizeId");
-
-                    b.ToTable("Sizes");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.SizeProductEntity", b =>
-                {
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SizeId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("SizeProduct");
+                    b.ToTable("ProductOrderEntity");
                 });
 
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserAdressEntity", b =>
@@ -303,25 +255,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductCategoryEntity", b =>
-                {
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.CategoryEntity", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.ProductEntity", "Product")
-                        .WithMany("Categories")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductOrderEntity", b =>
                 {
                     b.HasOne("API_EF_Hash_Token.DAL.Entities.OrderEntity", "Order")
@@ -339,25 +272,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.SizeProductEntity", b =>
-                {
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.ProductEntity", "Product")
-                        .WithMany("Sizes")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.SizeEntity", "Size")
-                        .WithMany("Products")
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserAdressEntity", b =>
@@ -384,11 +298,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.CategoryEntity", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.OrderEntity", b =>
                 {
                     b.Navigation("Products");
@@ -396,16 +305,7 @@ namespace API_EF_Hash_Token.DAL.Migrations
 
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductEntity", b =>
                 {
-                    b.Navigation("Categories");
-
                     b.Navigation("Orders");
-
-                    b.Navigation("Sizes");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.SizeEntity", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserEntity", b =>
