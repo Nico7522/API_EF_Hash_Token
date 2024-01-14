@@ -33,6 +33,8 @@ namespace API_EF_Hash_Token.DAL.Domain
             modelBuilder.ApplyConfiguration(new UserAdressConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());
             modelBuilder.ApplyConfiguration(new OrderConfig());
+            modelBuilder.ApplyConfiguration(new ProductOrderConfig());
+
 
 
 

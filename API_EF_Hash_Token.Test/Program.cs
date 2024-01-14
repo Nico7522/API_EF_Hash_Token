@@ -9,13 +9,14 @@ string pepper = "cr2bPd0Cl4vGhjBMhqVWApY651YzyJB0\r\n";
 int iteration = 3;
 string email = "nico.daddabbo7100@gmail.com";
 string password = "@Test1234=";
-#region Test register
+#region Test Register
 //try
 //{
 //    UserEntity user = new UserEntity()
 //    {
 //        FirstName = "D",
 //        LastName = "Nico",
+//        PhoneNumber = 491410952,
 //        Email = "nico.daddabbo7100@gmail.com",
 //        PasswordSalt = PasswordHasher.GenerateSalt(),
 //    };
@@ -29,12 +30,12 @@ string password = "@Test1234=";
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.Message);
+//    Console.WriteLine(ex.InnerException.Message);
 //}
 
 #endregion
 
-#region Test login
+#region Test Login
 
 //try
 //{
@@ -52,6 +53,63 @@ string password = "@Test1234=";
 //{
 
 //    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Create Adress
+
+//try
+//{
+//    AdressEntity adress = new AdressEntity()
+//    {
+//        CityName = "Mons",
+//        Street = "Rue quelconque",
+//        Number = 36,
+//        Country = "Belgique",
+//    };
+
+//    dataContext.Adresses.Add(adress);
+
+//    UserAdressEntity userAdress = new UserAdressEntity()
+//    {
+//        UserId = 6,
+//        Adress = adress,
+//    };
+//    dataContext.UserAdress.Add(userAdress);
+//    dataContext.SaveChanges();
+//    Console.WriteLine("OK");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+
+
+
+#endregion
+
+#region Test Create Product
+
+//try
+//{
+//	ProductEntity product = new ProductEntity()
+//	{
+//		ModelName = "Nike Air Force",
+//		Brand = "Nike",
+//		Description = "Chassure pour homme, ville ...",
+//		Sexe = "Homme",
+//		Price = 129.99M
+//	};
+//	dataContext.Products.Add(product);
+//	dataContext.SaveChanges();
+//    Console.WriteLine("OK");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
 //}
 
 #endregion

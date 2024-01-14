@@ -4,6 +4,7 @@ using API_EF_Hash_Token.DAL.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_EF_Hash_Token.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240114092620_fix bug maxLength user mail")]
+    partial class fixbugmaxLengthusermail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,28 +96,21 @@ namespace API_EF_Hash_Token.DAL.Migrations
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Discount")
-                        .ValueGeneratedOnAdd()
-                        .HasPrecision(3, 2)
-                        .HasColumnType("decimal(3,2)")
-                        .HasDefaultValue(0m);
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ModelName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(11, 2)
-                        .HasColumnType("decimal(11,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Sexe")
                         .IsRequired()
@@ -124,33 +119,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.HasKey("PrdoductId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductOrderEntity", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ReductionPerProduct")
-                        .ValueGeneratedOnAdd()
-                        .HasPrecision(3, 2)
-                        .HasColumnType("decimal(3,2)")
-                        .HasDefaultValue(0m);
-
-                    b.HasKey("ProductId", "OrderId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("ProductOrderEntity");
                 });
 
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserAdressEntity", b =>
@@ -230,25 +198,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductOrderEntity", b =>
-                {
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.OrderEntity", "Order")
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.ProductEntity", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserAdressEntity", b =>
                 {
                     b.HasOne("API_EF_Hash_Token.DAL.Entities.AdressEntity", "Adress")
@@ -271,16 +220,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.AdressEntity", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.OrderEntity", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.ProductEntity", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserEntity", b =>

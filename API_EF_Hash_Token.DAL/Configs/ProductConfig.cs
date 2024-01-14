@@ -15,7 +15,11 @@ namespace API_EF_Hash_Token.DAL.Configs
         {
             builder.HasKey(p => p.PrdoductId);
             builder.Property(p => p.PrdoductId).ValueGeneratedOnAdd();
-
+            builder.Property(p => p.ModelName).HasMaxLength(150).IsRequired();
+            builder.Property(p => p.Brand).HasMaxLength(150).IsRequired();
+            builder.Property(p => p.Description).HasMaxLength(500).IsRequired();
+            builder.Property(p => p.Price).HasPrecision(11, 2).IsRequired();
+            builder.Property(p => p.Discount).HasPrecision(3, 2).HasDefaultValue(0);
         }
     }
 }
