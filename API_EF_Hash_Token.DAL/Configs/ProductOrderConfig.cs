@@ -17,7 +17,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.HasOne(po => po.Product).WithMany(o => o.Orders).HasForeignKey(po => po.ProductId);
             builder.HasOne(po => po.Order).WithMany(o => o.Products).HasForeignKey(po => po.OrderId);
             builder.Property(po => po.Quantity).IsRequired();
-            builder.Property(po => po.Price).IsRequired();
+            builder.Property(po => po.Price).HasPrecision(11, 2).IsRequired();
             builder.Property(po => po.ReductionPerProduct).HasPrecision(3, 2).HasDefaultValue(0);
 
 
