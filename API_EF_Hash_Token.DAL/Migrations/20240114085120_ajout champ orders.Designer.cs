@@ -4,6 +4,7 @@ using API_EF_Hash_Token.DAL.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_EF_Hash_Token.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240114085120_ajout champ orders")]
+    partial class ajoutchamporders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,12 +76,7 @@ namespace API_EF_Hash_Token.DAL.Migrations
                         .HasColumnType("decimal(3,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -163,17 +160,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.OrderEntity", b =>
-                {
-                    b.HasOne("API_EF_Hash_Token.DAL.Entities.UserEntity", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserAdressEntity", b =>
                 {
                     b.HasOne("API_EF_Hash_Token.DAL.Entities.AdressEntity", "Adress")
@@ -201,8 +187,6 @@ namespace API_EF_Hash_Token.DAL.Migrations
             modelBuilder.Entity("API_EF_Hash_Token.DAL.Entities.UserEntity", b =>
                 {
                     b.Navigation("Addresses");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

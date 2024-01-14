@@ -21,6 +21,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.Property(u => u.PhoneNumber).HasMaxLength(300).IsRequired();
             builder.Property(u => u.Role).HasDefaultValue("User");
             builder.Property(u => u.IsActive).HasDefaultValue(false);
+            builder.HasMany(u => u.Orders).WithOne(o => o.User);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace API_EF_Hash_Token.DAL.Domain
         public DbSet<AdressEntity> Adresses { get; set; }
         public DbSet<UserAdressEntity> UserAdress { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
-
+        public DbSet<OrderEntity> Orders { get; set; }
 
 
 
@@ -32,6 +32,8 @@ namespace API_EF_Hash_Token.DAL.Domain
             modelBuilder.ApplyConfiguration(new AdressConfig());
             modelBuilder.ApplyConfiguration(new UserAdressConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());
+            modelBuilder.ApplyConfiguration(new OrderConfig());
+
 
 
 

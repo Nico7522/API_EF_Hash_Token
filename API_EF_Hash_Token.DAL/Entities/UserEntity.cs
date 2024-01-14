@@ -18,5 +18,6 @@ namespace API_EF_Hash_Token.DAL.Entities
         public string Role { get; set; }
         public bool IsActive { get; set; }
         public List<UserAdressEntity> Addresses { get; set; }
+        public List<OrderEntity> Orders { get; set; }
     }
 }
