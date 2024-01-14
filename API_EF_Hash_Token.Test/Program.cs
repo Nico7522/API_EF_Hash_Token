@@ -114,3 +114,34 @@ string password = "@Test1234=";
 
 #endregion
 
+#region Test Create Order et Create OrderProduct
+
+//try
+//{
+//	OrderEntity order = new OrderEntity() {
+//		UserId = 6,
+//		OrderDate = DateTime.Now,
+//	};
+//	dataContext.Orders.Add(order);
+//	ProductOrderEntity productOrder = new ProductOrderEntity() {
+
+//		Order = order,
+//		ProductId = 1,
+//		Quantity = 2,
+//		Price = 3.99M
+//	};
+//	order.TotalPrice = 7.01M;
+//	dataContext.ProductOrder.Add(productOrder);
+//	dataContext.SaveChanges();
+//    Console.WriteLine("OK");
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+
+#endregion
+
+
