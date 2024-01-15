@@ -9,7 +9,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
 {
     public interface IAuthRepository
     {
-        void Register();
-        UserEntity Login(string email, string password);
+        Task<UserEntity?> Register();
+        Task<UserEntity?> Login(string email, string password);
     }
 }

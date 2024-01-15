@@ -1,8 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using API_EF_Hash_Token.DAL.Domain;
 using API_EF_Hash_Token.DAL.Entities;
+using API_EF_Hash_Token.DAL.Interfaces;
 using API_EF_Hash_Token.DAL.Methods;
+using API_EF_Hash_Token.DAL.Repositories;
 using API_EF_Hash_Token.Test.Models;
+using Microsoft.Extensions.Configuration;
 
 Console.WriteLine("Hello, World!");
 DataContext dataContext = new DataContext();
@@ -189,22 +192,22 @@ string password = "@Test1234=";
 #region Test liaison size et product
 
 
-try
-{
-SizeProductEntity entity = new SizeProductEntity()
-{
-    ProductId = 1,
-    SizeId = 2,
-    Stock = 20
-};
-    dataContext.SizeProduct.Add(entity);
-    dataContext.SaveChanges();
-    Console.WriteLine("OK"); ;
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.InnerException.Message);
-}
+//try
+//{
+//SizeProductEntity entity = new SizeProductEntity()
+//{
+//    ProductId = 1,
+//    SizeId = 2,
+//    Stock = 20
+//};
+//    dataContext.SizeProduct.Add(entity);
+//    dataContext.SaveChanges();
+//    Console.WriteLine("OK"); ;
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.InnerException.Message);
+//}
 
 
 
@@ -283,6 +286,42 @@ catch (Exception ex)
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+
+
+// Pour utiliser appsetting.json
+IConfiguration configuration = new ConfigurationBuilder()
+ .SetBasePath(Directory.GetCurrentDirectory())
+ .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+ .AddEnvironmentVariables()
+ .AddCommandLine(args)
+ .Build();
+
+
+
+
+
+// TEST Service DAL
+IUserRepository userRepository = new UserRepository(dataContext, configuration);
+
+#region Test GetAll Users
+
+try
+{
+    IEnumerable<UserEntity> users = await  userRepository.GetAll();
+
+    foreach (var item in users)
+    {
+        Console.WriteLine(item.FirstName);
+    }
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
 #endregion
 
 
