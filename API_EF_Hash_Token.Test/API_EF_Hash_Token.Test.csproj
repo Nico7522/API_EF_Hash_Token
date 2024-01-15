@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API_EF_Hash_Token.BLL\API_EF_Hash_Token.BLL.csproj" />
     <ProjectReference Include="..\API_EF_Hash_Token.DAL\API_EF_Hash_Token.DAL.csproj" />
   </ItemGroup>
 

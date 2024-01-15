@@ -38,6 +38,13 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return await _context.Users.ToListAsync();
         }
 
+        public async Task<UserEntity?> GetByEmail(string email)
+        {
+            UserEntity? user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return user;
+
+        }
+
         public async Task<UserEntity?> GetById(int id)
         {
             return await _context.Users.FindAsync(id);
@@ -47,7 +54,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
         {
 
             // Peut-être à mettre dans la BLL
-            UserEntity? user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email); 
+            UserEntity? user = await GetByEmail(email);
             if (user is null)
                 return null;
 
@@ -67,12 +74,16 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return user;
         }
 
-        public async Task<UserEntity> Update(UserEntity entity, int id)
+        public async Task<UserEntity> Update(UserEntity newEntity, int id)
         {
-            UserEntity? user = await GetById(6);
-            user = entity;
+            // PB : obligé de faire la recherche par id ici
+            UserEntity? user = await _context.Users.FindAsync(id);
+       
+            user.FirstName = newEntity.FirstName;
+            user.LastName = newEntity.LastName;
+            user.PhoneNumber = newEntity.PhoneNumber;
             await _context.SaveChangesAsync();
-            return user;
+            return newEntity;
         }
     }
 }

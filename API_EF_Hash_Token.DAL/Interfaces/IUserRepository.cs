@@ -12,9 +12,11 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<IEnumerable<UserEntity>> GetAll();
         Task<UserEntity?> GetById(int id);
 
-        Task<UserEntity> Update (UserEntity entity, int id);
+        Task<UserEntity> Update (UserEntity newEntity, int id);
 
         Task<UserEntity> Delete(UserEntity user);
+
+        Task<UserEntity?> GetByEmail(string email);
 
 
 

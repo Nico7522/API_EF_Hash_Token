@@ -1,4 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using API_EF_Hash_Token.BLL.IInterfaces;
+using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Services;
 using API_EF_Hash_Token.DAL.Domain;
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
@@ -13,6 +16,8 @@ string pepper = "cr2bPd0Cl4vGhjBMhqVWApY651YzyJB0\r\n";
 int iteration = 3;
 string email = "nico.daddabbo2000@gmail.com";
 string password = "@Test1234=";
+
+// TEST direct
 #region Test Register
 //try
 //{
@@ -298,7 +303,7 @@ IConfiguration configuration = new ConfigurationBuilder()
  .AddCommandLine(args)
  .Build();
 
-// TEST Service DAL
+// TEST Repositories DAL
 IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #region Test GetAll Users
@@ -338,7 +343,26 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #endregion
 
-#region Test Update Users
+#region Test GetByEmail User
+
+//try
+//{
+//	UserEntity? user = await userRepository.GetByEmail("nico.daddabbo7100@gmail.com");
+
+//	if (user is null)
+//		throw new Exception();
+
+//    Console.WriteLine(user.LastName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Update User
 
 //try
 //{
@@ -409,17 +433,97 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 //try
 //{
-//	UserEntity? user = await userRepository.Login("nico.daddabbo2000@gmail.com", "@est1234=");
+//    UserEntity? user = await userRepository.Login("nico.daddabbo2000@gmail.com", "@Test1234=");
 //    if (user is null)
 //        throw new Exception();
-  
+
 //    Console.WriteLine(user.LastName);
 //}
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.Message); 
+//    Console.WriteLine(ex.Message);
 //}
 
 #endregion
 
+
+
+// TEST Services BLL
+
+IUserService userService = new UserService(userRepository);
+
+#region Test GetAll Users
+
+//try
+//{
+//   IEnumerable<UserModel> users = await userService.GetAll();
+
+//    foreach (var item in users)
+//    {
+//        Console.WriteLine(item.FirstName);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetById User
+
+//try
+//{
+//    UserModel? user = await userService.GetById(12);
+
+//    if (user is null) throw new Exception();
+
+//    Console.WriteLine(user.FirstName);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message); 
+//}
+#endregion
+
+#region Test GetByEmail User
+
+//try
+//{
+//	UserModel? user = await userService.GetByEmail("nico.daddabbo2000@gmail.com");
+//    if (user is null) throw new Exception();
+
+//    Console.WriteLine(user.FirstName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Update User
+
+
+//try
+//{
+//    UserModel? userToUpdate = await userService.GetById(12);
+//    userToUpdate.FirstName = "jean-jacque";
+//    userToUpdate.LastName = "ddqdsq";
+
+//    if (userToUpdate is null)
+//        throw new Exception();
+
+//    UserModel? updatedUser = await userService.Update(userToUpdate, 12);
+
+//    Console.WriteLine(updatedUser.FirstName);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
