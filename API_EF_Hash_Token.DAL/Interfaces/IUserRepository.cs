@@ -14,7 +14,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
 
         Task<UserEntity> Update (UserEntity entity, int id);
 
-        Task<UserEntity> Delete(int id);
+        Task<UserEntity> Delete(UserEntity user);
 
 
 

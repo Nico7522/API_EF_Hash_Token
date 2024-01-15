@@ -298,30 +298,128 @@ IConfiguration configuration = new ConfigurationBuilder()
  .AddCommandLine(args)
  .Build();
 
-
-
-
-
 // TEST Service DAL
 IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #region Test GetAll Users
 
-try
-{
-    IEnumerable<UserEntity> users = await  userRepository.GetAll();
+//try
+//{
+//    IEnumerable<UserEntity> users = await  userRepository.GetAll();
 
-    foreach (var item in users)
-    {
-        Console.WriteLine(item.FirstName);
-    }
-}
-catch (Exception ex)
-{
+//    foreach (var item in users)
+//    {
+//        Console.WriteLine(item.FirstName);
+//    }
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
+#region Test GetById User
+
+
+//try
+//{
+//    UserEntity? user = await userRepository.GetById(6);
+//    Console.WriteLine(user?.FirstName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+
+#endregion
+
+#region Test Update Users
+
+//try
+//{
+//	UserEntity? user = await userRepository.GetById(6);
+//	user.FirstName = "D'Ad";
+//	UserEntity updatedUser = await userRepository.Update(user, 6);
+//    Console.WriteLine("OK");
+
+
+
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+
+//}
+
+
+
+#endregion
+
+#region Test Delete User
+
+//try
+//{
+//	UserEntity? userToDelete = await userRepository.GetById(11);
+
+//    if (userToDelete is null)
+//        throw new Exception();
+
+//	UserEntity deletedUser = await userRepository.Delete(userToDelete);
+
+//    Console.WriteLine(deletedUser.FirstName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); ;
+//}
+#endregion
+
+#region Test Register User
+
+//UserEntity user = new UserEntity()
+//{
+//    FirstName = "DD",
+//    LastName = "Nicolas",
+//    Email = "nico.daddabbo2000@gmail.com",
+//    Password = "@Test1234=",
+//    PhoneNumber = 0491410953,
+
+//};
+
+//try
+//{
+//    UserEntity? createdUser = await userRepository.Register(user);
+//    Console.WriteLine(createdUser?.FirstName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
+#region Test Login User
+
+//try
+//{
+//	UserEntity? user = await userRepository.Login("nico.daddabbo2000@gmail.com", "@est1234=");
+//    if (user is null)
+//        throw new Exception();
+  
+//    Console.WriteLine(user.LastName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+
+#endregion
 
