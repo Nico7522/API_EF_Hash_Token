@@ -2,6 +2,7 @@
 using API_EF_Hash_Token.DAL.Domain;
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Methods;
+using API_EF_Hash_Token.Test.Models;
 
 Console.WriteLine("Hello, World!");
 DataContext dataContext = new DataContext();
@@ -94,16 +95,16 @@ string password = "@Test1234=";
 
 //try
 //{
-//	ProductEntity product = new ProductEntity()
-//	{
-//		ModelName = "Nike Air Force",
-//		Brand = "Nike",
-//		Description = "Chassure pour homme, ville ...",
-//		Sexe = "Homme",
-//		Price = 129.99M
-//	};
-//	dataContext.Products.Add(product);
-//	dataContext.SaveChanges();
+//    ProductEntity product = new ProductEntity()
+//    {
+//        ModelName = "Duramo 10",
+//        Brand = "Adidas",
+//        Description = "Chassure pour femme, course",
+//        Sexe = "Femme",
+//        Price = 45.80M
+//    };
+//    dataContext.Products.Add(product);
+//    dataContext.SaveChanges();
 //    Console.WriteLine("OK");
 //}
 //catch (Exception ex)
@@ -142,6 +143,50 @@ string password = "@Test1234=";
 //    Console.WriteLine(ex.InnerException.Message);
 //}
 
+#endregion
+
+#region Test Full Order
+
+// Ce que l'on reçoit du front
+List<OrderProduct> userOrder = new List<OrderProduct>() { new OrderProduct() { ProductId = 1, Price = 129.99M, Quantity = 2 }, new OrderProduct() { ProductId = 2, Price = 85.99M, Quantity = 1 } };
+
+try
+{
+    // Création de la command
+    OrderEntity orderEntity = new OrderEntity();
+    // Ajout de l'user id
+    orderEntity.UserId = 6;
+    // Ajout de la date
+    orderEntity.OrderDate = DateTime.Now;
+
+    // Pour tous les produits de la commande, on créé un ProductOrder
+    foreach (var product in userOrder)
+    {
+        ProductOrderEntity productOrderEntity = new ProductOrderEntity() 
+        { 
+            // On y associe la commande, le produit, la quantité et le prix total (quantity*price)
+            Order = orderEntity,
+            ProductId = product.ProductId,
+            Quantity = product.Quantity,
+            Price = product.Price * product.Quantity,
+        
+        };
+        dataContext.ProductOrder.Add(productOrderEntity);
+        // On ajoute le prix total (quantity*price) au prix total de la commande
+        orderEntity.TotalPrice += productOrderEntity.Price;
+    }
+
+    dataContext.Orders.Add(orderEntity);
+    dataContext.SaveChanges();
+    Console.WriteLine("OK");
+
+
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
 #endregion
 
 

@@ -1,6 +1,7 @@
 ﻿using API_EF_Hash_Token.DAL.Configs;
 using API_EF_Hash_Token.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace API_EF_Hash_Token.DAL.Domain
 {
     public class DataContext : DbContext
     {
-        private string _connectionString = "Data Source=DESKTOP-IFNFMI9;Initial Catalog=EF_Hash_Token;Integrated Security=True;Connect Timeout=60;";
+        private string _connectionString = "Data Source=GOS-VDI202\\TFTIC;Initial Catalog=EF_Hash_Token;Integrated Security=True;Connect Timeout=60;";
 
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<AdressEntity> Adresses { get; set; }
@@ -22,8 +23,6 @@ namespace API_EF_Hash_Token.DAL.Domain
         public DbSet<ProductOrderEntity> ProductOrder { get; set; }
         public DbSet<SizeEntity> Sizes { get; set; }
         public DbSet<SizeProductEntity> SizeProduct { get; set; }
-
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,18 +40,15 @@ namespace API_EF_Hash_Token.DAL.Domain
             modelBuilder.ApplyConfiguration(new ProductCategoryConfig());
             modelBuilder.ApplyConfiguration(new SizeConfig());
             modelBuilder.ApplyConfiguration(new SizeProductConfig());
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        public void ConfigureService(IServiceCollection service)
+        {
+            service.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer("server=.;database=myDb;trusted_connection=true;");
+            });
         }
     }
+
 }
+
