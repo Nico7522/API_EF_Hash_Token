@@ -20,6 +20,8 @@ namespace API_EF_Hash_Token.DAL.Domain
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductCategoryEntity> ProductCategory { get; set; }
+
         public DbSet<ProductOrderEntity> ProductOrder { get; set; }
         public DbSet<SizeEntity> Sizes { get; set; }
         public DbSet<SizeProductEntity> SizeProduct { get; set; }

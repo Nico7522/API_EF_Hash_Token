@@ -17,7 +17,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.Property(u => u.UserId).ValueGeneratedOnAdd();
             builder.Property(u => u.FirstName).HasMaxLength(150).IsRequired();
             builder.Property(u => u.LastName).HasMaxLength(150).IsRequired();
-            builder.Property(u => u.Email).HasMaxLength(250).IsRequired();
+            builder.HasIndex(u => u.Email).IsUnique();
             builder.Property(u => u.PhoneNumber).HasMaxLength(300).IsRequired();
             builder.Property(u => u.Role).HasDefaultValue("User");
             builder.Property(u => u.IsActive).HasDefaultValue(false);

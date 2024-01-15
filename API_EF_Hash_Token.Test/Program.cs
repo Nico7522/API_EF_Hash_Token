@@ -8,7 +8,7 @@ Console.WriteLine("Hello, World!");
 DataContext dataContext = new DataContext();
 string pepper = "cr2bPd0Cl4vGhjBMhqVWApY651YzyJB0\r\n";
 int iteration = 3;
-string email = "nico.daddabbo7100@gmail.com";
+string email = "nico.daddabbo2000@gmail.com";
 string password = "@Test1234=";
 #region Test Register
 //try
@@ -18,7 +18,7 @@ string password = "@Test1234=";
 //        FirstName = "D",
 //        LastName = "Nico",
 //        PhoneNumber = 491410952,
-//        Email = "nico.daddabbo7100@gmail.com",
+//        Email = "nico.daddabbo2000@gmail.com",
 //        PasswordSalt = PasswordHasher.GenerateSalt(),
 //    };
 
@@ -115,6 +115,102 @@ string password = "@Test1234=";
 
 #endregion
 
+#region Test Create Category
+
+//try
+//{
+//    CategoryEntity categoryEntity = new CategoryEntity()
+//    {
+//        CategoryName = "Mocassin",
+//        Description = "description",
+//    };
+
+//    dataContext.Categories.Add(categoryEntity);
+//    dataContext.SaveChanges();
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+
+
+#endregion
+
+#region Test Liaison categorie et chaussure
+
+
+//try
+//{
+//ProductCategoryEntity categoryEntity = new ProductCategoryEntity() { 
+//    ProductId = 1,
+//    CategoryId = 2
+//};
+//dataContext.ProductCategory.Add(categoryEntity);
+//dataContext.SaveChanges();
+//Console.WriteLine("OK");
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+
+#endregion
+
+#region Test ajout Size
+
+//try
+//{
+//    SizeEntity sizeEntity = new SizeEntity()
+//    {
+//        Size = 38,
+//    };
+
+//    dataContext.Sizes.Add(sizeEntity);
+//    dataContext.SaveChanges();
+//    Console.WriteLine("OK");
+
+
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+
+
+
+#endregion
+
+#region Test liaison size et product
+
+
+try
+{
+SizeProductEntity entity = new SizeProductEntity()
+{
+    ProductId = 1,
+    SizeId = 2,
+    Stock = 20
+};
+    dataContext.SizeProduct.Add(entity);
+    dataContext.SaveChanges();
+    Console.WriteLine("OK"); ;
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.InnerException.Message);
+}
+
+
+
+
+#endregion
+
 #region Test Create Order et Create OrderProduct
 
 //try
@@ -147,46 +243,46 @@ string password = "@Test1234=";
 
 #region Test Full Order
 
-// Ce que l'on reçoit du front
-List<OrderProduct> userOrder = new List<OrderProduct>() { new OrderProduct() { ProductId = 1, Price = 129.99M, Quantity = 2 }, new OrderProduct() { ProductId = 2, Price = 85.99M, Quantity = 1 } };
+//// Ce que l'on reçoit du front
+//List<OrderProduct> userOrder = new List<OrderProduct>() { new OrderProduct() { ProductId = 1, Price = 129.99M, Quantity = 2 }, new OrderProduct() { ProductId = 2, Price = 85.99M, Quantity = 1 } };
 
-try
-{
-    // Création de la command
-    OrderEntity orderEntity = new OrderEntity();
-    // Ajout de l'user id
-    orderEntity.UserId = 6;
-    // Ajout de la date
-    orderEntity.OrderDate = DateTime.Now;
+//try
+//{
+//    // Création de la command
+//    OrderEntity orderEntity = new OrderEntity();
+//    // Ajout de l'user id
+//    orderEntity.UserId = 6;
+//    // Ajout de la date
+//    orderEntity.OrderDate = DateTime.Now;
 
-    // Pour tous les produits de la commande, on créé un ProductOrder
-    foreach (var product in userOrder)
-    {
-        ProductOrderEntity productOrderEntity = new ProductOrderEntity() 
-        { 
-            // On y associe la commande, le produit, la quantité et le prix total (quantity*price)
-            Order = orderEntity,
-            ProductId = product.ProductId,
-            Quantity = product.Quantity,
-            Price = product.Price * product.Quantity,
-        
-        };
-        dataContext.ProductOrder.Add(productOrderEntity);
-        // On ajoute le prix total (quantity*price) au prix total de la commande
-        orderEntity.TotalPrice += productOrderEntity.Price;
-    }
+//    // Pour tous les produits de la commande, on créé un ProductOrder
+//    foreach (var product in userOrder)
+//    {
+//        ProductOrderEntity productOrderEntity = new ProductOrderEntity() 
+//        { 
+//            // On y associe la commande, le produit, la quantité et le prix total (quantity*price)
+//            Order = orderEntity,
+//            ProductId = product.ProductId,
+//            Quantity = product.Quantity,
+//            Price = product.Price * product.Quantity,
 
-    dataContext.Orders.Add(orderEntity);
-    dataContext.SaveChanges();
-    Console.WriteLine("OK");
+//        };
+//        dataContext.ProductOrder.Add(productOrderEntity);
+//        // On ajoute le prix total (quantity*price) au prix total de la commande
+//        orderEntity.TotalPrice += productOrderEntity.Price;
+//    }
+
+//    dataContext.Orders.Add(orderEntity);
+//    dataContext.SaveChanges();
+//    Console.WriteLine("OK");
 
 
-}
-catch (Exception ex)
-{
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 #endregion
 
 

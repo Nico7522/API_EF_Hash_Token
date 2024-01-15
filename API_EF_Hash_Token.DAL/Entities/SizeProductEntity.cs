@@ -12,5 +12,6 @@ namespace API_EF_Hash_Token.DAL.Entities
         public SizeEntity Size { get; set; }
         public int ProductId { get; set; }
         public ProductEntity Product { get; set; }
+        public int Stock { get; set; }
     }
 }

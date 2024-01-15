@@ -10,8 +10,6 @@ namespace API_EF_Hash_Token.DAL.Entities
     {
         public int SizeId { get; set; }
         public int Size { get; set; }
-        public int Stock { get; set; }
-
         public List<SizeProductEntity> Products { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.HasKey(sp => new { sp.SizeId, sp.ProductId });
             builder.HasOne(sp => sp.Size).WithMany(s => s.Products).HasForeignKey(sp => sp.SizeId);
             builder.HasOne(sp => sp.Product).WithMany(p => p.Sizes).HasForeignKey(sp => sp.ProductId);
+            builder.Property(s => s.Stock).IsRequired();
 
         }
     }
