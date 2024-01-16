@@ -547,14 +547,14 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 
 //try
 //{
-//    UserModel? userToUpdate = await userService.GetById(12);
-//    userToUpdate.FirstName = "jean-jacque";
-//    userToUpdate.LastName = "ddqdsq";
+//    UserModel? userToUpdate = await userService.GetById(14);
+//    userToUpdate.FirstName = "niconrrico";
+//    userToUpdate.LastName = "d";
 
 //    if (userToUpdate is null)
 //        throw new Exception();
 
-//    UserModel? updatedUser = await userService.Update(userToUpdate, 12);
+//    UserModel? updatedUser = await userService.Update(userToUpdate, 14);
 
 //    Console.WriteLine(updatedUser.FirstName);
 //}
@@ -639,9 +639,9 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 
 //try
 //{
-//	bool isUpdated = await authService.UpdatePassword("@GGGtyudd4", 14);
+//    bool isUpdated = await authService.UpdatePassword("@GGGtyudd4ddd", 14);
 
-//	if (!isUpdated) throw new Exception();
+//    if (!isUpdated) throw new Exception();
 
 //    Console.WriteLine("ok");
 //}
