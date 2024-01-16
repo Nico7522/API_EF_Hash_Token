@@ -2,6 +2,7 @@
 using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace API_EF_Hash_Token.API.Controllers
             _userService = userService;
         }
 
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll()
         {

@@ -10,5 +10,14 @@
         public string Email { get; set; }
 
         public int PhoneNumber { get; set; }
+
+        public UserDTO(int userId, string firstName, string lastName, string Email, int phoneNumber)
+        {
+            this.UserId = userId;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = Email;
+            this.PhoneNumber = phoneNumber;
+        }
     }
 }
