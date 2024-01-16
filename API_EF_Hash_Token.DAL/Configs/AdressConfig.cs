@@ -15,6 +15,7 @@ namespace API_EF_Hash_Token.DAL.Configs
         {
             builder.HasKey(a => a.AdressId);
             builder.Property(a => a.AdressId).ValueGeneratedOnAdd();
+            builder.HasIndex(a => new { a.Number, a.Street, a.CityName, a.Country }).IsUnique();
             builder.Property(a => a.Number).IsRequired();
             builder.Property(a => a.CityName).HasMaxLength(200).IsRequired();
             builder.Property(a => a.Street).HasMaxLength(350).IsRequired();

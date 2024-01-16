@@ -366,24 +366,24 @@ IAdressRepository adressRepository = new AdressRepository(dataContext);
 
 #region Test Update User
 
-try
-{
-    UserEntity? user = await userRepository.GetById(19);
-    user.FirstName = "D'Adss";
-    UserEntity? updatedUser = await userRepository.Update(user, 19);
+//try
+//{
+//    UserEntity? user = await userRepository.GetById(19);
+//    user.FirstName = "D'Adss";
+//    UserEntity? updatedUser = await userRepository.Update(user, 19);
 
-    if (updatedUser is null) throw new Exception();
+//    if (updatedUser is null) throw new Exception();
 
-    Console.WriteLine("OK");
+//    Console.WriteLine("OK");
 
 
 
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
 
-}
+//}
 
 
 
