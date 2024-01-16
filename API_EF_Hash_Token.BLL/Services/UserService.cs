@@ -17,9 +17,12 @@ namespace API_EF_Hash_Token.BLL.Services
         {
             _userRepository = userRepository;
         }
-        public Task<UserModel?> Delete(int id)
+        public async Task<UserModel?> Delete(int id)
         {
-            throw new NotImplementedException();
+          
+           UserModel deletedUser = await _userRepository.Delete(id).ContinueWith(r => r.Result.ToUserModel());
+            return deletedUser;
+
         }
 
         public async Task<IEnumerable<UserModel>> GetAll()
@@ -43,11 +46,7 @@ namespace API_EF_Hash_Token.BLL.Services
 
         public async Task<UserModel?> Update(UserModel newUser, int id)
         {
-           UserModel? userToUpdate = await GetById(id);
-
-            if (userToUpdate is null)
-                return null;
-
+        
             UserModel updatedUser = await _userRepository.Update(newUser.ToUserEntity(), id).ContinueWith(r => r.Result.ToUserModel());
             return updatedUser;
         }

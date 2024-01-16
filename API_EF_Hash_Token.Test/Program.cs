@@ -450,8 +450,10 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 
 // TEST Services BLL
-
+IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
+IAuthService authService = new AuthService(authRepository, userRepository);
+
 
 #region Test GetAll Users
 
@@ -523,6 +525,59 @@ IUserService userService = new UserService(userRepository);
 //}
 //catch (Exception ex)
 //{
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Delete user
+
+//try
+//{
+//	UserModel? deletedUser = await userService.Delete(13);
+//    Console.WriteLine(deletedUser.FirstName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Register User
+
+//try
+//{
+//	UserModel user = new UserModel("test", "dqsd", email, 0491542362, password);
+
+//	UserModel createdUser = await authService.Register(user);
+
+//	if (createdUser is null)
+//		throw new Exception();
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Login User
+
+//try
+//{
+//	UserModel user = await authService.Login(email, "rfds");
+
+//	if (user is null) throw new Exception();
+
+//    Console.WriteLine(user.FirstName + user.LastName);
+
+//}
+//catch (Exception ex)
+//{
+
 //    Console.WriteLine(ex.Message);
 //}
 

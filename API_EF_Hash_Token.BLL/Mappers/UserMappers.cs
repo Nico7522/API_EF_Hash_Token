@@ -20,7 +20,9 @@ namespace API_EF_Hash_Token.BLL.Mappers
             return new UserEntity() { 
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email,
+                Password = model.Password,
             };
         }
     }

@@ -18,7 +18,7 @@ namespace API_EF_Hash_Token.BLL.Models
         private string _password;
 
         public string Password
-        {
+        {   internal get { return _password; }
             set { _password = value; }
         }
 
@@ -34,7 +34,7 @@ namespace API_EF_Hash_Token.BLL.Models
             this.UserId = id;
         }
 
-        internal UserModel(string lastName, string firstName, string email, int phoneNumber, string password) : this(lastName, firstName, email, phoneNumber)
+        public UserModel(string lastName, string firstName, string email, int phoneNumber, string password) : this(lastName, firstName, email, phoneNumber)
         {
             
             this.Password = password;

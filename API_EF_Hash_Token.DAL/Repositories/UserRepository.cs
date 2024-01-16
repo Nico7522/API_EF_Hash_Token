@@ -26,11 +26,15 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _pepper = _configuration.GetSection("secret").Value;
         }
 
-        public async Task<UserEntity> Delete(UserEntity user)
+        public async Task<UserEntity> Delete(int id)
         {
-            _context.Remove(user);
+            UserEntity? userToDelete = await GetById(13);
+            if (userToDelete is null)
+                return null;
+
+              _context.Remove(userToDelete);
             await _context.SaveChangesAsync();
-            return user;
+            return userToDelete;
         }
 
         public async Task<IEnumerable<UserEntity>> GetAll()
@@ -53,7 +57,6 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public async Task<UserEntity?> Login(string email, string password)
         {
 
-            // Peut-être à mettre dans la BLL
             UserEntity? user = await GetByEmail(email);
             if (user is null)
                 return null;
