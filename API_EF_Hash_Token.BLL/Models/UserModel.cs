@@ -21,20 +21,22 @@ namespace API_EF_Hash_Token.BLL.Models
         {   internal get { return _password; }
             set { _password = value; }
         }
-
-        public UserModel(string lastName, string firstName, string email, int phoneNumber)
+        public UserModel(string lastName, string firstName, int phoneNumber)
         {
             this.LastName = lastName;
             this.FirstName = firstName;
-            this.Email = email;
             this.PhoneNumber = phoneNumber;
         }
-        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber) : this(lastName, firstName, email, phoneNumber)
+        public UserModel(string lastName, string firstName, int phoneNumber, string email) : this(lastName, firstName, phoneNumber)
+        {
+            this.Email = email;
+        }
+        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber) : this(lastName, firstName, phoneNumber, email)
         {
             this.UserId = id;
         }
 
-        public UserModel(string lastName, string firstName, string email, int phoneNumber, string password) : this(lastName, firstName, email, phoneNumber)
+        public UserModel(string lastName, string firstName, string email, int phoneNumber, string password) : this(lastName, firstName, phoneNumber, email)
         {
             
             this.Password = password;

@@ -19,10 +19,8 @@ namespace API_EF_Hash_Token.BLL.Services
         }
         public async Task<UserModel?> Delete(int id)
         {
-          
-           UserModel deletedUser = await _userRepository.Delete(id).ContinueWith(r => r.Result.ToUserModel());
+           UserModel? deletedUser = await _userRepository.Delete(id).ContinueWith(r => r.Result?.ToUserModel());
             return deletedUser;
-
         }
 
         public async Task<IEnumerable<UserModel>> GetAll()

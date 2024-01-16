@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.API.Dto;
+using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,34 @@ namespace API_EF_Hash_Token.API.Controllers
            IEnumerable<UserDTO> users = await _userService.GetAll().ContinueWith(r => r.Result.Select(u => u.ToUserDTO()));
 
             return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDTO?>> GetById(int id)
+        {
+            UserDTO? user = await _userService.GetById(id).ContinueWith(r => r.Result?.ToUserDTO());
+            return user is not null ? Ok(user) : NotFound();
+        }
+
+        [HttpPost("email")]
+        public async Task<ActionResult<UserDTO?>> GetByEmail(SearchByEmailForm form) {
+            
+            UserDTO? user = await _userService.GetByEmail(form.Email).ContinueWith(r => r.Result?.ToUserDTO());
+            return user is not null ? Ok(user) : NotFound();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UserDTO?>> Update(UpdateUserForm form, int id)
+        {
+            UserDTO? updatedUser = await _userService.Update(form.ToUserModel(), id).ContinueWith(r => r.Result?.ToUserDTO());
+            return updatedUser is not null ? Ok(updatedUser) : NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserDTO>> Delete(int id)
+        {
+            UserDTO? deletedUser = await _userService.Delete(id).ContinueWith(r => r.Result?.ToUserDTO());
+            return deletedUser is not null ? Ok(deletedUser) : NotFound();
         }
     }
 }

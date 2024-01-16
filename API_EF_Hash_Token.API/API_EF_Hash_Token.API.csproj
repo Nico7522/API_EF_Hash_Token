@@ -14,8 +14,4 @@
     <ProjectReference Include="..\API_EF_Hash_Token.BLL\API_EF_Hash_Token.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Forms\" />
-  </ItemGroup>
-
 </Project>

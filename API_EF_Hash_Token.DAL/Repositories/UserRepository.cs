@@ -28,7 +28,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<UserEntity> Delete(int id)
         {
-            UserEntity? userToDelete = await GetById(13);
+            UserEntity? userToDelete = await GetById(id);
             if (userToDelete is null)
                 return null;
 

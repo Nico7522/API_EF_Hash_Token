@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.API.Dto;
+using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.BLL.Models;
 
 namespace API_EF_Hash_Token.API.Mappers
@@ -16,6 +17,11 @@ namespace API_EF_Hash_Token.API.Mappers
                 PhoneNumber = model.PhoneNumber,
 
             };
+        }
+
+        internal static UserModel ToUserModel(this UpdateUserForm form)
+        {
+            return new UserModel(form.LastName, form.FirstName, form.PhoneNumber);
         }
     }
 }
