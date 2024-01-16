@@ -12,7 +12,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
     {
         internal static UserModel ToUserModel(this UserEntity entity)
         {
-            return new UserModel(entity.UserId, entity.LastName, entity.FirstName, entity.Email, entity.PhoneNumber);
+            return new UserModel(entity.UserId, entity.LastName, entity.FirstName, entity.Email, entity.PhoneNumber, entity.Role);
         }
 
         internal static UserEntity ToUserEntity(this UserModel model)

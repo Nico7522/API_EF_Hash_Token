@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -32,6 +33,8 @@ namespace API_EF_Hash_Token.API.Infrastructure
                 new Claim(ClaimTypes.Sid, user.UserId.ToString()),
 
                 new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+
+                new Claim(ClaimTypes.Role, user.Role),
 
                 new Claim(ClaimTypes.Expiration, now.Add(TimeSpan.FromDays(expirationDate)).ToString(), ClaimValueTypes.DateTime)
             };

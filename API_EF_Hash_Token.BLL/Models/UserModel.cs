@@ -31,9 +31,10 @@ namespace API_EF_Hash_Token.BLL.Models
         {
             this.Email = email;
         }
-        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber) : this(lastName, firstName, phoneNumber, email)
+        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber, string role) : this(lastName, firstName, phoneNumber, email)
         {
             this.UserId = id;
+            this.Role = role;
         }
 
         public UserModel(string lastName, string firstName, string email, int phoneNumber, string password) : this(lastName, firstName, phoneNumber, email)
