@@ -16,7 +16,6 @@ namespace API_EF_Hash_Token.BLL.Models
         public string Role { get; set; }
         public bool IsActive { get; set; }
         private string _password;
-
         public string Password
         {   internal get { return _password; }
             set { _password = value; }

@@ -305,7 +305,9 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 // TEST Repositories DAL
 IUserRepository userRepository = new UserRepository(dataContext, configuration);
+IAdressRepository adressRepository = new AdressRepository(dataContext);
 
+// TEST Users
 #region Test GetAll Users
 
 //try
@@ -364,21 +366,24 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #region Test Update User
 
-//try
-//{
-//	UserEntity? user = await userRepository.GetById(6);
-//	user.FirstName = "D'Ad";
-//	UserEntity updatedUser = await userRepository.Update(user, 6);
-//    Console.WriteLine("OK");
+try
+{
+    UserEntity? user = await userRepository.GetById(19);
+    user.FirstName = "D'Adss";
+    UserEntity? updatedUser = await userRepository.Update(user, 19);
+
+    if (updatedUser is null) throw new Exception();
+
+    Console.WriteLine("OK");
 
 
 
-//}
-//catch (Exception ex)
-//{
-//    Console.WriteLine(ex.Message);
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
 
-//}
+}
 
 
 
@@ -481,6 +486,92 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 //    Console.WriteLine(ex.Message);
 //}
 
+#endregion
+
+// TEST Adresses
+#region Test GetAll Adresses
+
+//try
+//{
+//IEnumerable<AdressEntity> adresses = await adressRepository.GetAll();
+//    foreach (var item in adresses)
+//    {
+//        Console.WriteLine(item.CityName);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+
+#endregion
+
+#region Test GetById Adress
+
+//try
+//{
+//	AdressEntity? adress = await adressRepository.GetById(16);
+//    if (adress is null)
+//        throw new Exception();
+
+//    Console.WriteLine(adress.Street);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+
+//}
+#endregion
+
+#region Test Insert Adress
+
+try
+{
+	AdressEntity? insertedAdress = await adressRepository.Insert(new AdressEntity { CityName = "LL", Country = "BE", Number = 25, Street = "AV" });
+    Console.WriteLine("ok");
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
+#endregion
+
+#region Test Update Adress
+
+//try
+//{
+//    AdressEntity? adressToUpdate = await adressRepository.GetById(1);
+//    adressToUpdate.Street = "rezrzer";
+//    AdressEntity? adress = await adressRepository.Update(adressToUpdate, 1);
+
+//    Console.WriteLine(adress.Street);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+#endregion
+
+#region Test Delete Adress
+
+//try
+//{
+//    AdressEntity? deletedAdress = await adressRepository.Delete(2);
+
+//    if (deletedAdress is null) throw new Exception();
+
+//    Console.WriteLine(deletedAdress.Street);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
 #endregion
 
 

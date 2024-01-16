@@ -12,7 +12,7 @@ namespace API_EF_Hash_Token.DAL.Domain
 {
     public class DataContext : DbContext
     {
-        //private string _connectionString = "Data Source=GOS-VDI202\\TFTIC;Initial Catalog=EF_Hash_Token;Integrated Security=True;Connect Timeout=60;";
+        private string _connectionString = "Data Source=GOS-VDI202\\TFTIC;Initial Catalog=EF_Hash_Token;Integrated Security=True;Connect Timeout=60;";
 
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<AdressEntity> Adresses { get; set; }
@@ -27,10 +27,15 @@ namespace API_EF_Hash_Token.DAL.Domain
         public DbSet<SizeProductEntity> SizeProduct { get; set; }
         public DataContext(DbContextOptions options) : base(options) { }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(_connectionString);
-        //}
+        // Pour les tests
+        public DataContext()
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfig());

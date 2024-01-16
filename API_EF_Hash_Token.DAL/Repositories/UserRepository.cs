@@ -26,13 +26,13 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _pepper = _configuration.GetSection("secret").Value;
         }
 
-        public async Task<UserEntity> Delete(int id)
+        public async Task<UserEntity?> Delete(int id)
         {
             UserEntity? userToDelete = await GetById(id);
             if (userToDelete is null)
                 return null;
 
-              _context.Remove(userToDelete);
+            _context.Remove(userToDelete);
             await _context.SaveChangesAsync();
             return userToDelete;
         }
@@ -77,16 +77,18 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return user;
         }
 
-        public async Task<UserEntity> Update(UserEntity newEntity, int id)
+        public async Task<UserEntity?> Update(UserEntity newEntity, int id)
         {
             // PB : obligé de faire la recherche par id ici
             UserEntity? user = await _context.Users.FindAsync(id);
-       
+
+            if (user is null) return null;
+
             user.FirstName = newEntity.FirstName;
             user.LastName = newEntity.LastName;
             user.PhoneNumber = newEntity.PhoneNumber;
             await _context.SaveChangesAsync();
-            return newEntity;
+            return user;
         }
 
         public async Task<bool> UpdateEmail(string email, int id)
