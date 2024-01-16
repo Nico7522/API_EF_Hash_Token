@@ -465,7 +465,7 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #endregion
 
-#region Test Update Password User
+#region Test UpdatePassword User
 
 //try
 //{

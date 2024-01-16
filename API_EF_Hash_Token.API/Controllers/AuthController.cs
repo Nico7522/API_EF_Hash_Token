@@ -21,19 +21,28 @@ namespace API_EF_Hash_Token.API.Controllers
             _tokenManager = tokenManager;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult<UserDTO?>> Register([FromBody] RegisterUserForm form)
         {
-           UserDTO? user = await _authService.Register(form.ToUserModel()).ContinueWith(r => r.Result?.ToUserDTO());
+            UserDTO? user = await _authService.Register(form.ToUserModel()).ContinueWith(r => r.Result?.ToUserDTO());
 
-            if(user is null)
+            if (user is null)
                 return BadRequest();
 
             string token = _tokenManager.GerenateJwt(user);
 
-            return Ok(new { Token = token});
+            return Ok(new { Token = token });
+        }
 
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] LoginUserForm form)
+        {
+            UserDTO? user = await _authService.Login(form.Email, form.Password).ContinueWith(r => r.Result?.ToUserDTO());
 
+            if (user is null) return BadRequest();
+
+            string token = _tokenManager.GerenateJwt(user);
+            return Ok(new { Token = token });
         }
     }
 }
