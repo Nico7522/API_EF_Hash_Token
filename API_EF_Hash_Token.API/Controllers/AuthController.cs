@@ -44,5 +44,21 @@ namespace API_EF_Hash_Token.API.Controllers
             string token = _tokenManager.GerenateJwt(user);
             return Ok(new { Token = token });
         }
+
+        [HttpPatch("{id}/update/email")]
+        public async Task<ActionResult> UpdateEmail(UpdateEmailForm form, int id)
+        {
+            bool isUpdated = await _authService.UpdateEmail(form.Email, id);
+            return isUpdated ? Ok() : BadRequest();
+        }
+
+        [HttpPatch("{id}/update/password")]
+        public async Task<ActionResult> UpdatePassword(UpdatePasswordForm form, int id)
+        {
+            bool isUpdated = await _authService.UpdatePassword(form.Password, id);
+            return isUpdated ? Ok() : BadRequest();
+
+
+        }
     }
 }

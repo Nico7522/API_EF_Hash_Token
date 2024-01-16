@@ -20,7 +20,7 @@ namespace API_EF_Hash_Token.API.Controllers
             _userService = userService;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll()
         {
