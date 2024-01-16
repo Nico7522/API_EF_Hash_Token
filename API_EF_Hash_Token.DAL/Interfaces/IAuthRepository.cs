@@ -11,7 +11,8 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     {
         Task<UserEntity?> Register(UserEntity user);
         Task<UserEntity?> Login(string email, string password);
-
         Task<bool> UpdateEmail(string email, int id);
+
+        Task<bool> UpdatePassword(string password, int id);
     }
 }

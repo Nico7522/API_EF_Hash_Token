@@ -465,6 +465,24 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #endregion
 
+#region Test Update Password User
+
+//try
+//{
+//    bool isUpdated = await userRepository.UpdatePassword("@TTTTe11z", 14);
+
+//    if (!isUpdated) throw new Exception();
+
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 
 // TEST Services BLL
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
@@ -585,9 +603,9 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 
 //try
 //{
-//	UserModel user = await authService.Login(email, "rfds");
+//    UserModel user = await authService.Login("nico.daddabbo7100@gmail.com", "@GGGtyudd4");
 
-//	if (user is null) throw new Exception();
+//    if (user is null) throw new Exception();
 
 //    Console.WriteLine(user.FirstName + user.LastName);
 
@@ -613,6 +631,24 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 //{
 
 //    Console.WriteLine(ex);
+//}
+
+#endregion
+
+#region Test UpdatePassword User
+
+//try
+//{
+//	bool isUpdated = await authService.UpdatePassword("@GGGtyudd4", 14);
+
+//	if (!isUpdated) throw new Exception();
+
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
 //}
 
 #endregion

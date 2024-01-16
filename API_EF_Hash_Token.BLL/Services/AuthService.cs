@@ -51,5 +51,12 @@ namespace API_EF_Hash_Token.BLL.Services
             bool isUpdated = await _authRepository.UpdateEmail(email, id);
             return isUpdated;
         }
+
+        public async Task<bool> UpdatePassword(string password, int id)
+        {
+          bool isUpdated = await _authRepository.UpdatePassword(password, id);
+
+            return isUpdated;
+        }
     }
 }

@@ -99,5 +99,17 @@ namespace API_EF_Hash_Token.DAL.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> UpdatePassword(string newPassword, int id)
+        {
+            UserEntity? user = await GetById(id);
+
+            if (user is null) return false;
+
+            user.PasswordSalt = PasswordHasher.GenerateSalt();
+            user.PasswordHash = PasswordHasher.ComputeHash(newPassword, user.PasswordSalt, _pepper, _iteration);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
