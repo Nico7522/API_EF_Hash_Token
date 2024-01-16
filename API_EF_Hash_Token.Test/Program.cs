@@ -447,6 +447,23 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 
 #endregion
 
+#region TestUpdateEmail User
+
+//try
+//{
+//	bool isUpdated = await userRepository.UpdateEmail("dokkannico75@gmail.com",12);
+
+//	if (!isUpdated) throw new Exception();
+
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message); 
+//}
+
+#endregion
 
 
 // TEST Services BLL
@@ -579,6 +596,23 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 //{
 
 //    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test UpdateEmail User
+
+//try
+//{
+//	bool isUpdated = await authService.UpdateEmail("nico.daddabbo7100@gmail.com", 14);
+//	if (!isUpdated) throw new Exception();
+
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex);
 //}
 
 #endregion

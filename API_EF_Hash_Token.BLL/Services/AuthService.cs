@@ -45,5 +45,11 @@ namespace API_EF_Hash_Token.BLL.Services
 
             return newUser;
         }
+
+        public async Task<bool> UpdateEmail(string email, int id)
+        {
+            bool isUpdated = await _authRepository.UpdateEmail(email, id);
+            return isUpdated;
+        }
     }
 }

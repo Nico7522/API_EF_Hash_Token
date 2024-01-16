@@ -88,5 +88,16 @@ namespace API_EF_Hash_Token.DAL.Repositories
             await _context.SaveChangesAsync();
             return newEntity;
         }
+
+        public async Task<bool> UpdateEmail(string email, int id)
+        {
+            UserEntity? user = await GetById(id);
+            if (user is null)
+                return false;
+
+            user.Email = email;
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
