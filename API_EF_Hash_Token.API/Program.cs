@@ -28,6 +28,11 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdressRepository, AdressRepository>();
 builder.Services.AddScoped<IAdressService, AdressService>();
 
+// Product
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+// Token
 builder.Services.AddSingleton<TokenManager>();
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
