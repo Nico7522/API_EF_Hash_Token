@@ -42,17 +42,26 @@ namespace API_EF_Hash_Token.BLL.Services
 
         public async Task<AdressModel?> Insert(AdressModel adressModel)
         {
-            AdressEntity? isAdressExist = await _adressRepository.CheckIfExist(adressModel.ToAdressEntity());
-            if (isAdressExist is not null) return null;
+            bool isAdressExist = await _adressRepository.CheckIfExist(adressModel.ToAdressEntity());
+            if (isAdressExist) return null;
 
 
             AdressModel ? insetedAdress = await _adressRepository.Insert(adressModel.ToAdressEntity()).ContinueWith(r => r.Result?.ToAdressModel());
             return insetedAdress;
         }
 
-        public Task<AdressModel?> Update(AdressModel modifiedAdress, int id)
+        public async Task<AdressModel?> Update(AdressModel modifiedAdress, int id)
         {
-            throw new NotImplementedException();
+            // Check si l'adresse existe
+            AdressEntity? adressToUpdate = await _adressRepository.GetById(id);
+            if(adressToUpdate is null) return null;
+
+            // Check si après modification, l'adresse ne va pas faire doublon avec une autre.
+            bool isAdressExist = await _adressRepository.CheckIfExist(modifiedAdress.ToAdressEntity());
+            if (isAdressExist) return null;
+
+            // Si tout est ok, on update
+            return await _adressRepository.Update(adressToUpdate, modifiedAdress.ToAdressEntity()).ContinueWith(r => r.Result?.ToAdressModel());
         }
     }
 }

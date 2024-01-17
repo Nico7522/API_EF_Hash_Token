@@ -10,6 +10,6 @@ namespace API_EF_Hash_Token.DAL.Interfaces
 {
     public interface IAdressRepository : ICrudRepository<int, AdressEntity>
     {
-        Task<AdressEntity?> CheckIfExist(AdressEntity entityToFind);
+        Task<bool> CheckIfExist(AdressEntity entityToFind);
     }
 }

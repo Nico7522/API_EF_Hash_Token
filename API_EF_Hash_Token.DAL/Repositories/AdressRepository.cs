@@ -19,10 +19,11 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _dataContext = dataContext;
         }
 
-        public async Task<AdressEntity?> CheckIfExist(AdressEntity entityToFind)
+        public async Task<bool> CheckIfExist(AdressEntity entityToFind)
         {
             AdressEntity? isAdressExist = await _dataContext.Adresses.Where(a => a.Number == entityToFind.Number && a.Street == entityToFind.Street && a.CityName == entityToFind.CityName && a.Country == entityToFind.Country).SingleOrDefaultAsync();
-            return isAdressExist;
+
+            return isAdressExist is null ? false : true;
         }
 
         public async Task<AdressEntity?> Delete(AdressEntity entity)
@@ -48,22 +49,18 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public async Task<AdressEntity?> Insert(AdressEntity entity)
         {
             await _dataContext.Adresses.AddAsync(entity);
-            int rowInserted = await _dataContext.SaveChangesAsync();
-            return rowInserted == 1 ? entity : null;
+            await _dataContext.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task<AdressEntity?> Update(AdressEntity entity, int id)
+        public async Task<AdressEntity?> Update(AdressEntity oldEntity, AdressEntity modifiedEntity)
         {
-            AdressEntity? adressToUpdate = await _dataContext.Adresses.FindAsync(id);
-            if (adressToUpdate is null)
-                return null;
-
-            adressToUpdate.Street = entity.Street;
-            adressToUpdate.Number = entity.Number;
-            adressToUpdate.CityName = entity.CityName;
-            adressToUpdate.Country = entity.Country;
+            oldEntity.Street = modifiedEntity.Street;
+            oldEntity.Number = modifiedEntity.Number;
+            oldEntity.CityName = modifiedEntity.CityName;
+            oldEntity.Country = modifiedEntity.Country;
             await _dataContext.SaveChangesAsync();
-            return adressToUpdate;
+            return oldEntity;
         }
     }
 }

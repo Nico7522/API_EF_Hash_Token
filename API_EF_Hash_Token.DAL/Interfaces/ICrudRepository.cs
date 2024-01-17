@@ -9,7 +9,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     public interface ICrudRepository<TKey, TEntity> : IReadRepository<TKey, TEntity>
     {
         Task<TEntity?> Insert(TEntity entity);
-        Task<TEntity?> Update(TEntity entity, TKey id);
+        Task<TEntity?> Update(TEntity oldEntity, TEntity modifiedEntity);
         Task<TEntity?> Delete(TEntity entity);
     }
 }

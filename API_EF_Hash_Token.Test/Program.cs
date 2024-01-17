@@ -881,3 +881,23 @@ IAdressService adressService = new AdressService(adressRepository);
 //}
 
 #endregion
+
+#region test Update Adress
+
+//try
+//{
+//    AdressModel? adress = await adressService.GetById(16);
+//    if (adress is null) throw new Exception();
+
+//    adress.Street = "Pas d'didéeddd";
+//    AdressModel? modifiedAdress = await adressService.Update(adress, 16);
+//    if (modifiedAdress is null) throw new Exception();
+
+//    Console.WriteLine(modifiedAdress.Street);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
