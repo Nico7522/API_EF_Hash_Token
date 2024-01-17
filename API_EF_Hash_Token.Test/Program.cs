@@ -1058,6 +1058,27 @@ IProductService productService = new ProductService(productRepository);
 
 #endregion
 
+#region Test Insert Product
+
+try
+{
+	ProductModel? insertedProduct = await productService.Insert(new ProductModel("Pas idée", "des baskets blblbl", "nike", "Homme", 50.89M, 0));
+    Console.WriteLine(insertedProduct.ProductId);
+    if (insertedProduct is null) throw new Exception();
+
+    Console.WriteLine(insertedProduct.Description);
+
+
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
+#endregion
+
+
 #region Test Update Products
 
 //try

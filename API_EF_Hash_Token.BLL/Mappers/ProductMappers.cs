@@ -1,10 +1,5 @@
 ﻿using API_EF_Hash_Token.BLL.Models;
 using API_EF_Hash_Token.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API_EF_Hash_Token.BLL.Mappers
 {
@@ -13,6 +8,13 @@ namespace API_EF_Hash_Token.BLL.Mappers
         internal static ProductModel ToProductModel(this ProductEntity entity)
         {
             return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.Categories.Select(c => c.Category.ToCategoryModel()).ToList(), entity.PrdoductId);
+        }
+
+
+        // Mapper pour retourner l'entité créee car elle ne renvoie pas de liste avec les catégories
+        internal static ProductModel ToProductModelResponse(this ProductEntity entity)
+        {
+            return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.PrdoductId);
         }
 
         internal static ProductEntity ToProductEntity(this ProductModel model)

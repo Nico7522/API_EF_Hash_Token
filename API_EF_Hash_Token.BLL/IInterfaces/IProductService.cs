@@ -11,6 +11,8 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
     {
         Task<IEnumerable<ProductModel>> GetAll();
         Task<ProductModel?> GetById(int id);
+
+        Task<ProductModel?> Insert(ProductModel model);
         Task<ProductModel?> Update(ProductModel modifiedProduct, int id);
         Task<ProductModel?> Delete(int id);
     }

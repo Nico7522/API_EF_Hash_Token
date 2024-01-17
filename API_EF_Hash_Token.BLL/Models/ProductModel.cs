@@ -15,9 +15,9 @@ namespace API_EF_Hash_Token.BLL.Models
         public string Sexe { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
-        public List<CategoryModel> Categories { get; set; }
+        public List<CategoryModel>? Categories { get; set; }
 
-        public ProductModel(string modelName, string description, string brand, string sexe, decimal price, decimal discount, List<CategoryModel> categories)
+        public ProductModel(string modelName, string description, string brand, string sexe, decimal price, decimal discount)
         {
             this.ModelName = modelName;
             this.Description = description;
@@ -25,8 +25,15 @@ namespace API_EF_Hash_Token.BLL.Models
             this.Sexe = sexe;
             this.Price = price;
             this.Discount = discount;
-            Categories = categories;
 
+        }
+        public ProductModel(string modelName, string description, string brand, string sexe, decimal price, decimal discount, int productId) : this(modelName, description, brand, sexe, price, discount)
+        {
+            this.ProductId = productId;
+        }
+        public ProductModel(string modelName, string description, string brand, string sexe, decimal price, decimal discount, List<CategoryModel> categories): this (modelName, description, brand, sexe, price, discount)
+        {
+            Categories = categories;
         }
 
         public ProductModel(string modelName, string description, string brand, string sexe, decimal price, decimal discount, List<CategoryModel> categories, int productId) : this(modelName, description, brand, sexe, price,  discount, categories)

@@ -39,7 +39,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<ProductEntity?> Insert(ProductEntity entity)
         {
-            await _dataContext.AddAsync(entity);
+            await _dataContext.Products.AddAsync(entity);
             await _dataContext.SaveChangesAsync();
             return entity;
         }
