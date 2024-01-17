@@ -21,5 +21,16 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Street = entity.Street,
             };
         }
+
+        internal static AdressEntity ToAdressEntity(this AdressModel model)
+        {
+            return new AdressEntity()
+            {
+                CityName = model.CityName,
+                Country = model.Country,
+                Number = model.Number,
+                Street = model.Street,
+            };
+        }
     }
 }

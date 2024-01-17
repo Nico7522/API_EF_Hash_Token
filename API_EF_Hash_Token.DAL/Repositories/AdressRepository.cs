@@ -19,18 +19,18 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _dataContext = dataContext;
         }
 
-
-        public async Task<AdressEntity?> Delete(int id)
+        public async Task<AdressEntity?> CheckIfExist(AdressEntity entityToFind)
         {
-            AdressEntity? adressToDelete = await GetById(id);
+            AdressEntity? isAdressExist = await _dataContext.Adresses.Where(a => a.Number == entityToFind.Number && a.Street == entityToFind.Street && a.CityName == entityToFind.CityName && a.Country == entityToFind.Country).SingleOrDefaultAsync();
+            return isAdressExist;
+        }
 
-            if (adressToDelete is null)
-                return null;
-
-            _dataContext.Adresses.Remove(adressToDelete);
+        public async Task<AdressEntity?> Delete(AdressEntity entity)
+        {
+            //AdressEntity? adressToDelete = await GetById(id);
+            _dataContext.Adresses.Remove(entity);
             await _dataContext.SaveChangesAsync();
-
-            return adressToDelete;
+            return entity;
         }
 
         public async Task<IEnumerable<AdressEntity>> GetAll()

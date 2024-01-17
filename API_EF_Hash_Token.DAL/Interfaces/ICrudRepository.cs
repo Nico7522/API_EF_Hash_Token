@@ -10,6 +10,6 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     {
         Task<TEntity?> Insert(TEntity entity);
         Task<TEntity?> Update(TEntity entity, TKey id);
-        Task<TEntity?> Delete(TKey id);
+        Task<TEntity?> Delete(TEntity entity);
     }
 }

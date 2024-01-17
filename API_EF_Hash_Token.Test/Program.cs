@@ -579,13 +579,13 @@ IAdressRepository adressRepository = new AdressRepository(dataContext);
 
 //try
 //{
-//	AdressEntity? insertedAdress = await adressRepository.Insert(new AdressEntity { CityName = "LL", Country = "BE", Number = 25, Street = "AV" });
+//    AdressEntity? insertedAdress = await adressRepository.Insert(new AdressEntity { CityName = "LL", Country = "BE", Number = 25, Street = "AV" });
 //    Console.WriteLine("ok");
 //}
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.Message);
+//    Console.WriteLine(ex.InnerException.Message);
 //}
 
 #endregion
@@ -625,12 +625,14 @@ IAdressRepository adressRepository = new AdressRepository(dataContext);
 #endregion
 
 
+
+
 // TEST Services BLL
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
 IAuthService authService = new AuthService(authRepository, userRepository);
-
-
+IAdressService adressService = new AdressService(adressRepository);
+// TEST Users
 #region Test GetAll Users
 
 //try
@@ -806,4 +808,76 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 //        Console.WriteLine(adress.Country);
 //    }
 //}
+#endregion
+
+// TEST Adress
+
+#region Test GetAll Adress
+
+//try
+//{
+//	IEnumerable<AdressModel> adresses = await adressService.GetAll();
+//    foreach (var item in adresses)
+//    {
+//        Console.WriteLine(item.CityName);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+
+#endregion
+
+#region Test GetById Adress
+
+//try
+//{
+//	AdressModel? adress = await adressService.GetById(1);
+
+//	if (adress is null) throw new Exception();
+
+//    Console.WriteLine(adress.Country);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+
+#endregion
+
+#region Test Delete Adress
+
+//try
+//{
+//	AdressModel? deletedAdress = await adressService.Delete(12);
+
+//	if (deletedAdress is null) throw new Exception();
+
+//    Console.WriteLine(deletedAdress.Country);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
+#region Test Insert Adress
+
+//try
+//{
+//	AdressModel? insertedAdress = await adressService.Insert(new AdressModel() { CityName = "Charleroi", Street = "Pas d'didée", Number = 420, Country = "Belgique" });
+//	if (insertedAdress is null) throw new Exception();
+
+//    Console.WriteLine(insertedAdress.Street);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+
 #endregion
