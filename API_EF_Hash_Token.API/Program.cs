@@ -12,14 +12,22 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-// Add services to the container.
+// DB
 builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("default")));
 
+// User
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+// Auth
 builder.Services.AddScoped<IAuthRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+// Adress
+builder.Services.AddScoped<IAdressRepository, AdressRepository>();
+builder.Services.AddScoped<IAdressService, AdressService>();
+
 builder.Services.AddSingleton<TokenManager>();
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>

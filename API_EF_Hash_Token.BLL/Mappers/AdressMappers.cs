@@ -32,5 +32,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Street = model.Street,
             };
         }
+
+   
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.API.Dto;
+using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.BLL.Models;
 
 namespace API_EF_Hash_Token.API.Mappers
@@ -14,6 +15,28 @@ namespace API_EF_Hash_Token.API.Mappers
                 Number = model.Number,
                 Country = model.Country,
                 Street = model.Street,
+            };
+        }
+
+        internal static AdressModel ToAdressModel(this CreateAdressForm form)
+        {
+            return new AdressModel()
+            {
+                CityName = form.CityName,
+                Number = form.Number,
+                Country = form.Country,
+                Street = form.Street,
+            };
+        }
+
+        internal static AdressModel ToAdressModel(this UpdateAdressForm form)
+        {
+            return new AdressModel()
+            {
+                CityName = form.CityName,
+                Number = form.Number,
+                Country = form.Country,
+                Street = form.Street,
             };
         }
     }
