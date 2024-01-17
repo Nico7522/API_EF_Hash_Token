@@ -25,5 +25,19 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Password = model.Password,
             };
         }
+
+        internal static UserAdressesModel ToUserAdresses(this UserEntity entity)
+        {
+            return new UserAdressesModel()
+            {
+
+                user = entity.ToUserModel(),
+                Adresses = entity.Addresses != null
+            ? entity.Addresses.Where(ua => ua.Adress is not null)
+                .Select(ua => ua.Adress.ToAdressModel()).ToList()
+            : new List<AdressModel>()
+
+            };
+        }
     }
 }

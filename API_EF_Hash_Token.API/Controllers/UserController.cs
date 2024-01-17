@@ -56,5 +56,13 @@ namespace API_EF_Hash_Token.API.Controllers
             UserDTO? deletedUser = await _userService.Delete(id).ContinueWith(r => r.Result?.ToUserDTO());
             return deletedUser is not null ? Ok(deletedUser) : NotFound();
         }
+
+        [HttpGet("adresses")]
+        public async Task<ActionResult<IEnumerable<UserWithAdressesDTO>>> GetAllWithAdresses()
+        {
+            IEnumerable<UserWithAdressesDTO> result = await _userService.GetAllWithAdresses().ContinueWith(r => r.Result.Select(all => all.ToUserWithAdressesDTO()));
+            return Ok(result);
+           
+        }
     }
 }

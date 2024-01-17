@@ -48,5 +48,11 @@ namespace API_EF_Hash_Token.BLL.Services
             UserModel updatedUser = await _userRepository.Update(newUser.ToUserEntity(), id).ContinueWith(r => r.Result.ToUserModel());
             return updatedUser;
         }
+
+        public async Task<IEnumerable<UserAdressesModel>> GetAllWithAdresses()
+        {
+            IEnumerable<UserAdressesModel> result = await _userRepository.GetAllWithAdresses().ContinueWith(u => u.Result.Select(r => r.ToUserAdresses()));
+            return result;
+        }
     }
 }

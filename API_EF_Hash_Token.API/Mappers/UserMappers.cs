@@ -1,6 +1,7 @@
 ﻿using API_EF_Hash_Token.API.Dto;
 using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Entities;
 
 namespace API_EF_Hash_Token.API.Mappers
 {
@@ -21,6 +22,15 @@ namespace API_EF_Hash_Token.API.Mappers
         internal static UserModel ToUserModel(this RegisterUserForm form)
         {
             return new UserModel(form.FirstName, form.LastName, form.Email, form.PhoneNumber, form.Password);
+        }
+
+        internal static UserWithAdressesDTO ToUserWithAdressesDTO(this UserAdressesModel model)
+        {
+            return new UserWithAdressesDTO()
+            {
+                User = model.user.ToUserDTO(),
+                Adresses = model.Adresses.Select(a => a.ToAdressDTO()).ToList(),
+            };
         }
     }
 }

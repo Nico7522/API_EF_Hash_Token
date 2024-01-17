@@ -8,7 +8,10 @@ using API_EF_Hash_Token.DAL.Interfaces;
 using API_EF_Hash_Token.DAL.Methods;
 using API_EF_Hash_Token.DAL.Repositories;
 using API_EF_Hash_Token.Test.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
+using System.Data;
 
 Console.WriteLine("Hello, World!");
 DataContext dataContext = new DataContext();
@@ -293,6 +296,53 @@ string password = "@Test1234=";
 //}
 #endregion
 
+#region Test GetAllUsersWithAdresses
+
+//var users = dataContext.Users.Join(dataContext.UserAdress, u => u.UserId, ua => ua.UserId, (u ,ua) => new {u, ua.Adress.CityName});
+//var usersWithAddresses = dataContext.Users
+//    .Select(user => new
+//    {
+//        User = user,
+//        Addresses = user.Addresses.Select(ua => ua.Adress).ToList()
+//    })
+//    .ToList();
+
+//foreach (var userWithAddresses in usersWithAddresses)
+//{
+//    Console.WriteLine($"User: {userWithAddresses.User.FirstName} {userWithAddresses.User.LastName}");
+
+//    if (userWithAddresses.Addresses.Count > 0)
+//    {
+//        foreach (var address in userWithAddresses.Addresses)
+//        {
+//            Console.WriteLine($"Address: {address.CityName}, {address.Country}");
+//        }
+//    }
+//    else
+//    {
+//        Console.WriteLine("No addresses");
+//    }
+
+//    Console.WriteLine(); 
+//}
+
+
+// var test = dataContext.Users
+//   .Include(x => x.Addresses) // UserAddresses
+//       .ThenInclude(x => x.Adress) // UserAddress.Address
+//   .ToList();
+
+//foreach (var item in test)
+//{
+//    Console.WriteLine(item.LastName);
+//    foreach (var adress in item.Addresses)
+//    {
+//        Console.WriteLine(adress.Adress.Country);
+//    }
+//}
+#endregion
+
+
 
 
 // Pour utiliser appsetting.json
@@ -527,16 +577,16 @@ IAdressRepository adressRepository = new AdressRepository(dataContext);
 
 #region Test Insert Adress
 
-try
-{
-	AdressEntity? insertedAdress = await adressRepository.Insert(new AdressEntity { CityName = "LL", Country = "BE", Number = 25, Street = "AV" });
-    Console.WriteLine("ok");
-}
-catch (Exception ex)
-{
+//try
+//{
+//	AdressEntity? insertedAdress = await adressRepository.Insert(new AdressEntity { CityName = "LL", Country = "BE", Number = 25, Street = "AV" });
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
@@ -742,4 +792,18 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 //    Console.WriteLine(ex.Message);
 //}
 
+#endregion
+
+#region Test GetAllUsersWithAdresses
+
+//IEnumerable<UserAdressesModel> userAdresses = await userService.GetAllWithAdresses();
+
+//foreach (var user in userAdresses)
+//{
+//    Console.WriteLine(user.user.FirstName);
+//    foreach (var adress in user.Adresses)
+//    {
+//        Console.WriteLine(adress.Country);
+//    }
+//}
 #endregion

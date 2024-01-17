@@ -18,6 +18,8 @@ namespace API_EF_Hash_Token.DAL.Interfaces
 
         Task<UserEntity?> GetByEmail(string email);
 
+        Task<IEnumerable<UserEntity>> GetAllWithAdresses();
+
 
 
 

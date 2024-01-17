@@ -113,5 +113,15 @@ namespace API_EF_Hash_Token.DAL.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<UserEntity>> GetAllWithAdresses()
+        {
+            return await _context.Users
+              .Include(u => u.Addresses)
+                  .ThenInclude(a => a.Adress)
+              .ToListAsync();
+
+
+        }
     }
 }

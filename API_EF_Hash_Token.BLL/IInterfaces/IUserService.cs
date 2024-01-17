@@ -14,6 +14,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<UserModel?> GetByEmail(string email);
         Task<UserModel?> Update(UserModel user, int id);
         Task<UserModel?> Delete(int id);
+        Task<IEnumerable<UserAdressesModel>> GetAllWithAdresses();
 
     }
 }
