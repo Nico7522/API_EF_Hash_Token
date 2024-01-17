@@ -356,7 +356,7 @@ IConfiguration configuration = new ConfigurationBuilder()
 // TEST Repositories DAL
 IUserRepository userRepository = new UserRepository(dataContext, configuration);
 IAdressRepository adressRepository = new AdressRepository(dataContext);
-
+IProductRepository productRepository = new ProductRepository(dataContext);
 // TEST Users
 #region Test GetAll Users
 
@@ -625,6 +625,70 @@ IAdressRepository adressRepository = new AdressRepository(dataContext);
 #endregion
 
 
+// TEST Products
+
+#region Test GetAll Products
+
+//try
+//{
+//	IEnumerable<ProductEntity> products = await productRepository.GetAll();
+
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.Brand);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine($"Catégorie : {category.Category.CategoryName}"
+//            );
+//        }
+//    }
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex);
+//}
+
+#endregion
+
+#region Test GetById Produdct
+
+//try
+//{
+//    ProductEntity? product = await productRepository.GetById(2);
+//    if (product is null) throw new Exception();
+
+//    Console.WriteLine($"Product name :{product.ModelName}");
+//    foreach (var category in product.Categories)
+//    {
+//        Console.WriteLine($"Catégorie : {category.Category.CategoryName}");
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine( ex.Message); ;
+//}
+
+#endregion
+
+#region Test Insert Product
+
+//try
+//{
+//    ProductEntity? insertedProduct = await productRepository.Insert(new ProductEntity() { ModelName = "Puma course ...", Description = "Modèle pour course à pied ...", Brand = "Puma", Price = 77.22M, Discount = 0.30M, Sexe = "Femme"});;
+//    if (insertedProduct is null) throw new Exception();
+
+//    Console.WriteLine(insertedProduct.ModelName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+
+#endregion
 
 
 // TEST Services BLL

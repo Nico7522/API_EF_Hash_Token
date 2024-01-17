@@ -52,8 +52,6 @@ namespace API_EF_Hash_Token.API.Controllers
         {
             AdressDTO? deletedAdress = await _adressService.Delete(id).ContinueWith(r => r.Result?.ToAdressDTO());
             return deletedAdress is not null ? Ok(deletedAdress) : BadRequest();
-
-
         }
     }
 }
