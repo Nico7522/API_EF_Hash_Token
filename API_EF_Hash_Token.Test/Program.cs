@@ -690,12 +690,54 @@ IProductRepository productRepository = new ProductRepository(dataContext);
 
 #endregion
 
+#region Test Update Product
+//try
+//{
+//    ProductEntity? productToUpdate = await productRepository.GetById(1);
+//    if (productToUpdate is null) throw new Exception();
+
+//    ProductEntity modifiedProduct = productToUpdate;
+//    modifiedProduct.ModelName = "";
+//    ProductEntity? updatedProduct = await productRepository.Update(productToUpdate, modifiedProduct);
+//    if (updatedProduct is null) throw new Exception();
+
+//    Console.WriteLine(updatedProduct.ModelName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); ;
+//}
+
+#endregion
+
+#region Test Delete Product
+
+//try
+//{
+//    ProductEntity? productToDelete = await productRepository.GetById(155);
+//    if (productToDelete is null) throw new Exception();
+
+
+//    ProductEntity? deletedProduct = await productRepository.Delete(productToDelete);
+//    if (deletedProduct is null) throw new Exception();
+
+//    Console.WriteLine(deletedProduct.ModelName);
+
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message); 
+//}
+#endregion
 
 // TEST Services BLL
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
 IAuthService authService = new AuthService(authRepository, userRepository);
 IAdressService adressService = new AdressService(adressRepository);
+IProductService productService = new ProductService(productRepository);
 // TEST Users
 #region Test GetAll Users
 
@@ -964,4 +1006,93 @@ IAdressService adressService = new AdressService(adressRepository);
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+
+// TEST Products
+
+#region Test GetAll Products
+
+//try
+//{
+//	IEnumerable<ProductModel> products = await productService.GetAll();
+
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine(category.CategoryName);
+//        }
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//	throw;
+//}
+
+#endregion
+
+#region Test getById Products
+
+//try
+//{
+//	ProductModel? product = await productService.GetById(2);
+
+//	if (product is null) throw new Exception();
+
+//    Console.WriteLine(product.ModelName);
+//    Console.WriteLine("Categories :");
+//    foreach (var item in product.Categories)
+//    {
+//        Console.WriteLine(item.CategoryName);
+//    }
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Update Products
+
+//try
+//{
+//    ProductModel? productToUpdate = await productService.GetById(2);
+//    if (productToUpdate is null) throw new Exception();
+
+//    productToUpdate.ModelName = "New model 2024 incroyableee";
+
+//    ProductModel? updatedProduct = await productService.Update(productToUpdate ,2); 
+//    if(updatedProduct is null) throw new Exception();
+
+//    Console.WriteLine(updatedProduct.ModelName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Delete Product
+//try
+//{
+//	ProductModel? deletedProduct = await productService.Delete(2);
+//	if (deletedProduct is null) throw new Exception();
+
+//    Console.WriteLine(deletedProduct.ModelName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
 #endregion

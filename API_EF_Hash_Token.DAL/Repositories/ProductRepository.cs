@@ -20,9 +20,11 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _dataContext = dataContext;
         }
 
-        public Task<ProductEntity?> Delete(ProductEntity entity)
+        public async Task<ProductEntity?> Delete(ProductEntity entity)
         {
-            throw new NotImplementedException();
+            _dataContext.Products.Remove(entity);
+            await _dataContext.SaveChangesAsync();
+            return entity;
         }
 
         public async Task<IEnumerable<ProductEntity>> GetAll()
@@ -42,9 +44,15 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return entity;
         }
 
-        public Task<ProductEntity?> Update(ProductEntity oldEntity, ProductEntity modifiedEntity)
+        public async Task<ProductEntity?> Update(ProductEntity oldEntity, ProductEntity modifiedEntity)
         {
-            throw new NotImplementedException();
+            oldEntity.ModelName = modifiedEntity.ModelName;
+            oldEntity.Brand = modifiedEntity.Brand;
+            oldEntity.Description = modifiedEntity.Description;
+            oldEntity.Price = modifiedEntity.Price;
+            oldEntity.Discount = modifiedEntity.Discount;
+            await _dataContext.SaveChangesAsync();
+            return oldEntity;
         }
     }
 }
