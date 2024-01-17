@@ -14,6 +14,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
         {
             return new AdressModel()
             {
+                AdressId = entity.AdressId,
                 CityName = entity.CityName,
                 Country = entity.Country,
                 Number = entity.Number,
