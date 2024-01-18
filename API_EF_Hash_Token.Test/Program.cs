@@ -846,6 +846,8 @@ IUserService userService = new UserService(userRepository);
 IAuthService authService = new AuthService(authRepository, userRepository);
 IAdressService adressService = new AdressService(adressRepository);
 IProductService productService = new ProductService(productRepository);
+ICategoryService categoryService = new CategoryService(categoryRepository);
+
 // TEST Users
 #region Test GetAll Users
 
@@ -1228,6 +1230,99 @@ IProductService productService = new ProductService(productRepository);
 #endregion
 
 
+// TEST Categories
+
+#region Test GetAll Category
+
+//try
+//{
+//	IEnumerable<CategoryModel> categories = await categoryService.GetAll();
+//    foreach (var category in categories)
+//    {
+//        Console.WriteLine(category.CategoryName);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetById Category
+
+//try
+//{
+//    CategoryModel? category = await categoryService.GetById(22);
+//    if (category is null) throw new Exception();
+
+//    Console.WriteLine(category.CategoryName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
+#region Test Insert Category
+
+//try
+//{
+//	CategoryModel? insertedCategory = await categoryService.Insert(new CategoryModel() { CategoryName = "Test BLL", Description = "Test BLL" });
+//	if (insertedCategory is null) throw new Exception();
+
+//    Console.WriteLine(insertedCategory.CategoryName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Update Category
+
+//try
+//{
+//	 CategoryModel? categoryToUpdate = await categoryService.GetById(2);
+//	if (categoryToUpdate is null) throw new Exception();
+
+//	categoryToUpdate.Description = "sddsfsfsf";
+
+//	CategoryModel? updatedCategory = await categoryService.Update(categoryToUpdate, 2);
+//	if(updatedCategory is null) throw new Exception();
+
+//    Console.WriteLine(updatedCategory.Description);
+//}
+//catch (Exception ex)
+//{
+
+//	Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Delete Category
+
+//try
+//{
+//    CategoryModel? deletedCategory = await categoryService.Delete(2);
+//    if (deletedCategory is null) throw new Exception();
+
+//    Console.WriteLine(deletedCategory.CategoryName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+
 
 // TEST appart
 
@@ -1255,6 +1350,10 @@ IProductService productService = new ProductService(productRepository);
 //}
 
 #endregion
+
+
+
+
 
 
 
