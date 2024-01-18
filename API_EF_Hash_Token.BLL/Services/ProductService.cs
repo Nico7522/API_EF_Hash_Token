@@ -41,9 +41,10 @@ namespace API_EF_Hash_Token.BLL.Services
             return await _productRepository.GetById(id).ContinueWith(r => r.Result?.ToProductModel());
         }
 
-        public async Task<ProductModel?> Insert(ProductModel model)
+        public async Task<ProductModel?> Insert(ProductModel model, List<int> categoriesId)
         {
-            ProductModel? insertedProduct = await _productRepository.Insert(model.ToProductEntity()).ContinueWith(r => r.Result?.ToProductModel());
+        
+            ProductModel? insertedProduct = await _productRepository.Insert(model.ToProductEntity(categoriesId)).ContinueWith(r => r.Result?.ToProductModel());
             return insertedProduct;
         }
 

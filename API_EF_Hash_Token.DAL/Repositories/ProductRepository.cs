@@ -40,6 +40,14 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public async Task<ProductEntity?> Insert(ProductEntity entity)
         {
             await _dataContext.Products.AddAsync(entity);
+            if (entity.CategoriesId.Count > 0)
+            {
+                foreach (var categoryId in entity.CategoriesId)
+                {
+                    await Console.Out.WriteLineAsync((char)categoryId);
+                    await _dataContext.ProductCategory.AddAsync(new ProductCategoryEntity { CategoryId = categoryId, Product = entity });
+                }
+            }
             await _dataContext.SaveChangesAsync();
             return entity;
         }

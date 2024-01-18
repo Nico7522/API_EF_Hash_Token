@@ -12,7 +12,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<IEnumerable<ProductModel>> GetAll();
         Task<ProductModel?> GetById(int id);
 
-        Task<ProductModel?> Insert(ProductModel model);
+        Task<ProductModel?> Insert(ProductModel model, List<int> categoriesId);
         Task<ProductModel?> Update(ProductModel modifiedProduct, int id);
         Task<ProductModel?> Delete(int id);
     }

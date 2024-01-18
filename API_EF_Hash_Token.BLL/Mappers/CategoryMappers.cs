@@ -20,5 +20,10 @@ namespace API_EF_Hash_Token.BLL.Mappers
         {
             return new CategoryEntity() { CategoryName = entity.CategoryName, Description = entity.Description };
         }
+
+        internal static CategoryEntity ToAssociatedCategoryEntity(this CategoryModel entity)
+        {
+            return new CategoryEntity() { CategoryId = entity.CategoryId };
+        }
     }
 }

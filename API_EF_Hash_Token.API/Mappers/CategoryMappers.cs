@@ -21,5 +21,10 @@ namespace API_EF_Hash_Token.API.Mappers
         {
             return new CategoryModel() { CategoryName = form.CategoryName, Description = form.Description };
         }
+
+        internal static CategoryModel ToCategoryModel(this CategoryDTO dto)
+        {
+            return new CategoryModel() { CategoryName = dto.CategoryName, Description = dto.Description };
+        }
     }
 }
