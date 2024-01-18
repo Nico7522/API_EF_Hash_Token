@@ -12,5 +12,7 @@ namespace API_EF_Hash_Token.DAL.Entities
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public List<ProductCategoryEntity> Products { get; set; }
+        //public List<ProductEntity> ProductsEntity { get; set; }
+
     }
 }

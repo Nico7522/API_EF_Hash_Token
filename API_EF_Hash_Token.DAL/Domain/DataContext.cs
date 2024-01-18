@@ -27,7 +27,7 @@ namespace API_EF_Hash_Token.DAL.Domain
         public DbSet<SizeProductEntity> SizeProduct { get; set; }
         public DataContext(DbContextOptions options) : base(options) { }
 
-        // Pour les tests
+        //Pour les tests
         public DataContext()
         {
         }

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Drawing.Design;
 
 Console.WriteLine("Hello, World!");
 DataContext dataContext = new DataContext();
@@ -1060,21 +1061,22 @@ IProductService productService = new ProductService(productRepository);
 
 #region Test Insert Product
 
-try
-{
-	ProductModel? insertedProduct = await productService.Insert(new ProductModel("Pas idée", "des baskets blblbl", "nike", "Homme", 50.89M, 0));
-    Console.WriteLine(insertedProduct.ProductId);
-    if (insertedProduct is null) throw new Exception();
+//try
+//{
+//    List<CategoryModel> cate = new List<CategoryModel>() { new CategoryModel() { CategoryName = "test", Description = "test" }, new CategoryModel() { CategoryName = "test", Description = "test" } };
+//	ProductModel? insertedProduct = await productService.Insert(new ProductModel("Pas idée", "des baskets blblbl", "nike", "Homme", 50.89M, 0, cate));
+//    Console.WriteLine(insertedProduct.ProductId);
+//    if (insertedProduct is null) throw new Exception();
 
-    Console.WriteLine(insertedProduct.Description);
+//    Console.WriteLine(insertedProduct.Description);
 
 
-}
-catch (Exception ex)
-{
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
@@ -1114,6 +1116,35 @@ catch (Exception ex)
 //{
 
 //    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+
+
+// TEST appart
+
+#region Test Include
+//try
+//{
+//IEnumerable<ProductEntity> list = await dataContext.Products.Include(p => p.CategoriesEntity).ToListAsync();
+
+//    foreach (var item in list)
+//    {
+
+//        Console.WriteLine(item.Description);
+
+//        foreach (var cate in item.CategoriesEntity)
+//        {
+//            Console.WriteLine(cate.CategoryName);
+//        }
+
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//	throw;
 //}
 
 #endregion

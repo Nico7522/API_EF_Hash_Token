@@ -7,15 +7,16 @@ namespace API_EF_Hash_Token.BLL.Mappers
     {
         internal static ProductModel ToProductModel(this ProductEntity entity)
         {
-            return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.Categories.Select(c => c.Category.ToCategoryModel()).ToList(), entity.PrdoductId);
+            #pragma warning disable CS8604 // Possible null reference argument.
+            return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.PrdoductId, entity.Categories?.Select(c => c.Category.ToCategoryModel()).ToList());
         }
 
 
         // Mapper pour retourner l'entité créee car elle ne renvoie pas de liste avec les catégories
-        internal static ProductModel ToProductModelResponse(this ProductEntity entity)
-        {
-            return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.PrdoductId);
-        }
+        //internal static ProductModel ToProductModelResponse(this ProductEntity entity)
+        //{
+        //    return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.PrdoductId);
+        //}
 
         internal static ProductEntity ToProductEntity(this ProductModel model)
         {

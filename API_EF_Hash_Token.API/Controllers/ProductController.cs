@@ -32,11 +32,13 @@ namespace API_EF_Hash_Token.API.Controllers
             return product is not null ? Ok(product) : NotFound();
         }
 
-        //[HttpPost]
-        //public async Task<ProductDTO?> Insert(CreateProductForm form)
-        //{
-        //    //await _productService.I
-        //}
+        [HttpPost]
+        public async Task<ActionResult<ProductDTO?>> Insert(CreateProductForm form)
+        {
+            ProductDTO? insertedProduct = await _productService.Insert(form.ToProductModel()).ContinueWith(r => r.Result?.ToProductDTO());
+
+            return insertedProduct is not null ? Ok(insertedProduct) : BadRequest();
+        }
 
         //[HttpPut("{id}")]
         //public async Task<ProductDTO?> Update(UpdateProductForm form, int id)

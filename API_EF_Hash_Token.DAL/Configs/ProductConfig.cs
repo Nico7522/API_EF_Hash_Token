@@ -14,6 +14,8 @@ namespace API_EF_Hash_Token.DAL.Configs
         public void Configure(EntityTypeBuilder<ProductEntity> builder)
         {
             builder.HasKey(p => p.PrdoductId);
+            //builder.HasMany(p => p.CategoriesEntity).WithMany(p => p.ProductsEntity).UsingEntity<ProductCategoryEntity>(l => l.HasOne<CategoryEntity>(c => c.Category).WithMany(c => c.Products),
+            //                                                                                                            r => r.HasOne<ProductEntity>(p => p.Product).WithMany(p => p.Categories));
             builder.Property(p => p.PrdoductId).ValueGeneratedOnAdd();
             builder.Property(p => p.ModelName).HasMaxLength(150).IsRequired();
             builder.Property(p => p.Brand).HasMaxLength(150).IsRequired();
