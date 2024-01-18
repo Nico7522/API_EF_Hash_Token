@@ -29,7 +29,8 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<IEnumerable<ProductEntity>> GetAll()
         {
-            return await _dataContext.Products.Include(p => p.Categories).ThenInclude(p => p.Category).ToListAsync();
+            return await _dataContext.Products.Include(p => p.Categories).ThenInclude(p => p.Category)
+                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
         public async Task<ProductEntity?> GetById(int id)

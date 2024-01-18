@@ -344,7 +344,29 @@ string password = "@Test1234=";
 #endregion
 
 
+#region Test GallAll Products avec categories et sizes
 
+//try
+//{
+//	IEnumerable<ProductEntity> products = await dataContext.Products.Include(p => p.Categories).ThenInclude(p => p.Category).Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        foreach (var size in product.Sizes)
+//        {
+//            Console.WriteLine(size.Size.Size);
+//            Console.WriteLine(size.Stock);
+//        }
+//    }
+
+//}
+//catch (Exception ex)
+//{
+
+//	throw;
+//}
+
+#endregion
 
 // Pour utiliser appsetting.json
 IConfiguration configuration = new ConfigurationBuilder()
@@ -359,6 +381,7 @@ IUserRepository userRepository = new UserRepository(dataContext, configuration);
 IAdressRepository adressRepository = new AdressRepository(dataContext);
 IProductRepository productRepository = new ProductRepository(dataContext);
 ICategoryRepository categoryRepository = new CategoryRepository(dataContext);
+ISizeRepository sizeRepository = new SizeRepository(dataContext);
 
 // TEST Users
 #region Test GetAll Users
@@ -655,6 +678,35 @@ ICategoryRepository categoryRepository = new CategoryRepository(dataContext);
 
 #endregion
 
+#region Test GetAll Products avec sizes et categories
+
+//try
+//{
+//	List<ProductEntity> products = (List<ProductEntity>)await productRepository.GetAll();
+
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine($"Product name : {product.ModelName}");
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine($"Categories : {category.Category.CategoryName}");
+//        }
+//        foreach (var size in product.Sizes)
+//        {
+//            Console.WriteLine($"Size : {size.Size.Size}");
+//            Console.WriteLine($"Stock : {size.Stock}");
+
+//        }
+
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//	throw;
+//}
+#endregion
+
 #region Test GetById Produdct
 
 //try
@@ -840,6 +892,96 @@ ICategoryRepository categoryRepository = new CategoryRepository(dataContext);
 //}
 #endregion
 
+
+// TEST Sizes
+
+#region Test GetAll Sizes
+
+
+//try
+//{
+//	IEnumerable<SizeEntity> sizes = await sizeRepository.GetAll();
+//    foreach (var size in sizes)
+//    {
+//        Console.WriteLine(size.Size);
+//    }
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
+#region Test GetById Sizes
+//try
+//{
+//    SizeEntity? size = await sizeRepository.GetById(2);
+//    if (size is null) throw new Exception();
+
+//        Console.WriteLine(size.Size);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Insert Size
+
+//try
+//{
+//    SizeEntity? size = await sizeRepository.Insert(new SizeEntity() { Size = 39});
+//    if (size is null) throw new Exception();
+
+//    Console.WriteLine(size.Size);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Update Size
+
+//try
+//{
+//    SizeEntity? oldSize = await sizeRepository.GetById(2);
+//    if (oldSize is null) throw new Exception();
+
+//    oldSize.Size = 40;
+//    SizeEntity updatedSize = oldSize;
+//    SizeEntity? size = await sizeRepository.Update(oldSize, updatedSize);
+//    if (size is null) throw new Exception();
+
+//    Console.WriteLine(size.Size);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Delete Size
+
+//try
+//{
+//    SizeEntity? entityToDelete = await sizeRepository.GetById(2);
+//    if (entityToDelete is null) throw new Exception();
+
+//    SizeEntity? size = await sizeRepository.Delete(entityToDelete);
+//    if (size is null) throw new Exception();
+
+//    Console.WriteLine(size.Size);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
 // TEST Services BLL
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
@@ -847,6 +989,8 @@ IAuthService authService = new AuthService(authRepository, userRepository);
 IAdressService adressService = new AdressService(adressRepository);
 IProductService productService = new ProductService(productRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
+ISizeService sizeService = new SizeService(sizeRepository);
+
 
 // TEST Users
 #region Test GetAll Users
@@ -1322,6 +1466,101 @@ ICategoryService categoryService = new CategoryService(categoryRepository);
 
 #endregion
 
+// TEST Sizes
+
+#region Test GetAll Sizes
+
+//try
+//{
+//	IEnumerable<SizeModel> sizes = await sizeService.GetAll();
+//    foreach (var size in sizes)
+//    {
+//        Console.WriteLine(size.Size);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetById Sizes
+
+//try
+//{
+//    SizeModel? size = await sizeService.GetById(3);
+//    if (size is null) throw new Exception();
+
+//        Console.WriteLine(size.Size);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Insert Size
+
+//try
+//{
+//    SizeModel? insertedSize = await sizeService.Insert(new SizeModel(41));
+//    if (insertedSize is null) throw new Exception();
+
+
+//    Console.WriteLine(insertedSize.Size);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
+#region Test Update Size
+
+//try
+//{
+//    SizeModel? sizeToUpdate = await sizeService.GetById(4);
+//    if (sizeToUpdate is null) throw new Exception();
+
+//    SizeModel size = sizeToUpdate;
+//    size.Size = 42;
+
+//    SizeModel? updatedSize = await sizeService.Update(size, 4);
+//    if (updatedSize is null) throw new Exception();
+
+
+//    Console.WriteLine(updatedSize.Size);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test Delete Size
+
+//try
+//{
+
+//    SizeModel? deletedSize = await sizeService.Delete(4);
+//    if (deletedSize is null) throw new Exception();
+
+//    Console.WriteLine(deletedSize.Size);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
 
 
 // TEST appart
@@ -1350,7 +1589,6 @@ ICategoryService categoryService = new CategoryService(categoryRepository);
 //}
 
 #endregion
-
 
 
 

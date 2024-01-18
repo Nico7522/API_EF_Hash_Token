@@ -18,6 +18,7 @@ namespace API_EF_Hash_Token.BLL.Models
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public List<CategoryModel>? Categories { get; set; }
+        //public List<> MyProperty { get; set; }
 
 
         public ProductModel(string modelName, string description, string brand, string sexe, decimal price, decimal discount)
