@@ -358,6 +358,8 @@ IConfiguration configuration = new ConfigurationBuilder()
 IUserRepository userRepository = new UserRepository(dataContext, configuration);
 IAdressRepository adressRepository = new AdressRepository(dataContext);
 IProductRepository productRepository = new ProductRepository(dataContext);
+ICategoryRepository categoryRepository = new CategoryRepository(dataContext);
+
 // TEST Users
 #region Test GetAll Users
 
@@ -730,6 +732,111 @@ IProductRepository productRepository = new ProductRepository(dataContext);
 //catch (Exception ex)
 //{
 //    Console.WriteLine(ex.Message); 
+//}
+#endregion
+
+
+
+// TEST Categories
+#region Test GetAll Categories
+
+//try
+//{
+//IEnumerable<CategoryEntity> categories = await categoryRepository.GetAll();
+
+//    foreach (var category in categories)
+//    {
+//        Console.WriteLine(category.CategoryName);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetById Category
+
+//try
+//{
+//    CategoryEntity? category = await categoryRepository.GetById(10);
+//    if (category is null) throw new Exception();
+
+//    Console.WriteLine(category.CategoryName);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+
+#endregion
+
+#region Test Insert Category
+
+//try
+//{
+//    CategoryEntity category = new CategoryEntity();
+//    category.Description = "Description";
+//    category.CategoryName = "Nom cate";
+//    CategoryEntity? insertedCategory = await categoryRepository.Insert(category);
+
+//    if (insertedCategory is null) throw new Exception();
+
+//    Console.WriteLine(insertedCategory.CategoryName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); 
+//}
+#endregion
+
+#region Test Update Category
+
+//try
+//{
+//    CategoryEntity? oldCategory = await categoryRepository.GetById(3);
+//    if (oldCategory is null) throw new Exception();
+
+
+//    CategoryEntity modifiedEntity = oldCategory;
+//    modifiedEntity.CategoryName = "Changment de nom";
+//    CategoryEntity? updatedCategory = await categoryRepository.Update(oldCategory, modifiedEntity);
+
+//    if (updatedCategory is null) throw new Exception();
+
+//    Console.WriteLine(updatedCategory.CategoryName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message); ;
+//}
+
+#endregion
+
+#region Test Delete Category
+
+//try
+//{
+//    CategoryEntity? categoryToDelete = await categoryRepository.GetById(3);
+//    if (categoryToDelete is null) throw new Exception();
+
+//    CategoryEntity? deletedCategory = await categoryRepository.Delete(categoryToDelete);
+//    if (deletedCategory is null) throw new Exception();
+
+//    Console.WriteLine(deletedCategory.CategoryName);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
 //}
 #endregion
 
@@ -1148,3 +1255,6 @@ IProductService productService = new ProductService(productRepository);
 //}
 
 #endregion
+
+
+

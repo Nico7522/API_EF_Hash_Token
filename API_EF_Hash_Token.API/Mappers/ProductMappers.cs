@@ -26,5 +26,10 @@ namespace API_EF_Hash_Token.API.Mappers
         {
             return new ProductModel(form.ModelName, form.Description, form.Brand, form.Sexe, form.Price, form.Discount); 
         }
+
+        internal static ProductModel ToProductModel(this UpdateProductForm form)
+        {
+            return new ProductModel(form.ModelName, form.Description, form.Brand, form.Sexe, form.Price, form.Discount);
+        }
     }
 }

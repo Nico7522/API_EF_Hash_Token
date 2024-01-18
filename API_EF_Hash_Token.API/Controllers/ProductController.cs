@@ -40,10 +40,12 @@ namespace API_EF_Hash_Token.API.Controllers
             return insertedProduct is not null ? Ok(insertedProduct) : BadRequest();
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<ProductDTO?> Update(UpdateProductForm form, int id)
-        //{
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ProductDTO>?> Update(UpdateProductForm form, int id)
+        {
+            ProductDTO? updatedProduct = await _productService.Update(form.ToProductModel(), id).ContinueWith(r => r.Result?.ToProductDTO());
+            return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
 
-        //}
+        }
     }
 }
