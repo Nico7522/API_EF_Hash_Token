@@ -12,6 +12,7 @@ namespace API_EF_Hash_Token.API.Mappers
             {
                 SizeId = model.SizeId,
                 Size = model.Size,
+                Stock = model.Stock,
             };
         }
 

@@ -35,8 +35,9 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<ProductEntity?> GetById(int id)
         {
-            return await _dataContext.Products.Where(p => p.PrdoductId == id).Include(p => p.Categories).ThenInclude(p => p.Category).FirstOrDefaultAsync();
-        }
+            return await _dataContext.Products.Where(p => p.PrdoductId == id).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                                                             .Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync();
+        }                           
 
         public async Task<ProductEntity?> Insert(ProductEntity entity)
         {
