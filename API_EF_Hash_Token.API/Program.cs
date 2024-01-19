@@ -36,6 +36,10 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+// Sizes
+builder.Services.AddScoped<ISizeRepository, SizeRepository>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+
 // Token
 builder.Services.AddSingleton<TokenManager>();
 

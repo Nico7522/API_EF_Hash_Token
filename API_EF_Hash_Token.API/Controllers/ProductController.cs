@@ -47,5 +47,12 @@ namespace API_EF_Hash_Token.API.Controllers
             return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
 
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ProductDTO?>> Delete(int id)
+        {
+            ProductDTO? deletedProduct = await _productService.Delete(id).ContinueWith(r => r.Result?.ToProductDTO());
+            return deletedProduct is not null ? Ok(deletedProduct) : BadRequest();
+        }
     }
 }
