@@ -344,6 +344,7 @@ string password = "@Test1234=";
 #endregion
 
 
+
 #region Test GallAll Products avec categories et sizes
 
 //try
@@ -785,6 +786,21 @@ ISizeRepository sizeRepository = new SizeRepository(dataContext);
 //{
 //    Console.WriteLine(ex.Message); 
 //}
+#endregion
+
+
+#region Test Update Stock
+
+//try
+//{
+//	await productRepository.Update
+//}
+//catch (Exception ex)
+//{
+
+//	throw;
+//}
+
 #endregion
 
 
