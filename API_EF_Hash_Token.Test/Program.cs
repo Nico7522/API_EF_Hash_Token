@@ -227,51 +227,53 @@ string password = "@Test1234=";
 
 //try
 //{
-//	OrderEntity order = new OrderEntity() {
-//		UserId = 6,
+//	OrderEntity order = new OrderEntity()
+//	{
+//		UserId = 12,
 //		OrderDate = DateTime.Now,
 //	};
 //	dataContext.Orders.Add(order);
-//	ProductOrderEntity productOrder = new ProductOrderEntity() {
+//	ProductOrderEntity productOrder = new ProductOrderEntity()
+//	{
 
 //		Order = order,
-//		ProductId = 1,
+//		ProductId = 5,
 //		Quantity = 2,
-//		Price = 3.99M
+//		Price = 154.44M
 //	};
-//	order.TotalPrice = 7.01M;
+//	order.TotalPrice = 154.44M;
 //	dataContext.ProductOrder.Add(productOrder);
 //	dataContext.SaveChanges();
-//    Console.WriteLine("OK");
+//	Console.WriteLine("OK");
 
 //}
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.InnerException.Message);
+//	Console.WriteLine(ex.InnerException.Message);
 //}
 
 #endregion
 
 #region Test Full Order
 
-//// Ce que l'on reçoit du front
-//List<OrderProduct> userOrder = new List<OrderProduct>() { new OrderProduct() { ProductId = 1, Price = 129.99M, Quantity = 2 }, new OrderProduct() { ProductId = 2, Price = 85.99M, Quantity = 1 } };
+// Ce que l'on reçoit du front
+//List<OrderProduct> userOrder = new List<OrderProduct>() { new OrderProduct() { ProductId = 20, Price = 50.99M, Quantity = 2 }, new OrderProduct() { ProductId = 22, Price = 50.99M, Quantity = 1 } };
 
 //try
 //{
 //    // Création de la command
 //    OrderEntity orderEntity = new OrderEntity();
 //    // Ajout de l'user id
-//    orderEntity.UserId = 6;
+//    orderEntity.UserId = 12;
 //    // Ajout de la date
 //    orderEntity.OrderDate = DateTime.Now;
 
 //    // Pour tous les produits de la commande, on créé un ProductOrder
 //    foreach (var product in userOrder)
 //    {
-//        ProductOrderEntity productOrderEntity = new ProductOrderEntity() 
-//        { 
+//        ProductOrderEntity productOrderEntity = new ProductOrderEntity()
+//        {
 //            // On y associe la commande, le produit, la quantité et le prix total (quantity*price)
 //            Order = orderEntity,
 //            ProductId = product.ProductId,
@@ -293,7 +295,7 @@ string password = "@Test1234=";
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.Message);
+//    Console.WriteLine(ex.InnerException.Message);
 //}
 #endregion
 
@@ -343,8 +345,6 @@ string password = "@Test1234=";
 //}
 #endregion
 
-
-
 #region Test GallAll Products avec categories et sizes
 
 //try
@@ -383,6 +383,8 @@ IAdressRepository adressRepository = new AdressRepository(dataContext);
 IProductRepository productRepository = new ProductRepository(dataContext);
 ICategoryRepository categoryRepository = new CategoryRepository(dataContext);
 ISizeRepository sizeRepository = new SizeRepository(dataContext);
+IOrderRepository orderRepository = new OrderRepository(dataContext);
+
 
 // TEST Users
 #region Test GetAll Users
@@ -997,6 +999,86 @@ ISizeRepository sizeRepository = new SizeRepository(dataContext);
 //    Console.WriteLine(ex.Message);
 //}
 #endregion
+
+// TEST Orders
+
+#region Test GetAll Orders
+
+//try
+//{
+//   IEnumerable<OrderEntity> orders = await orderRepository.GetAll();
+//    foreach (var order in orders)
+//    {
+//        Console.WriteLine($"User : {order.User.FirstName}");
+//        foreach (var product in order.Products)
+//        {
+//            Console.WriteLine($"Product : {product.Product.ModelName}");
+//            Console.WriteLine($"Price : {product.Price}");
+//            Console.WriteLine($"Quantity : {product.Quantity}");
+
+//        }
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetByUserId Orders
+
+//try
+//{
+//    IEnumerable<OrderEntity> orders = await orderRepository.GetByUserId(12);
+//    foreach (var order in orders)
+//    {
+//        Console.WriteLine($"User : {order.User.FirstName}");
+//        foreach (var product in order.Products)
+//        {
+//            Console.WriteLine($"Product : {product.Product.ModelName}");
+//            Console.WriteLine($"Price : {product.Price}");
+//            Console.WriteLine($"Quantity : {product.Quantity}");
+
+//        }
+//        Console.WriteLine($"Total price : {order.TotalPrice}");
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetByUser Orders
+
+//try
+//{
+//    IEnumerable<OrderEntity> orders = await orderRepository.GetByUser("dokkannico75@gmail.com");
+//    foreach (var order in orders)
+//    {
+//        Console.WriteLine($"User : {order.User.FirstName}");
+//        foreach (var product in order.Products)
+//        {
+//            Console.WriteLine($"Product : {product.Product.ModelName}");
+//            Console.WriteLine($"Price : {product.Price}");
+//            Console.WriteLine($"Quantity : {product.Quantity}");
+
+//        }
+//        Console.WriteLine($"Total price : {order.TotalPrice}");
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 
 // TEST Services BLL
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
@@ -1619,7 +1701,6 @@ ISizeService sizeService = new SizeService(sizeRepository);
 //}
 
 #endregion
-
 
 
 

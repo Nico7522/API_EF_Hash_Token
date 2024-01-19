@@ -9,8 +9,6 @@ namespace API_EF_Hash_Token.API.CustomAttributes
             if (value is null) return new ValidationResult("Required");
 
             if (value?.ToString().Length < 9 || value?.ToString().Length > 9) return new ValidationResult("Invalid phone number");
-
-
             return ValidationResult.Success;
 
             
