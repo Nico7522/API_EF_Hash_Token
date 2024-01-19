@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Class;
 using API_EF_Hash_Token.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,15 @@ namespace API_EF_Hash_Token.BLL.Mappers
         internal static SizeEntity ToSizeEntity(this SizeModel model)
         {
             return new SizeEntity() { Size = model.Size };
+        }
+
+        internal static SizeStock ToSizeStock(this SizeModel model)
+        {
+            return new SizeStock()
+            {
+                SizeId = model.SizeId,
+                Stock = model.Stock,
+            };
         }
 
         //internal static SizeStockModel ToSizeStockModel(this SizeEntity entity, ProductEntity stock)

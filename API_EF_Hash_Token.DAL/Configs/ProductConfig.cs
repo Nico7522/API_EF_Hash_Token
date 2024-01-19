@@ -23,6 +23,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.Property(p => p.Price).HasPrecision(11, 2).IsRequired();
             builder.Property(p => p.Discount).HasPrecision(3, 2).HasDefaultValue(0);
             builder.Ignore(p => p.CategoriesId);
+            builder.Ignore(p => p.SizeStock);
         }
     }
 }

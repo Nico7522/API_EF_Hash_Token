@@ -2,6 +2,7 @@
 using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
+using API_EF_Hash_Token.BLL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace API_EF_Hash_Token.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductDTO?>> Insert(CreateProductForm form)
         {
-            ProductDTO? insertedProduct = await _productService.Insert(form.ToProductModel(), form.CategoriesId).ContinueWith(r => r.Result?.ToProductDTO());
+            ProductDTO? insertedProduct = await _productService.Insert(form.ToProductModel(), form.CategoriesId, form.SizeStock.Select(st => st.ToSizeModel()).ToList()).ContinueWith(r => r.Result?.ToProductDTO());
 
             return insertedProduct is not null ? Ok(insertedProduct) : BadRequest();
         }

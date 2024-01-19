@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API_EF_Hash_Token.DAL.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,6 @@ namespace API_EF_Hash_Token.DAL.Entities
         //public List<CategoryEntity> CategoriesEntity { get; set; }
         public List<SizeProductEntity> Sizes { get; set; }
         public List<int> CategoriesId { get; set; }
+        public List<SizeStock> SizeStock { get; set; }
     }
 }

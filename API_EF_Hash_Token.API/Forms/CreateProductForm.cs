@@ -11,5 +11,6 @@ namespace API_EF_Hash_Token.API.Forms
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public List<int> CategoriesId { get; set; }
+        public List<SizeStockForm> SizeStock { get; set; }
     }
 }

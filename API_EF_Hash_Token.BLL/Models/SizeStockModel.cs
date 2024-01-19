@@ -16,5 +16,6 @@ namespace API_EF_Hash_Token.BLL.Models
             this.Size = size; 
             this.Stock = stock;
         }
+
     }
 }

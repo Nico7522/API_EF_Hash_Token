@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Class;
 using API_EF_Hash_Token.DAL.Entities;
 
 namespace API_EF_Hash_Token.BLL.Mappers
@@ -18,17 +19,18 @@ namespace API_EF_Hash_Token.BLL.Mappers
         //    return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.PrdoductId);
         //}
 
-        internal static ProductEntity ToProductEntity(this ProductModel model, List<int>? categoriesId = null)
+        internal static ProductEntity ToProductEntity(this ProductModel model, List<int>? categoriesId = null, List<SizeModel>? sizeStock = null)
         {
             return new ProductEntity() {
-                
-            ModelName = model.ModelName,
-            Description = model.Description,
-            Brand = model.Brand,
-            Sexe = model.Sexe,
-            Price = model.Price,
-            Discount = model.Discount,
-            CategoriesId = categoriesId.ToList(),
+
+                ModelName = model.ModelName,
+                Description = model.Description,
+                Brand = model.Brand,
+                Sexe = model.Sexe,
+                Price = model.Price,
+                Discount = model.Discount,
+                CategoriesId = categoriesId.ToList(),
+                SizeStock = sizeStock.Select(st => st.ToSizeStock()).ToList() ?? new List<SizeStock>()
             };
         }
     }

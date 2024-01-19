@@ -17,9 +17,16 @@ namespace API_EF_Hash_Token.BLL.Models
         {
             this.Size = size;
         }
-        public SizeModel(int sizeId, int size, int stock = 0) : this(size)
+        public SizeModel(int sizeId, int stock = 0)
         {
             this.SizeId = sizeId;
+            Stock = stock;
+
+        }
+        public SizeModel(int sizeId, int size, int stock = 0)
+        {
+            this.SizeId = sizeId;
+            this.Size = size;
             Stock = stock;
 
         }

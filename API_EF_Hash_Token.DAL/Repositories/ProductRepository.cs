@@ -1,4 +1,5 @@
-﻿using API_EF_Hash_Token.DAL.Domain;
+﻿using API_EF_Hash_Token.DAL.Class;
+using API_EF_Hash_Token.DAL.Domain;
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -46,8 +47,19 @@ namespace API_EF_Hash_Token.DAL.Repositories
             {
                 foreach (var categoryId in entity.CategoriesId)
                 {
-                    await Console.Out.WriteLineAsync((char)categoryId);
+                    CategoryEntity? findEntity = await _dataContext.Categories.FindAsync(categoryId);
+                    if (findEntity is null) return null;
                     await _dataContext.ProductCategory.AddAsync(new ProductCategoryEntity { CategoryId = categoryId, Product = entity });
+                }
+            }
+
+            if(entity.SizeStock.Count > 0)
+            {
+                foreach (var sizeStock in entity.SizeStock)
+                {
+                    SizeEntity? findEntity = await _dataContext.Sizes.FindAsync(sizeStock.SizeId);
+                    if (findEntity is null) return null;
+                    await _dataContext.SizeProduct.AddAsync(new SizeProductEntity() { SizeId = sizeStock.SizeId, Stock = sizeStock.Stock, Product = entity });
                 }
             }
             await _dataContext.SaveChangesAsync();

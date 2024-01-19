@@ -10,6 +10,7 @@ namespace API_EF_Hash_Token.API.Mappers
         {
             return new SizeStockDTO()
             {
+                SizeId = model.SizeId,
                 Size = model.Size,
                 Stock = model.Stock,
             };
@@ -31,6 +32,10 @@ namespace API_EF_Hash_Token.API.Mappers
         internal static SizeModel ToSizeModel(this UpdateSizeForm form)
         {
             return new SizeModel(form.Size);
+        }
+
+        internal static SizeModel ToSizeModel(this SizeStockForm form) {
+            return new SizeModel(form.SizeId, form.Stock);
         }
     }
 }
