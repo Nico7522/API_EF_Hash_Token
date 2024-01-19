@@ -10,6 +10,6 @@
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public List<CategoryDTO> Categories { get; set; }
-        public List<SizeDTO> Sizes { get; set; }
+        public List<SizeStockDTO> Sizes { get; set; }
     }
 }

@@ -6,13 +6,20 @@ namespace API_EF_Hash_Token.API.Mappers
 {
     internal static class SizeMappers
     {
+        internal static SizeStockDTO ToStockSizeDTO(this SizeModel model)
+        {
+            return new SizeStockDTO()
+            {
+                Size = model.Size,
+                Stock = model.Stock,
+            };
+        }
         internal static SizeDTO ToSizeDTO(this SizeModel model)
         {
             return new SizeDTO()
             {
                 SizeId = model.SizeId,
                 Size = model.Size,
-                Stock = model.Stock,
             };
         }
 
