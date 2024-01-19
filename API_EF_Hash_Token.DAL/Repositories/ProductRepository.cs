@@ -77,13 +77,14 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return oldEntity;
         }
 
-        public async Task<bool> UpdateStock(int productId, int sizeId)
+        public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
         {
             SizeProductEntity? sizeProduct = await _dataContext.SizeProduct.Where(sp => sp.ProductId == productId && sp.SizeId == sizeId).FirstOrDefaultAsync();
-            sizeProduct.Stock = 100;
-            await _dataContext.SaveChangesAsync();
+            if (sizeProduct is null) return false;
 
-            return false;
+            sizeProduct.Stock = stock;
+            await _dataContext.SaveChangesAsync();
+            return true;
         }
     }
 }

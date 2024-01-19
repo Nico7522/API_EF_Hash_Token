@@ -55,5 +55,13 @@ namespace API_EF_Hash_Token.API.Controllers
             ProductDTO? deletedProduct = await _productService.Delete(id).ContinueWith(r => r.Result?.ToProductDTO());
             return deletedProduct is not null ? Ok(deletedProduct) : BadRequest();
         }
+
+        [HttpPatch(("stock/{sizeId}/{productId}"))]
+        public async Task<ActionResult> UpdateStock(UpdateStockForm form,int sizeId, int productId)
+        {
+            bool isUpdated = await _productService.UpdateStock(sizeId, productId, form.Stock);
+
+            return isUpdated ? Ok() : BadRequest();
+        }
     }
 }

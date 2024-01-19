@@ -788,17 +788,17 @@ ISizeRepository sizeRepository = new SizeRepository(dataContext);
 //}
 #endregion
 
-
 #region Test Update Stock
 
 //try
 //{
-//	await productRepository.Update
+//	bool isUpdated = await productRepository.UpdateStock(5, 44, 40);
+
 //}
 //catch (Exception ex)
 //{
 
-//	throw;
+//    Console.WriteLine(ex);
 //}
 
 #endregion
@@ -1003,7 +1003,7 @@ IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
 IAuthService authService = new AuthService(authRepository, userRepository);
 IAdressService adressService = new AdressService(adressRepository);
-IProductService productService = new ProductService(productRepository);
+IProductService productService = new ProductService(productRepository, sizeRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
 
@@ -1349,7 +1349,6 @@ ISizeService sizeService = new SizeService(sizeRepository);
 
 #endregion
 
-
 #region Test Update Products
 
 //try
@@ -1380,6 +1379,21 @@ ISizeService sizeService = new SizeService(sizeRepository);
 
 //    Console.WriteLine(deletedProduct.ModelName);
 
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test UpdateStock Product
+
+//try
+//{
+//	bool isUpdated = await productRepository.UpdateStock(5, 57, 100);
+//	if (!isUpdated) throw new Exception();
 //}
 //catch (Exception ex)
 //{

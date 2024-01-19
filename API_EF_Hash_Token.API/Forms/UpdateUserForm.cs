@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using API_EF_Hash_Token.API.CustomAttributes;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace API_EF_Hash_Token.API.Forms
@@ -13,11 +14,8 @@ namespace API_EF_Hash_Token.API.Forms
         [MaxLength(150)]
         public string LastName { get; set; }
 
-
         [Required]
-        [MinLength(7)]
-        [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$")]
-        [DefaultValue("password")]
+        [CheckMaxLength]
         public int PhoneNumber { get; set; }
     }
 }

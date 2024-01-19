@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using API_EF_Hash_Token.API.CustomAttributes;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace API_EF_Hash_Token.API.Forms
@@ -14,7 +15,7 @@ namespace API_EF_Hash_Token.API.Forms
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(9)]
+        [CheckMaxLength]
         public int PhoneNumber { get; set; }
 
         [Required]

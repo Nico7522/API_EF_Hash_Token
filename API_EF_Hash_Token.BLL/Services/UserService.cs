@@ -1,6 +1,7 @@
 ﻿using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Mappers;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,10 @@ namespace API_EF_Hash_Token.BLL.Services
         }
         public async Task<UserModel?> Delete(int id)
         {
-           UserModel? deletedUser = await _userRepository.Delete(id).ContinueWith(r => r.Result?.ToUserModel());
+            UserEntity? entityToDelete = await _userRepository.GetById(id);
+            if (entityToDelete is null) return null;
+
+            UserModel? deletedUser = await _userRepository.Delete(entityToDelete).ContinueWith(r => r.Result?.ToUserModel());
             return deletedUser;
         }
 
@@ -44,8 +48,11 @@ namespace API_EF_Hash_Token.BLL.Services
 
         public async Task<UserModel?> Update(UserModel newUser, int id)
         {
-        
-            UserModel updatedUser = await _userRepository.Update(newUser.ToUserEntity(), id).ContinueWith(r => r.Result.ToUserModel());
+
+            UserEntity? entityToUpdate = await _userRepository.GetById(id);
+            if (entityToUpdate is null) return null;
+       
+            UserModel? updatedUser = await _userRepository.Update(entityToUpdate, newUser.ToUserEntity()).ContinueWith(r => r.Result?.ToUserModel());
             return updatedUser;
         }
 

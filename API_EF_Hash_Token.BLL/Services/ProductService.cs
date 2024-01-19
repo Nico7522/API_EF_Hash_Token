@@ -15,10 +15,12 @@ namespace API_EF_Hash_Token.BLL.Services
     {
 
         private readonly IProductRepository _productRepository;
+        private readonly ISizeRepository _sizeRepository;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IProductRepository productRepository, ISizeRepository sizeRepository)
         {
             _productRepository = productRepository;
+            _sizeRepository = sizeRepository;
         }
 
         public async Task<ProductModel?> Delete(int id)
@@ -56,6 +58,20 @@ namespace API_EF_Hash_Token.BLL.Services
 
             ProductModel? updatedProduct = await _productRepository.Update(productToUpdate, modifiedProduct.ToProductEntity()).ContinueWith(r => r.Result?.ToProductModel());
             return updatedProduct;
+        }
+
+        public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
+        {
+            // Check si le produit existe
+            ProductEntity? productFound = await _productRepository.GetById(productId);
+            if (productFound is null) return false;
+
+            // check si la taille existe
+            SizeEntity? sizeFound = await _sizeRepository.GetById(sizeId);
+            if (sizeFound is null) return false;
+
+            bool isUpdated = await _productRepository.UpdateStock(sizeId, productId, stock);
+            return isUpdated;
         }
     }
 }
