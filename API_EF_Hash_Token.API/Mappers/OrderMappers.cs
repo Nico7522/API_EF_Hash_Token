@@ -1,4 +1,5 @@
-﻿using API_EF_Hash_Token.API.Forms;
+﻿using API_EF_Hash_Token.API.Dto;
+using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.BLL.Models;
 
 namespace API_EF_Hash_Token.API.Mappers
@@ -22,6 +23,45 @@ namespace API_EF_Hash_Token.API.Mappers
                 Price = form.Price,
                 Quantity = form.Quantity
             };
+        }
+
+        internal static OrderDTO ToOrderDTO(this OrderModel model)
+        {
+            return new OrderDTO() {
+
+                OrderId = model.OrderId,
+                User = model.User != null ? model.User.ToUserDTO() : null,
+                TotalPrice = model.TotalPrice,
+                OrderedProducts = model.OrderProducts.Select(po => po.ToProductOrderDTO()).ToList() ?? new List<ProductOrderDTO>()
+                
+            };
+        }
+
+
+        internal static ProductOrderDTO ToProductOrderDTO(this OrderProductModel model)
+        {
+            return new ProductOrderDTO() 
+            { 
+                ProductName = model.ModelName,
+                Price = model.Price,
+                Quantity = model.Quantity,
+            };
+        }
+
+        internal static OrderResponseDTO ToOrderResponseDTO(this OrderModel model)
+        {
+            return new OrderResponseDTO() 
+            { 
+                OrderId = model.OrderId,
+                UserId = model.UserId, 
+                TotalPrice = model.TotalPrice, 
+                Products = model.OrderProducts.Select(p => p.ToProductOrderResponseDTO()).ToList() ?? new List<ProductOrderResponseDTO>() 
+            };
+        }
+
+        internal static ProductOrderResponseDTO ToProductOrderResponseDTO(this OrderProductModel model)
+        {
+            return new ProductOrderResponseDTO() { Price = model.Price, ProductId = model.ProductId, Quantity = model.Quantity };
         }
     }
   

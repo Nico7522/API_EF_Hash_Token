@@ -1,4 +1,5 @@
-﻿using API_EF_Hash_Token.API.Forms;
+﻿using API_EF_Hash_Token.API.Dto;
+using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -17,11 +18,17 @@ namespace API_EF_Hash_Token.API.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Insert(CreateOrderForm form)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAll()
         {
-            await _orderService.Insert(form.ToOrderModel());
-            return Ok();
+            return await _orderService.GetAll().ContinueWith(r => r.Result.Select(o => o.ToOrderDTO()).ToList());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<OrderResponseDTO?>> Insert(CreateOrderForm form)
+        {
+            OrderResponseDTO? insertedOrder = await _orderService.Insert(form.ToOrderModel()).ContinueWith(r => r.Result.ToOrderResponseDTO());
+            return insertedOrder is not null ? Ok(insertedOrder) : BadRequest(); 
         }
     }
 }

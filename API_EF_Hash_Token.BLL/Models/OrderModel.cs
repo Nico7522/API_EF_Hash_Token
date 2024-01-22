@@ -8,6 +8,7 @@ namespace API_EF_Hash_Token.BLL.Models
 {
     public class OrderModel
     {
+        public int OrderId { get; set; }
         public int UserId { get; set; }
         public UserModel User { get; set; }
         public List<OrderProductModel> OrderProducts { get; set; } = new List<OrderProductModel>();

@@ -14,13 +14,14 @@ namespace API_EF_Hash_Token.BLL.Mappers
         {
             return new OrderModel() 
             {
+                OrderId = entity.OrderId,
                 UserId = entity.UserId,
                 User = entity.User.ToUserModel(),
                 TotalPrice = entity.TotalPrice,
                 Reduction = entity.TotalReduction,
+                OrderProducts = entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price)).ToList(),
+                
 
-                // Faire un mapper qui map un ProductEntity vers un OrderProductModel et passer en paramètres la quantité ...
-                OrderProducts = entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price)).ToList()
             };
         }
         internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price)

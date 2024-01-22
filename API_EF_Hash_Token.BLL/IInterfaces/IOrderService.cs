@@ -12,6 +12,6 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<IEnumerable<OrderModel>> GetAll();
         Task<IEnumerable<OrderModel>> GetByUserId(int UserId);
         Task<IEnumerable<OrderModel>> GetByUserEmail(string email);
-        Task<OrderModel> Insert(OrderModel orderModel);
+        Task<OrderModel?> Insert(OrderModel orderModel);
     }
 }

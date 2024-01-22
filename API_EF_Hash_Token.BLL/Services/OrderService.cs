@@ -37,16 +37,17 @@ namespace API_EF_Hash_Token.BLL.Services
             return await _orderRepository.GetByUserId(UserId).ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
         }
 
-        public async Task<OrderModel> Insert(OrderModel orderModel)
+        public async Task<OrderModel?> Insert(OrderModel orderModel)
         {
             decimal tp = 0;
             foreach (var product in orderModel.OrderProducts)
             {
-                tp += product.Price*product.Quantity;
+                product.Price = product.Price * product.Quantity;
+                tp += product.Price;
             }
             orderModel.TotalPrice = tp;
-            await _orderRepository.Insert(orderModel.ToOrderEntity());
-            return orderModel;
+           OrderModel? insertedOrder = await _orderRepository.Insert(orderModel.ToOrderEntity()).ContinueWith(r => r.Result?.ToOrderModel());
+            return insertedOrder;
         }
     }
 }

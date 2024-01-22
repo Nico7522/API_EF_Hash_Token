@@ -36,6 +36,8 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<OrderEntity?> Insert(OrderEntity entity)
         {
+            UserEntity? userFound = await _dataContext.Users.FindAsync(entity.UserId);
+            if (userFound is null) return null;
             foreach (var product in entity.Products)
             {
                 ProductEntity? productFound = await _dataContext.Products.FindAsync(product.ProductId);
