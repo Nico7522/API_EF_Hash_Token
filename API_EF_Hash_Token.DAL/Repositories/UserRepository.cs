@@ -116,5 +116,12 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
 
         }
+
+        public async Task<bool> ActiveAccount(UserEntity user)
+        {
+            user.IsActive = true;
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

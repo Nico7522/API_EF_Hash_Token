@@ -567,6 +567,24 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test ActiveAccount User
+
+//try
+//{
+//	UserEntity? userAccountToActive = await userRepository.GetById(12);
+//	if (userAccountToActive is null) throw new Exception();
+//	bool isActivate = await userRepository.ActiveAccount(userAccountToActive);
+//	if (!isActivate) throw new Exception();
+
+//    Console.WriteLine("OK");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
 // TEST Adresses
 #region Test GetAll Adresses
 
@@ -1088,7 +1106,7 @@ IAdressService adressService = new AdressService(adressRepository);
 IProductService productService = new ProductService(productRepository, sizeRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
-IOrderService orderService = new OrderService((OrderRepository)orderRepository);
+IOrderService orderService = new OrderService(orderRepository, userRepository);
 
 
 // TEST Users
@@ -1267,6 +1285,24 @@ IOrderService orderService = new OrderService((OrderRepository)orderRepository);
 //        Console.WriteLine(adress.Country);
 //    }
 //}
+#endregion
+
+#region Test ActiveAccount User
+
+//try
+//{
+//	bool isActivate = await userService.ActiveAccount(16);
+//    if (!isActivate) throw new Exception();
+
+//    Console.WriteLine("OK");
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
 #endregion
 
 // TEST Adress

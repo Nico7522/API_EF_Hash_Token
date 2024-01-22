@@ -64,5 +64,13 @@ namespace API_EF_Hash_Token.API.Controllers
             return Ok(result);
            
         }
+
+
+        [HttpPatch("active/{userId}")]
+        public async Task<ActionResult> ActiveAccount(int userId)
+        {
+            bool isActivate = await _userService.ActiveAccount(userId);
+            return isActivate ? Ok() : BadRequest();
+        }
     }
 }

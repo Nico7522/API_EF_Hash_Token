@@ -2,8 +2,12 @@
 using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace API_EF_Hash_Token.API.Controllers
 {
@@ -38,11 +42,27 @@ namespace API_EF_Hash_Token.API.Controllers
             return userOrders is not null ? Ok(userOrders) : NotFound(); 
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<OrderResponseDTO?>> Insert(CreateOrderForm form)
         {
+            // Récupérer l'id dans les claims
+            //var identity = HttpContext.User.Identity as ClaimsIdentity;
+            //if (identity != null)
+            //{
+            //    IEnumerable<Claim> claims = identity.Claims;
+            //    // or
+            //    string? id = identity.FindFirst(ClaimTypes.Sid)?.Value;
+
+            //    if(id is not null) 
+            //        await Console.Out.WriteLineAsync(id.ToString());
+
+            //}
+
+
             OrderResponseDTO? insertedOrder = await _orderService.Insert(form.ToOrderModel()).ContinueWith(r => r.Result?.ToOrderResponseDTO());
             return insertedOrder is not null ? Ok(insertedOrder) : NotFound(); 
         }
+
     }
 }

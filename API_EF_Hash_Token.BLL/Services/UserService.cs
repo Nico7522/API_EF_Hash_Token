@@ -61,5 +61,15 @@ namespace API_EF_Hash_Token.BLL.Services
             IEnumerable<UserAdressesModel> result = await _userRepository.GetAllWithAdresses().ContinueWith(u => u.Result.Select(r => r.ToUserAdresses()));
             return result;
         }
+
+        public async Task<bool> ActiveAccount(int userId)
+        {
+            UserEntity? userAccountToActive = await _userRepository.GetById(userId);
+            if (userAccountToActive is null) return false;
+
+
+            bool isActivate = await _userRepository.ActiveAccount(userAccountToActive);
+            return isActivate;
+        }
     }
 }
