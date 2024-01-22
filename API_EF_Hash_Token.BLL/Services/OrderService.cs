@@ -46,7 +46,8 @@ namespace API_EF_Hash_Token.BLL.Services
                 tp += product.Price;
             }
             orderModel.TotalPrice = tp;
-           OrderModel? insertedOrder = await _orderRepository.Insert(orderModel.ToOrderEntity()).ContinueWith(r => r.Result?.ToOrderModel());
+            orderModel.OrderDate = DateTime.Now;
+            OrderModel? insertedOrder = await _orderRepository.Insert(orderModel.ToOrderEntity()).ContinueWith(r => r.Result?.ToOrderModel());
             return insertedOrder;
         }
     }

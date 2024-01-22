@@ -41,9 +41,8 @@ namespace API_EF_Hash_Token.BLL.Mappers
 
             return new OrderEntity() {
                 UserId = model.UserId,
-                // À faire dans la BLL
-                OrderDate = DateTime.Now,
                 TotalPrice = model.TotalPrice,
+                OrderDate = model.OrderDate,
                 Products = model.OrderProducts.Select(p => p.ToProductOrderEntity()).ToList()
                 
             };
