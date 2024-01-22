@@ -42,10 +42,10 @@ namespace API_EF_Hash_Token.BLL.Services
             decimal tp = 0;
             foreach (var product in orderModel.OrderProducts)
             {
-                product.Price = product.Price * product.Quantity;
+                product.Price = (product.Price - (product.Price*product.ReductionPerProduct)) * product.Quantity;
                 tp += product.Price;
             }
-            orderModel.TotalPrice = tp;
+            orderModel.TotalPrice = tp - (orderModel.TotalPrice*orderModel.TotalReduction);
             orderModel.OrderDate = DateTime.Now;
             OrderModel? insertedOrder = await _orderRepository.Insert(orderModel.ToOrderEntity()).ContinueWith(r => r.Result?.ToOrderModel());
             return insertedOrder;

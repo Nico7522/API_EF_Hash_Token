@@ -11,6 +11,7 @@ namespace API_EF_Hash_Token.API.Mappers
             return new OrderModel()
             {
                 UserId = form.UserId,
+                TotalReduction = form.TotalReduction,
                 OrderProducts = form.OrderProduct.Select(p => p.ToOrderProductModel()).ToList() ?? new List<OrderProductModel>()
             };
         }

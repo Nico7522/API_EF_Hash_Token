@@ -14,6 +14,6 @@ namespace API_EF_Hash_Token.BLL.Models
         public List<OrderProductModel> OrderProducts { get; set; } = new List<OrderProductModel>();
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
-        public decimal Reduction { get; set; }
+        public decimal TotalReduction { get; set; }
     }
 }

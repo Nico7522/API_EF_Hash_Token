@@ -19,7 +19,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 User = entity.User.ToUserModel(),
                 TotalPrice = entity.TotalPrice,
                 OrderDate = entity.OrderDate,
-                Reduction = entity.TotalReduction,
+                TotalReduction = entity.TotalReduction,
                 OrderProducts = entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price)).ToList(),
                 
 
@@ -43,6 +43,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 UserId = model.UserId,
                 TotalPrice = model.TotalPrice,
                 OrderDate = model.OrderDate,
+                TotalReduction = model.TotalReduction,
                 Products = model.OrderProducts.Select(p => p.ToProductOrderEntity()).ToList()
                 
             };
