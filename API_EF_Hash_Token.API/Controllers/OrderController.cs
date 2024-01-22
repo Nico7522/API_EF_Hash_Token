@@ -25,17 +25,24 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetByUserId(int userId)
+        public async Task<ActionResult<IEnumerable<OrderDTO>>?> GetByUserId(int userId)
         {
-            IEnumerable<OrderDTO> userOrders = await _orderService.GetByUserId(userId).ContinueWith(r => r.Result.Select(o => o.ToOrderDTO()));
-            return Ok(userOrders);
+            IEnumerable<OrderDTO>? userOrders = await _orderService.GetByUserId(userId).ContinueWith(r => r.Result?.Select(o => o.ToOrderDTO()));
+            return userOrders is not null ? Ok(userOrders) : BadRequest();
+        }
+
+        [HttpPost("search")]
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetByUserEmail(SearchByEmailForm form)
+        {
+            IEnumerable<OrderDTO>? userOrders = await _orderService.GetByUserEmail(form.Email).ContinueWith(r => r.Result?.Select(o => o.ToOrderDTO()));
+            return userOrders is not null ? Ok(userOrders) : NotFound(); 
         }
 
         [HttpPost]
         public async Task<ActionResult<OrderResponseDTO?>> Insert(CreateOrderForm form)
         {
-            OrderResponseDTO? insertedOrder = await _orderService.Insert(form.ToOrderModel()).ContinueWith(r => r.Result.ToOrderResponseDTO());
-            return insertedOrder is not null ? Ok(insertedOrder) : BadRequest(); 
+            OrderResponseDTO? insertedOrder = await _orderService.Insert(form.ToOrderModel()).ContinueWith(r => r.Result?.ToOrderResponseDTO());
+            return insertedOrder is not null ? Ok(insertedOrder) : NotFound(); 
         }
     }
 }

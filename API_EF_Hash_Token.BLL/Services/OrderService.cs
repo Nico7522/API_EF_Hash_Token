@@ -15,10 +15,12 @@ namespace API_EF_Hash_Token.BLL.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IUserRepository _userRepository;
 
-        public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository)
         {
             _orderRepository = orderRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<OrderModel>> GetAll()
@@ -26,15 +28,19 @@ namespace API_EF_Hash_Token.BLL.Services
            return await _orderRepository.GetAll().ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
         }
 
-        public async Task<IEnumerable<OrderModel>> GetByUserEmail(string email)
+        public async Task<IEnumerable<OrderModel>?> GetByUserEmail(string email)
         {
-            return await _orderRepository.GetByUserEmail(email).ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
+            UserEntity? userFound = await _userRepository.GetByEmail(email);
+            if (userFound is null) return null;
+            return await _orderRepository.GetByUserEmail(email).ContinueWith(r => r.Result?.Select(o => o.ToOrderModel()));
 
         }
 
-        public async Task<IEnumerable<OrderModel>> GetByUserId(int UserId)
+        public async Task<IEnumerable<OrderModel>?> GetByUserId(int userId)
         {
-            return await _orderRepository.GetByUserId(UserId).ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
+            UserEntity? userFound = await _userRepository.GetById(userId);
+            if (userFound is null) return null;
+            return await _orderRepository.GetByUserId(userId).ContinueWith(r => r.Result?.Select(o => o.ToOrderModel()));
         }
 
         public async Task<OrderModel?> Insert(OrderModel orderModel)
@@ -45,7 +51,7 @@ namespace API_EF_Hash_Token.BLL.Services
                 product.Price = (product.Price - (product.Price*product.ReductionPerProduct)) * product.Quantity;
                 tp += product.Price;
             }
-            orderModel.TotalPrice = tp - (orderModel.TotalPrice*orderModel.TotalReduction);
+            orderModel.TotalPrice = tp - (tp*orderModel.TotalReduction);
             orderModel.OrderDate = DateTime.Now;
             OrderModel? insertedOrder = await _orderRepository.Insert(orderModel.ToOrderEntity()).ContinueWith(r => r.Result?.ToOrderModel());
             return insertedOrder;

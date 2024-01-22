@@ -5,6 +5,7 @@
         public int OrderId { get; set; }
         public int UserId { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal TotalReduction { get; set; }
         public List<ProductOrderResponseDTO> Products { get; set; } = new List<ProductOrderResponseDTO>();
     }
 }
