@@ -28,10 +28,10 @@ namespace API_EF_Hash_Token.API.Mappers
         internal static OrderDTO ToOrderDTO(this OrderModel model)
         {
             return new OrderDTO() {
-
                 OrderId = model.OrderId,
-                User = model.User != null ? model.User.ToUserDTO() : null,
+                User = model.User.ToUserDTO(),
                 TotalPrice = model.TotalPrice,
+                OrderDate = model.OrderDate,
                 OrderedProducts = model.OrderProducts.Select(po => po.ToProductOrderDTO()).ToList() ?? new List<ProductOrderDTO>()
                 
             };

@@ -6,5 +6,6 @@
         public UserDTO User { get; set; }
         public List<ProductOrderDTO> OrderedProducts { get; set; } = new List<ProductOrderDTO>();
         public decimal TotalPrice { get; set; }
+        public DateTime OrderDate { get; set; }
     }
 }

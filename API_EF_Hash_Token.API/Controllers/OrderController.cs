@@ -24,6 +24,13 @@ namespace API_EF_Hash_Token.API.Controllers
             return await _orderService.GetAll().ContinueWith(r => r.Result.Select(o => o.ToOrderDTO()).ToList());
         }
 
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetByUserId(int userId)
+        {
+            IEnumerable<OrderDTO> userOrders = await _orderService.GetByUserId(userId).ContinueWith(r => r.Result.Select(o => o.ToOrderDTO()));
+            return Ok(userOrders);
+        }
+
         [HttpPost]
         public async Task<ActionResult<OrderResponseDTO?>> Insert(CreateOrderForm form)
         {
