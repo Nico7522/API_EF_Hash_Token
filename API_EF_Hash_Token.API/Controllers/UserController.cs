@@ -29,6 +29,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return Ok(users);
         }
 
+        [Authorize("AdminPolicy")]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO?>> GetById(int id)
         {
@@ -36,6 +37,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return user is not null ? Ok(user) : NotFound();
         }
 
+        [Authorize("AdminPolicy")]
         [HttpPost("email")]
         public async Task<ActionResult<UserDTO?>> GetByEmail(SearchByEmailForm form) {
             
@@ -43,6 +45,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return user is not null ? Ok(user) : NotFound();
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDTO?>> Update(UpdateUserForm form, int id)
         {
@@ -50,6 +53,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return updatedUser is not null ? Ok(updatedUser) : NotFound();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<UserDTO>> Delete(int id)
         {
@@ -57,6 +61,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return deletedUser is not null ? Ok(deletedUser) : NotFound();
         }
 
+        [Authorize("AdminPolicy")]
         [HttpGet("adresses")]
         public async Task<ActionResult<IEnumerable<UserWithAdressesDTO>>> GetAllWithAdresses()
         {
@@ -65,7 +70,7 @@ namespace API_EF_Hash_Token.API.Controllers
            
         }
 
-
+        [Authorize("adminPolicy")]
         [HttpPatch("active/{userId}")]
         public async Task<ActionResult> ActiveAccount(int userId)
         {
