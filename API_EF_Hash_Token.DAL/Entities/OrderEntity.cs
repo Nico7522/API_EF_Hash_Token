@@ -15,5 +15,6 @@ namespace API_EF_Hash_Token.DAL.Entities
         public int UserId { get; set; }
         public UserEntity User { get; set; }
         public List<ProductOrderEntity> Products { get; set; }
+
     }
 }

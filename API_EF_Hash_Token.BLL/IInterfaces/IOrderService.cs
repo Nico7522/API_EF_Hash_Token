@@ -9,6 +9,9 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
 {
     public interface IOrderService
     {
-        Task<IEnumerable<OrderProductModel>> GetAll();
+        Task<IEnumerable<OrderModel>> GetAll();
+        Task<IEnumerable<OrderModel>> GetByUserId(int UserId);
+        Task<IEnumerable<OrderModel>> GetByUserEmail(string email);
+        Task<OrderModel> Insert(OrderModel orderModel);
     }
 }

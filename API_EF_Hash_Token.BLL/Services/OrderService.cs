@@ -1,5 +1,8 @@
 ﻿using API_EF_Hash_Token.BLL.IInterfaces;
+using API_EF_Hash_Token.BLL.Mappers;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Entities;
+using API_EF_Hash_Token.DAL.Interfaces;
 using API_EF_Hash_Token.DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,16 +14,39 @@ namespace API_EF_Hash_Token.BLL.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly OrderRepository _orderRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public OrderService(OrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        public Task<IEnumerable<OrderProductModel>> GetAll()
+        public async Task<IEnumerable<OrderModel>> GetAll()
         {
-            throw new NotImplementedException();
+           return await _orderRepository.GetAll().ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
+        }
+
+        public async Task<IEnumerable<OrderModel>> GetByUserEmail(string email)
+        {
+            return await _orderRepository.GetByUserEmail(email).ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
+
+        }
+
+        public async Task<IEnumerable<OrderModel>> GetByUserId(int UserId)
+        {
+            return await _orderRepository.GetByUserId(UserId).ContinueWith(r => r.Result.Select(o => o.ToOrderModel()));
+        }
+
+        public async Task<OrderModel> Insert(OrderModel orderModel)
+        {
+            decimal tp = 0;
+            foreach (var product in orderModel.OrderProducts)
+            {
+                tp += product.Price*product.Quantity;
+            }
+            orderModel.TotalPrice = tp;
+            await _orderRepository.Insert(orderModel.ToOrderEntity());
+            return orderModel;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     {
         Task<IEnumerable<OrderEntity>> GetAll();
         Task<IEnumerable<OrderEntity>> GetByUserId(int userId);
-        Task<IEnumerable<OrderEntity>> GetByUser(string email);
+        Task<IEnumerable<OrderEntity>> GetByUserEmail(string email);
         Task<OrderEntity?> Insert(OrderEntity entity);
     }
 }

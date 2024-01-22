@@ -24,7 +24,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return await _dataContext.Orders.Include(c => c.User).Include(c => c.Products).ThenInclude(p => p.Product).ToListAsync();
         }
 
-        public async Task<IEnumerable<OrderEntity>> GetByUser(string email)
+        public async Task<IEnumerable<OrderEntity>> GetByUserEmail(string email)
         {
             return await _dataContext.Orders.Where(o => o.User.Email == email).Include(c => c.User).Include(c => c.Products).ThenInclude(p => p.Product).ToListAsync();
         }
@@ -36,7 +36,16 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<OrderEntity?> Insert(OrderEntity entity)
         {
+            foreach (var product in entity.Products)
+            {
+                ProductEntity? productFound = await _dataContext.Products.FindAsync(product.ProductId);
+                if (productFound is null) return null;
+            }
             await _dataContext.Orders.AddAsync(entity);
+            foreach (var po in entity.Products)
+            {
+                await _dataContext.ProductOrder.AddAsync(po);
+            }
             await _dataContext.SaveChangesAsync();
             return entity;
         }

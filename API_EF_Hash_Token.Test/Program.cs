@@ -1088,6 +1088,7 @@ IAdressService adressService = new AdressService(adressRepository);
 IProductService productService = new ProductService(productRepository, sizeRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
+IOrderService orderService = new OrderService((OrderRepository)orderRepository);
 
 
 // TEST Users
@@ -1665,6 +1666,86 @@ ISizeService sizeService = new SizeService(sizeRepository);
 //    if (deletedSize is null) throw new Exception();
 
 //    Console.WriteLine(deletedSize.Size);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+
+// TEST Orders
+
+#region Test GetAll Orders
+
+//try
+//{
+//    IEnumerable<OrderModel> orders = await orderService.GetAll();
+//    foreach (var order in orders)
+//    {
+//        Console.WriteLine($"User {order.User.FirstName} has order : ");
+//        foreach (var products in order.OrderProducts)
+//        {
+//            Console.WriteLine(products.ModelName);
+//            Console.WriteLine($"Quantity : {products.Quantity}");
+//            Console.WriteLine($"Total price : {products.Price}");
+//        }
+//        Console.WriteLine($"Total order price : {order.TotalPrice}");
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetByUserId Order
+
+//try
+//{
+//	IEnumerable<OrderModel> orders = await orderService.GetByUserId(12);
+//    foreach (var order in orders)
+//    {
+//        Console.WriteLine($"User {order.User.FirstName} has order : ");
+//        foreach (var products in order.OrderProducts)
+//        {
+//            Console.WriteLine(products.ModelName);
+//            Console.WriteLine($"Quantity : {products.Quantity}");
+//            Console.WriteLine($"Total price : {products.Price}");
+//        }
+//        Console.WriteLine($"Total order price : {order.TotalPrice}");
+//        Console.WriteLine("///////////////////////////////////////");
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex);
+//}
+
+#endregion
+
+#region Test GetByUserEmail Order
+
+//try
+//{
+//	IEnumerable<OrderModel> orders = await orderService.GetByUserEmail("dok@gmail.com");
+//    foreach (var order in orders)
+//    {
+//        Console.WriteLine($"User {order.User.FirstName} has order : ");
+//        foreach (var products in order.OrderProducts)
+//        {
+//            Console.WriteLine(products.ModelName);
+//            Console.WriteLine($"Quantity : {products.Quantity}");
+//            Console.WriteLine($"Total price : {products.Price}");
+//        }
+//        Console.WriteLine($"Total order price : {order.TotalPrice}");
+//        Console.WriteLine("///////////////////////////////////////");
+//    }
 //}
 //catch (Exception ex)
 //{

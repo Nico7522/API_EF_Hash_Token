@@ -10,7 +10,8 @@ namespace API_EF_Hash_Token.BLL.Models
     {
         public int UserId { get; set; }
         public UserModel User { get; set; }
-        public List<OrderProductModel> OrderProducts { get; set; }
+        public List<OrderProductModel> OrderProducts { get; set; } = new List<OrderProductModel>();
         public decimal TotalPrice { get; set; }
+        public decimal Reduction { get; set; }
     }
 }
