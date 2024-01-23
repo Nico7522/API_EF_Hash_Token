@@ -36,20 +36,28 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<OrderEntity?> Insert(OrderEntity entity)
         {
-            UserEntity? userFound = await _dataContext.Users.FindAsync(entity.UserId);
-            if (userFound is null) return null;
-            foreach (var product in entity.Products)
-            {
-                ProductEntity? productFound = await _dataContext.Products.FindAsync(product.ProductId);
-                if (productFound is null) return null;
-            }
             await _dataContext.Orders.AddAsync(entity);
             foreach (var po in entity.Products)
             {
+                bool isDecreased = await DecreaseStock(po.SizeId, po.ProductId, po.Quantity).ContinueWith(r => r.Result);
+                if (!isDecreased) return null;
+
                 await _dataContext.ProductOrder.AddAsync(po);
             }
             await _dataContext.SaveChangesAsync();
             return entity;
+        }
+
+        private async Task<bool> DecreaseStock(int sizeId,int productId, int quantity)
+        {
+            SizeProductEntity? product = await _dataContext.SizeProduct.Where(ps => ps.ProductId == productId && ps.SizeId == sizeId).SingleOrDefaultAsync();
+            if (product is null || product.Stock == 0) return false;
+
+            if (product.Stock - quantity < 0) return false;
+
+            product.Stock -= quantity;
+
+            return true;
         }
     }
 }

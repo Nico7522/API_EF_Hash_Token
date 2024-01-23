@@ -58,6 +58,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Price = model.Price,
                 Quantity = model.Quantity,
                 ReductionPerProduct = model.ReductionPerProduct,
+                SizeId = model.SizeId,
             };
         }
     }

@@ -21,6 +21,7 @@ namespace API_EF_Hash_Token.API.Mappers
             return new OrderProductModel() {
             
                 ProductId = form.ProductId,
+                SizeId = form.SizeId,
                 Price = form.Price,
                 Quantity = form.Quantity,
                 ReductionPerProduct = form.Discount

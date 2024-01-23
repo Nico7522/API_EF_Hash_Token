@@ -9,6 +9,9 @@ namespace API_EF_Hash_Token.API.Forms
         public int ProductId { get; set; }
 
         [Required]
+        public int SizeId { get; set; }
+
+        [Required]
         [Range(0, 999999999.99)]
         [DefaultValue("0")]
         public decimal Price { get; set; }

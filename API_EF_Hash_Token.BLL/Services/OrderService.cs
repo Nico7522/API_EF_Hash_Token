@@ -16,11 +16,13 @@ namespace API_EF_Hash_Token.BLL.Services
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IProductRepository _productRepository;
 
-        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository)
+        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository, IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
             _userRepository = userRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<IEnumerable<OrderModel>> GetAll()
@@ -45,9 +47,15 @@ namespace API_EF_Hash_Token.BLL.Services
 
         public async Task<OrderModel?> Insert(OrderModel orderModel)
         {
+
+            UserEntity? userFound = await _userRepository.GetById(orderModel.UserId);
+            if (userFound is null) return null;
             decimal tp = 0;
             foreach (var product in orderModel.OrderProducts)
             {
+                ProductEntity? productFound = await _productRepository.GetById(product.ProductId);
+                if (productFound is null) return null;
+
                 product.Price = (product.Price - (product.Price*product.ReductionPerProduct)) * product.Quantity;
                 tp += product.Price;
             }
