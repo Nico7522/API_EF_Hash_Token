@@ -63,5 +63,12 @@ namespace API_EF_Hash_Token.API.Controllers
 
             return isUpdated ? Ok() : BadRequest();
         }
+
+        [HttpGet("top")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetByTopSales()
+        {
+            IEnumerable<ProductDTO> products = await _productService.GetByTopSales().ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
+            return Ok(products);
+        }
     }
 }

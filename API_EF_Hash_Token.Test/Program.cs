@@ -1544,20 +1544,20 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 #region Test GetByTopSales Products
 
-try
-{
-    IEnumerable<ProductModel> products = await productService.GetByTopSales();
+//try
+//{
+//    IEnumerable<ProductModel> products = await productService.GetByTopSales();
 
-    foreach (var product in products)
-    {
-        Console.WriteLine(product.ModelName);
-    }
-}
-catch (Exception ex)
-{
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//    }
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
