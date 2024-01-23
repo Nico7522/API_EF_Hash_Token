@@ -843,6 +843,24 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test GetByStep Products
+
+//try
+//{
+//	IEnumerable<ProductEntity> products = await productRepository.GetByStep(10);
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.PrdoductId);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex);
+//}
+
+#endregion
+
 
 
 // TEST Categories
@@ -1551,6 +1569,24 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //    foreach (var product in products)
 //    {
 //        Console.WriteLine(product.ModelName);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetByStep Products
+
+//try
+//{
+//	IEnumerable<ProductModel> products = await productService.GetByStep(0);
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ProductId);
 //    }
 //}
 //catch (Exception ex)

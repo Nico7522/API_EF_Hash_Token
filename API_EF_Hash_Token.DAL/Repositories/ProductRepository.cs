@@ -40,6 +40,12 @@ namespace API_EF_Hash_Token.DAL.Repositories
                                                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<ProductEntity>> GetByStep(int offset = 0)
+        {
+            return await _dataContext.Products.Include(p => p.Categories).ThenInclude(p => p.Category)
+                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).Skip(offset).Take(10).ToListAsync();
+        }
+
         public async Task<IEnumerable<ProductEntity>> GetByTopSales()
         {
             List<ProductEntity> products = new List<ProductEntity>();
@@ -86,6 +92,12 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return entity;
         }
 
+        public async Task<bool> SaveChange()
+        {
+            int rowUpdated = await _dataContext.SaveChangesAsync();
+            return rowUpdated == 1;
+        }
+
         public async Task<ProductEntity?> Update(ProductEntity oldEntity, ProductEntity modifiedEntity)
         {
             oldEntity.ModelName = modifiedEntity.ModelName;
@@ -100,7 +112,6 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public async Task<bool> UpdatePicture(ProductEntity product, string imageUrl)
         {
             product.Image = imageUrl;
-            await _dataContext.SaveChangesAsync();
             return true;
         }
 

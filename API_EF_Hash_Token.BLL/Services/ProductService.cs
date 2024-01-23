@@ -44,6 +44,11 @@ namespace API_EF_Hash_Token.BLL.Services
             return await _productRepository.GetById(id).ContinueWith(r => r.Result?.ToProductModel());
         }
 
+        public async Task<IEnumerable<ProductModel>> GetByStep(int offset)
+        {
+            return await _productRepository.GetByStep(offset).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
+        }
+
         public async Task<IEnumerable<ProductModel>> GetByTopSales()
         {
             IEnumerable<ProductModel> products = await _productRepository.GetByTopSales().ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
@@ -55,6 +60,12 @@ namespace API_EF_Hash_Token.BLL.Services
         
             ProductModel? insertedProduct = await _productRepository.Insert(model.ToProductEntity(categoriesId, sizeStock)).ContinueWith(r => r.Result?.ToProductModel());
             return insertedProduct;
+        }
+
+        public async Task<bool> SaveChange()
+        {
+            bool isSaved = await _productRepository.SaveChange();
+            return isSaved;
         }
 
         public async Task<ProductModel?> Update(ProductModel modifiedProduct, int id)

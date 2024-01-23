@@ -9,10 +9,13 @@ namespace API_EF_Hash_Token.DAL.Interfaces
 {
     public interface IProductRepository : ICrudRepository<int, ProductEntity>
     {
+        // Pagination
+        Task<IEnumerable<ProductEntity>> GetByStep(int offset);
         Task<bool> UpdateStock(int sizeId, int productId, int stock);
 
         Task<IEnumerable<ProductEntity>> GetByTopSales();
 
         Task<bool> UpdatePicture(ProductEntity product, string imgUrl);
+        Task<bool> SaveChange();
     }
 }

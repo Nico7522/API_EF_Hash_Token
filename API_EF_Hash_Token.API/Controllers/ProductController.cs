@@ -26,6 +26,12 @@ namespace API_EF_Hash_Token.API.Controllers
             IEnumerable<ProductDTO> products = await _productService.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
             return Ok(products);
         }
+        [HttpGet("paginate/{offset:int}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetByStep(int offset = 0)
+        {
+            IEnumerable<ProductDTO> products = await _productService.GetByStep(offset).ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
+            return Ok(products);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO?>> GetById(int id)
@@ -72,7 +78,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return Ok(products);
         }
 
-        [HttpPatch("{id}/image")]
+        [HttpPut("{id}/image")]
         public async Task<ActionResult> UpdatePicture(int id, [FromForm] FileForm image)
         {
             if (image is null) return BadRequest();
@@ -86,12 +92,14 @@ namespace API_EF_Hash_Token.API.Controllers
                     image.File.CopyTo(stream);
                 }
 
-                return (isUpdated) ? NoContent() : BadRequest();
+                if (!isUpdated) return BadRequest();
+
+                bool isSaved = await _productService.SaveChange();
+
+                return (isUpdated && isSaved) ? NoContent() : throw new Exception();
             }
             catch (Exception ex)
             {
-                await _productService.UpdatePicture(id, "/default.png");
-
                 return BadRequest();
             }
         }
