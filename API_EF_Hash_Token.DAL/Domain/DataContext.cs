@@ -14,23 +14,23 @@ namespace API_EF_Hash_Token.DAL.Domain
     {
         private string _connectionString = "Data Source=GOS-VDI202\\TFTIC;Initial Catalog=EF_Hash_Token;Integrated Security=True;Connect Timeout=60;";
 
-        public DbSet<UserEntity> Users { get; set; }
-        public DbSet<AdressEntity> Adresses { get; set; }
-        public DbSet<UserAdressEntity> UserAdress { get; set; }
-        public DbSet<ProductEntity> Products { get; set; }
-        public DbSet<OrderEntity> Orders { get; set; }
-        public DbSet<CategoryEntity> Categories { get; set; }
-        public DbSet<ProductCategoryEntity> ProductCategory { get; set; }
+        public DbSet<UserEntity> Users { get { return Set<UserEntity>(); } }
+        public DbSet<AdressEntity> Adresses { get { return Set<AdressEntity>(); } }
+        public DbSet<UserAdressEntity> UserAdress { get { return Set<UserAdressEntity>(); } }
+        public DbSet<ProductEntity> Products { get { return Set<ProductEntity>(); } }
+        public DbSet<OrderEntity> Orders { get { return Set<OrderEntity>(); } }
+        public DbSet<CategoryEntity> Categories { get { return Set<CategoryEntity>(); } }
+        public DbSet<ProductCategoryEntity> ProductCategory { get { return Set<ProductCategoryEntity>(); } }
 
-        public DbSet<ProductOrderEntity> ProductOrder { get; set; }
-        public DbSet<SizeEntity> Sizes { get; set; }
-        public DbSet<SizeProductEntity> SizeProduct { get; set; }
+        public DbSet<ProductOrderEntity> ProductOrder { get { return Set<ProductOrderEntity>(); } }
+        public DbSet<SizeEntity> Sizes { get { return Set<SizeEntity>(); } }
+        public DbSet<SizeProductEntity> SizeProduct { get { return Set<SizeProductEntity>(); } }
         public DataContext(DbContextOptions options) : base(options) { }
 
         //Pour les tests
-        //public DataContext()
-        //{
-        //}
+        public DataContext()
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

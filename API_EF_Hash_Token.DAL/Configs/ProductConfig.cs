@@ -22,6 +22,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.Property(p => p.Description).HasMaxLength(500).IsRequired();
             builder.Property(p => p.Price).HasPrecision(11, 2).IsRequired();
             builder.Property(p => p.Discount).HasPrecision(3, 2).HasDefaultValue(0);
+            builder.Property(p => p.Image).HasDefaultValue("/default.png");
             builder.Ignore(p => p.CategoriesId);
             builder.Ignore(p => p.SizeStock);
         }

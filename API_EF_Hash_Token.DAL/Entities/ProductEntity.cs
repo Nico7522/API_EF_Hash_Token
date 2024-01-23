@@ -14,6 +14,7 @@ namespace API_EF_Hash_Token.DAL.Entities
         public string Description { get; set; }
         public string Brand { get; set; }
         public string Sexe { get; set; }
+        public string Image { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public List<ProductOrderEntity> Orders { get; set; }
