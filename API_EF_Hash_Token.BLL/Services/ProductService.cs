@@ -1,6 +1,7 @@
 ﻿using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Mappers;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Utils;
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
 using System;
@@ -64,6 +65,17 @@ namespace API_EF_Hash_Token.BLL.Services
 
             ProductModel? updatedProduct = await _productRepository.Update(productToUpdate, modifiedProduct.ToProductEntity()).ContinueWith(r => r.Result?.ToProductModel());
             return updatedProduct;
+        }
+
+        public async Task<bool> UpdatePicture(int productId, string imageUrl)
+        {
+            if (!Method.VerifyExtension(imageUrl)) return false;
+
+            ProductEntity? productFound = await _productRepository.GetById(productId);
+            if(productFound is null) return false;
+
+            bool isUpdated = await _productRepository.UpdatePicture(productFound, imageUrl);
+            return isUpdated;
         }
 
         public async Task<bool> UpdateStock(int sizeId, int productId, int stock)

@@ -5,6 +5,7 @@ using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace API_EF_Hash_Token.API.Controllers
 {
@@ -69,6 +70,30 @@ namespace API_EF_Hash_Token.API.Controllers
         {
             IEnumerable<ProductDTO> products = await _productService.GetByTopSales().ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
             return Ok(products);
+        }
+
+        [HttpPatch("{id}/image")]
+        public async Task<ActionResult> UpdatePicture(int id, [FromForm] FileForm image)
+        {
+            if (image is null) return BadRequest();
+
+            try
+            {
+                bool isUpdated = await _productService.UpdatePicture(id, image.File.FileName);
+                string path = Path.Combine(image.Directory, image.File.FileName);
+                using (Stream stream = new FileStream(path, FileMode.Create))
+                {
+                    image.File.CopyTo(stream);
+                }
+
+                return (isUpdated) ? NoContent() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                await _productService.UpdatePicture(id, "/default.png");
+
+                return BadRequest();
+            }
         }
     }
 }

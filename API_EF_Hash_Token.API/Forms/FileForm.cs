@@ -2,7 +2,7 @@
 {
     public class FileForm
     {
-        public string Directory { get; set; }
+        public string Directory { get; private set; }
         public IFormFile File { get; set; }
 
         public FileForm()

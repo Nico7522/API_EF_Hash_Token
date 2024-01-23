@@ -97,6 +97,13 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return oldEntity;
         }
 
+        public async Task<bool> UpdatePicture(ProductEntity product, string imageUrl)
+        {
+            product.Image = imageUrl;
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
         {
             SizeProductEntity? sizeProduct = await _dataContext.SizeProduct.Where(sp => sp.ProductId == productId && sp.SizeId == sizeId).FirstOrDefaultAsync();

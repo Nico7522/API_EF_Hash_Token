@@ -12,5 +12,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<bool> UpdateStock(int sizeId, int productId, int stock);
 
         Task<IEnumerable<ProductEntity>> GetByTopSales();
+
+        Task<bool> UpdatePicture(ProductEntity product, string imgUrl);
     }
 }
