@@ -26,8 +26,8 @@ namespace API_EF_Hash_Token.API.Controllers
             IEnumerable<ProductDTO> products = await _productService.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
             return Ok(products);
         }
-        [HttpGet("paginate/{offset:int}")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetByStep(int offset = 0)
+        [HttpGet("paginate")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetByStep([FromQuery] int offset = 0)
         {
             IEnumerable<ProductDTO> products = await _productService.GetByStep(offset).ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
             return Ok(products);
