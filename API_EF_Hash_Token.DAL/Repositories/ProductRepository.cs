@@ -38,7 +38,27 @@ namespace API_EF_Hash_Token.DAL.Repositories
         {
             return await _dataContext.Products.Where(p => p.PrdoductId == id).Include(p => p.Categories).ThenInclude(p => p.Category)
                                                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync();
-        }                           
+        }
+
+        public async Task<IEnumerable<ProductEntity>> GetByTopSales()
+        {
+            List<ProductEntity> products = new List<ProductEntity>();
+                        var list = await _dataContext.ProductOrder
+                        .GroupBy(x => x.ProductId)
+                        .Select(x => new { ProductId = x.Key, QuantitySum = x.Sum(a => a.Quantity)})
+                        .OrderByDescending(x => x.QuantitySum)
+                        .Select(x => x.ProductId)
+                        .Take(3)
+                        .ToListAsync();
+            foreach (var productId in list)
+            {
+                ProductEntity? product = await GetById(productId);
+                if (product is null) return null;
+                products.Add(product);
+            }
+
+            return products;
+        }
 
         public async Task<ProductEntity?> Insert(ProductEntity entity)
         {

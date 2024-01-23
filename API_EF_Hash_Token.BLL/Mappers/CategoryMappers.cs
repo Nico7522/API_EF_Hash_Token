@@ -13,7 +13,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
 
         internal static CategoryModel ToCategoryModel(this CategoryEntity entity)
         {
-            return new CategoryModel() { CategoryId = entity.CategoryId, CategoryName = entity.CategoryName, Description = entity.Description };
+            return new CategoryModel(entity.CategoryId, entity.CategoryName, entity.Description);
         }
 
         internal static CategoryEntity ToCategoryEntity(this CategoryModel entity)

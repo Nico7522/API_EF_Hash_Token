@@ -14,17 +14,17 @@ namespace API_EF_Hash_Token.API.Mappers
 
         internal static CategoryModel ToCategoryModel(this CreateCategoryForm form)
         {
-            return new CategoryModel() { CategoryName = form.CategoryName, Description = form.Description };
+            return new CategoryModel(form.CategoryName, form.Description);
         }
 
         internal static CategoryModel ToCategoryModel(this UpdateCategoryForm form)
         {
-            return new CategoryModel() { CategoryName = form.CategoryName, Description = form.Description };
+            return new CategoryModel(form.CategoryName, form.Description);
         }
 
         internal static CategoryModel ToCategoryModel(this CategoryDTO dto)
         {
-            return new CategoryModel() { CategoryName = dto.CategoryName, Description = dto.Description };
+            return new CategoryModel(dto.CategoryName, dto.Description);
         }
     }
 }

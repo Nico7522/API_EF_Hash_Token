@@ -28,9 +28,9 @@ namespace API_EF_Hash_Token.DAL.Domain
         public DataContext(DbContextOptions options) : base(options) { }
 
         //Pour les tests
-        //public DataContext()
-        //{
-        //}
+        public DataContext()
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

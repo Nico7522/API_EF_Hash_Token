@@ -823,6 +823,26 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test GetByTopSales Products
+
+//try
+//{
+//    var list = await productRepository.GetByTopSales();
+
+//    foreach (var product in list)
+//    {
+//        Console.WriteLine(product.ModelName);
+//    }
+
+//}
+//catch (Exception ex)
+//{
+
+//    throw;
+//}
+
+#endregion
+
 
 
 // TEST Categories
@@ -1106,7 +1126,7 @@ IAdressService adressService = new AdressService(adressRepository);
 IProductService productService = new ProductService(productRepository, sizeRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
-IOrderService orderService = new OrderService(orderRepository, userRepository);
+IOrderService orderService = new OrderService(orderRepository, userRepository, productRepository);
 
 
 // TEST Users
@@ -1404,7 +1424,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository);
 
 //try
 //{
-//	IEnumerable<ProductModel> products = await productService.GetAll();
+//    IEnumerable<ProductModel> products = await productService.GetAll();
 
 //    foreach (var product in products)
 //    {
@@ -1418,7 +1438,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository);
 //catch (Exception ex)
 //{
 
-//	throw;
+//    throw;
 //}
 
 #endregion
@@ -1517,8 +1537,27 @@ IOrderService orderService = new OrderService(orderRepository, userRepository);
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.Message);
+//	Console.WriteLine(ex.Message);
 //}
+
+#endregion
+
+#region Test GetByTopSales Products
+
+try
+{
+    IEnumerable<ProductModel> products = await productService.GetByTopSales();
+
+    foreach (var product in products)
+    {
+        Console.WriteLine(product.ModelName);
+    }
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
 
 #endregion
 
