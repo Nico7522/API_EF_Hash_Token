@@ -8,12 +8,12 @@ namespace API_EF_Hash_Token.API.Mappers
     {
         internal static OrderModel ToOrderModel(this CreateOrderForm form)
         {
-            return new OrderModel()
-            {
-                UserId = form.UserId,
-                TotalReduction = form.TotalReduction,
-                OrderProducts = form.OrderProduct.Select(p => p.ToOrderProductModel()).ToList() ?? new List<OrderProductModel>()
-            };
+            return new OrderModel(form.UserId, form.TotalReduction, form.OrderProduct.Select(p => p.ToOrderProductModel()).ToList() ?? new List<OrderProductModel>());
+            //{
+            //    UserId = form.UserId,
+            //    TotalReduction = form.TotalReduction,
+            //    OrderProducts = form.OrderProduct.Select(p => p.ToOrderProductModel()).ToList() ?? new List<OrderProductModel>()
+            //};
         }
 
         internal static OrderProductModel ToOrderProductModel(this ProductOrderForm form)

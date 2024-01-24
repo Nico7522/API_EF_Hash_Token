@@ -12,18 +12,18 @@ namespace API_EF_Hash_Token.BLL.Mappers
     {
         internal static OrderModel ToOrderModel(this OrderEntity entity)
         {
-            return new OrderModel() 
-            {
-                OrderId = entity.OrderId,
-                UserId = entity.UserId,
-                User = entity.User.ToUserModel(),
-                TotalPrice = entity.TotalPrice,
-                OrderDate = entity.OrderDate,
-                TotalReduction = entity.TotalReduction,
-                OrderProducts = entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct)).ToList(),
+            return new OrderModel(entity.OrderId, entity.UserId, entity.User.ToUserModel(), entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct)).ToList(), entity.TotalPrice, entity.OrderDate, entity.TotalReduction);
+            //{
+            //    OrderId = entity.OrderId,
+            //    UserId = entity.UserId,
+            //    User = entity.User.ToUserModel(),
+            //    TotalPrice = entity.TotalPrice,
+            //    OrderDate = entity.OrderDate,
+            //    TotalReduction = entity.TotalReduction,
+            //    OrderProducts = entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct)).ToList(),
                 
 
-            };
+            //};
         }
         internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price, decimal reductionPerProduct)
         {
