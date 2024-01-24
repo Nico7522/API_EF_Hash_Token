@@ -12,6 +12,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
     {
         internal static OrderModel ToOrderModel(this OrderEntity entity)
         {
+            // TODO : faire en sorte que la taille soit renvoyée avec la liste de commandes
             return new OrderModel(entity.OrderId, entity.UserId, entity.User.ToUserModel(), entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct, p.SizeId)).ToList(), entity.TotalPrice, entity.OrderDate, entity.TotalReduction);
             //{
             //    OrderId = entity.OrderId,
