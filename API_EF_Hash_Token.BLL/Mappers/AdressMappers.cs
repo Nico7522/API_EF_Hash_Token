@@ -12,14 +12,14 @@ namespace API_EF_Hash_Token.BLL.Mappers
     {
         internal static AdressModel ToAdressModel(this AdressEntity entity)
         {
-            return new AdressModel()
-            {
-                AdressId = entity.AdressId,
-                CityName = entity.CityName,
-                Country = entity.Country,
-                Number = entity.Number,
-                Street = entity.Street,
-            };
+            return new AdressModel(entity.AdressId, entity.Number, entity.CityName, entity.Street, entity.Country);
+            //{
+            //    AdressId = entity.AdressId,
+            //    CityName = entity.CityName,
+            //    Country = entity.Country,
+            //    Number = entity.Number,
+            //    Street = entity.Street,
+            //};
         }
 
         internal static AdressEntity ToAdressEntity(this AdressModel model)

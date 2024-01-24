@@ -19,7 +19,7 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.Property(po => po.Quantity).IsRequired();
             builder.Property(po => po.Price).HasPrecision(11, 2).IsRequired();
             builder.Property(po => po.ReductionPerProduct).HasPrecision(3, 2).HasDefaultValue(0);
-            builder.Ignore(po => po.SizeId);
+
 
 
 

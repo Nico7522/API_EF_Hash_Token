@@ -20,24 +20,24 @@ namespace API_EF_Hash_Token.API.Mappers
 
         internal static AdressModel ToAdressModel(this CreateAdressForm form)
         {
-            return new AdressModel()
-            {
-                CityName = form.CityName,
-                Number = form.Number,
-                Country = form.Country,
-                Street = form.Street,
-            };
+            return new AdressModel(form.Number, form.CityName, form.Street, form.Country);
+            //{
+            //    CityName = form.CityName,
+            //    Number = form.Number,
+            //    Country = form.Country,
+            //    Street = form.Street,
+            //};
         }
 
         internal static AdressModel ToAdressModel(this UpdateAdressForm form)
         {
-            return new AdressModel()
-            {
-                CityName = form.CityName,
-                Number = form.Number,
-                Country = form.Country,
-                Street = form.Street,
-            };
+            return new AdressModel(form.Number, form.CityName, form.Street, form.Country);
+            //{
+            //    CityName = form.CityName,
+            //    Number = form.Number,
+            //    Country = form.Country,
+            //    Street = form.Street,
+            //};
         }
     }
 }

@@ -1062,7 +1062,7 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//   IEnumerable<OrderEntity> orders = await orderRepository.GetAll();
+//    IEnumerable<OrderEntity> orders = await orderRepository.GetAll();
 //    foreach (var order in orders)
 //    {
 //        Console.WriteLine($"User : {order.User.FirstName}");
@@ -1071,8 +1071,10 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //            Console.WriteLine($"Product : {product.Product.ModelName}");
 //            Console.WriteLine($"Price : {product.Price}");
 //            Console.WriteLine($"Quantity : {product.Quantity}");
-
+//            Console.WriteLine($"SizeId : {product.Size.Size}");
 //        }
+
+//        Console.WriteLine($"Total price : {order.TotalPrice}");
 //    }
 //}
 //catch (Exception ex)

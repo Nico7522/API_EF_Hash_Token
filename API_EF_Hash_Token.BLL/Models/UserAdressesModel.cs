@@ -8,6 +8,7 @@ namespace API_EF_Hash_Token.BLL.Models
 {
     public class UserAdressesModel
     {
+        // TODO : faire des constructeurs
         public UserModel user { get; set; }
         public List<AdressModel>? Adresses { get; set; }
     }

@@ -21,7 +21,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<IEnumerable<OrderEntity>> GetAll()
         {
-            return await _dataContext.Orders.Include(c => c.User).Include(c => c.Products).ThenInclude(p => p.Product).ToListAsync();
+            return await _dataContext.Orders.Include(o => o.User).Include(c => c.Products).ThenInclude(p => p.Size).Include(p => p.Products).ThenInclude(p => p.Product).ToListAsync();
         }
 
         public async Task<IEnumerable<OrderEntity>> GetByUserEmail(string email)

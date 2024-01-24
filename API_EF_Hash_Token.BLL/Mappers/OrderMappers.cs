@@ -12,7 +12,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
     {
         internal static OrderModel ToOrderModel(this OrderEntity entity)
         {
-            return new OrderModel(entity.OrderId, entity.UserId, entity.User.ToUserModel(), entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct)).ToList(), entity.TotalPrice, entity.OrderDate, entity.TotalReduction);
+            return new OrderModel(entity.OrderId, entity.UserId, entity.User.ToUserModel(), entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct, p.SizeId)).ToList(), entity.TotalPrice, entity.OrderDate, entity.TotalReduction);
             //{
             //    OrderId = entity.OrderId,
             //    UserId = entity.UserId,
@@ -25,17 +25,17 @@ namespace API_EF_Hash_Token.BLL.Mappers
 
             //};
         }
-        internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price, decimal reductionPerProduct)
+        internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price, decimal reductionPerProduct, int sizeId)
         {
-            return new OrderProductModel()
-            {
-                ProductId = entity.PrdoductId,
-                ModelName = entity.ModelName,
-                Quantity = quantity,
-                ReductionPerProduct = reductionPerProduct,
-                Price = price,
+            return new OrderProductModel(entity.PrdoductId, sizeId, entity.ModelName, price, quantity, reductionPerProduct);
+            //{
+            //    ProductId = entity.PrdoductId,
+            //    ModelName = entity.ModelName,
+            //    Quantity = quantity,
+            //    ReductionPerProduct = reductionPerProduct,
+            //    Price = price,
 
-            };
+            //};
         }
 
         internal static OrderEntity ToOrderEntity(this OrderModel model) {

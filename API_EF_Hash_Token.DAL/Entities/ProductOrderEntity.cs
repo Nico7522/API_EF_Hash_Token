@@ -16,6 +16,7 @@ namespace API_EF_Hash_Token.DAL.Entities
         public decimal Price { get; set; }
         public decimal ReductionPerProduct { get; set; }
         public int SizeId { get; set; }
+        public SizeEntity Size { get; set; }
 
     }
 }
