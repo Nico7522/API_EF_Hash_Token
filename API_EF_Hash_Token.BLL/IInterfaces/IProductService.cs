@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
     public interface IProductService
     {
         Task<IEnumerable<ProductModel>> GetAll();
-        Task<ProductModel?> GetById(int id);
+        Task<ProductModel> GetById(int id);
 
         Task<IEnumerable<ProductModel>> GetByStep(int offset);
 

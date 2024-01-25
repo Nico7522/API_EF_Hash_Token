@@ -1,6 +1,7 @@
 ﻿using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Mappers;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Response;
 using API_EF_Hash_Token.BLL.Utils;
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
@@ -37,11 +38,15 @@ namespace API_EF_Hash_Token.BLL.Services
         public async Task<IEnumerable<ProductModel>> GetAll()
         {
             return await _productRepository.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
+            
         }
 
-        public async Task<ProductModel?> GetById(int id)
+        public async Task<ProductModel> GetById(int id)
         {
-            return await _productRepository.GetById(id).ContinueWith(r => r.Result?.ToProductModel());
+            ProductModel? product = await _productRepository.GetById(id).ContinueWith(r => r.Result?.ToProductModel());
+            if (product is null) return null;  
+
+            return product;
         }
 
         public async Task<IEnumerable<ProductModel>> GetByStep(int offset)

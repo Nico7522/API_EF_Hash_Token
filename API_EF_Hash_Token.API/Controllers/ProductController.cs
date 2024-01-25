@@ -1,8 +1,10 @@
-﻿using API_EF_Hash_Token.API.Dto;
+﻿using API_EF_Hash_Token.API.ApiResponse;
+using API_EF_Hash_Token.API.Dto;
 using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
@@ -23,7 +25,7 @@ namespace API_EF_Hash_Token.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll()
         {
-            IEnumerable<ProductDTO> products = await _productService.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
+            IEnumerable<ProductDTO>? products = await _productService.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductDTO()));
             return Ok(products);
         }
         [HttpGet("paginate")]
@@ -34,10 +36,11 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDTO?>> GetById(int id)
+        public async Task<ApiResponse<ProductDTO>> GetById(int id)
         {
             ProductDTO? product = await _productService.GetById(id).ContinueWith(r => r.Result?.ToProductDTO());
-            return product is not null ? Ok(product) : NotFound();
+
+            return product is not null ? ApiResponse<ProductDTO>.Success(product) : ApiResponse<ProductDTO>.Failed("Id not found");
         }
 
         [HttpPost]
