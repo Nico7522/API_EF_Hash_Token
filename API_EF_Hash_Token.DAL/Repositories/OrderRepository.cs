@@ -45,6 +45,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
                 await _dataContext.ProductOrder.AddAsync(po);
             }
             await _dataContext.SaveChangesAsync();
+            //OrderEntity? insertedEntity = await _dataContext.Orders.Include(o => o.User).Include(c => c.Products).ThenInclude(p => p.Size).Include(p => p.Products).ThenInclude(p => p.Product).Include(p => p.Products).Where(p => p.OrderId == entity.OrderId).SingleOrDefaultAsync();
             return entity;
         }
 

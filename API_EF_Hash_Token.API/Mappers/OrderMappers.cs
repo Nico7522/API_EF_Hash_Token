@@ -70,7 +70,7 @@ namespace API_EF_Hash_Token.API.Mappers
 
         internal static ProductOrderResponseDTO ToProductOrderResponseDTO(this OrderProductModel model)
         {
-            return new ProductOrderResponseDTO() { Price = model.Price, ProductId = model.ProductId, Quantity = model.Quantity, ReductionPerProduct = model.ReductionPerProduct };
+            return new ProductOrderResponseDTO() { Price = model.Price, ProductId = model.ProductId, ProductName = model.ModelName, Quantity = model.Quantity, ReductionPerProduct = model.ReductionPerProduct, Size = model.Size.ToSizeDTO() ?? null };
         }
     }
   
