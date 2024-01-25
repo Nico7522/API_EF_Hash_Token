@@ -4,7 +4,6 @@ using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Models;
-using API_EF_Hash_Token.BLL.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
@@ -36,11 +35,11 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ApiResponse<ProductDTO>> GetById(int id)
+        public async Task<ActionResult<ApiResponse<ProductDTO>>> GetById(int id)
         {
             ProductDTO? product = await _productService.GetById(id).ContinueWith(r => r.Result?.ToProductDTO());
 
-            return product is not null ? ApiResponse<ProductDTO>.Success(product) : ApiResponse<ProductDTO>.Failed("Id not found");
+            return product is not null ? Ok(ApiResponse<ProductDTO>.Success(product)) : ApiResponse<ProductDTO>.Failed(message: "Id not found", status: 404);
         }
 
         [HttpPost]
