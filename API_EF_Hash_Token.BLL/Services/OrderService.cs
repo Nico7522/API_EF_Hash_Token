@@ -17,12 +17,14 @@ namespace API_EF_Hash_Token.BLL.Services
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
+        private readonly ISizeRepository _sizeRepository;
 
-        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository, IProductRepository productRepository)
+        public OrderService(IOrderRepository orderRepository, IUserRepository userRepository, IProductRepository productRepository, ISizeRepository sizeRepository)
         {
             _orderRepository = orderRepository;
             _userRepository = userRepository;
             _productRepository = productRepository;
+            _sizeRepository = sizeRepository;
         }
 
         public async Task<IEnumerable<OrderModel>> GetAll()
@@ -47,20 +49,34 @@ namespace API_EF_Hash_Token.BLL.Services
 
         public async Task<OrderModel?> Insert(OrderModel orderModel)
         {
-
+            // Check si l'utilisateur existe
             UserEntity? userFound = await _userRepository.GetById(orderModel.UserId);
             if (userFound is null) return null;
+
+            // Déclaration d'une variable pour le prix total de la commande
             decimal tp = 0;
+
             foreach (var product in orderModel.OrderProducts)
             {
+                // Check si le produit existe.
                 ProductEntity? productFound = await _productRepository.GetById(product.ProductId);
                 if (productFound is null) return null;
 
+                // Check si la taille existe
+                SizeEntity? sizeFound = await _sizeRepository.GetById(product.SizeId);
+                if(sizeFound is null) return null;
+
+                // Pour chaque produit, on applique les réductions si il y en a, et on multiplie par la quantité acheté. Pour avoir le prix à l'unité * la quantité.
                 product.Price = (product.Price - (product.Price*product.ReductionPerProduct)) * product.Quantity;
+                // on augmente le prix total de la commande par le prix à l'unité * la quantité du produit.
                 tp += product.Price;
             }
+            // On applique les réductions sur le prix total si il y en a.
             orderModel.TotalPrice = tp - (tp*orderModel.TotalReduction);
+
+            // On set la date de la commande
             orderModel.OrderDate = DateTime.Now;
+
             OrderModel? insertedOrder = await _orderRepository.Insert(orderModel.ToOrderEntity()).ContinueWith(r => r.Result?.ToOrderModel());
             return insertedOrder;
         }

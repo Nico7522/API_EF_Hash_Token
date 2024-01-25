@@ -18,7 +18,7 @@ namespace API_EF_Hash_Token.API.Mappers
 
         internal static OrderProductModel ToOrderProductModel(this ProductOrderForm form)
         {
-            return new OrderProductModel(form.ProductId, form.SizeId, form.Price, form.Quantity, form.Discount);
+            return new OrderProductModel(form.ProductId, form.SizeId,  form.Price, form.Quantity, form.Discount);
             //{
             
             //    ProductId = form.ProductId,
@@ -36,7 +36,6 @@ namespace API_EF_Hash_Token.API.Mappers
                 User = model.User.ToUserDTO(),
                 TotalPrice = model.TotalPrice,
                 OrderDate = model.OrderDate,
-                
                 TotalReduction = model.TotalReduction,
                 OrderedProducts = model.OrderProducts.Select(po => po.ToProductOrderDTO()).ToList() ?? new List<ProductOrderDTO>()
                 
@@ -49,9 +48,10 @@ namespace API_EF_Hash_Token.API.Mappers
             return new ProductOrderDTO()
             {
                 ProductName = model.ModelName,
+                ProductId = model.ProductId,
                 Price = model.Price,
                 Quantity = model.Quantity,
-                SizeId = model.SizeId,
+                Size = model.Size.ToSizeDTO(),
                 ReductionPerProduct = model.ReductionPerProduct
             };
         }

@@ -13,7 +13,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
         internal static OrderModel ToOrderModel(this OrderEntity entity)
         {
             // TODO : faire en sorte que la taille soit renvoyée avec la liste de commandes
-            return new OrderModel(entity.OrderId, entity.UserId, entity.User.ToUserModel(), entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct, p.SizeId)).ToList(), entity.TotalPrice, entity.OrderDate, entity.TotalReduction);
+            return new OrderModel(entity.OrderId, entity.UserId, entity.User.ToUserModel(), entity.Products.Select(p => p.Product.ToOrderProductModel(p.Quantity, p.Price, p.ReductionPerProduct, p.SizeId, p.Size)).ToList(), entity.TotalPrice, entity.OrderDate, entity.TotalReduction);
             //{
             //    OrderId = entity.OrderId,
             //    UserId = entity.UserId,
@@ -26,9 +26,9 @@ namespace API_EF_Hash_Token.BLL.Mappers
 
             //};
         }
-        internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price, decimal reductionPerProduct, int sizeId)
+        internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price, decimal reductionPerProduct, int sizeId, SizeEntity size)
         {
-            return new OrderProductModel(entity.PrdoductId, sizeId, entity.ModelName, price, quantity, reductionPerProduct);
+            return new OrderProductModel(entity.PrdoductId, sizeId, entity.ModelName, price, quantity, reductionPerProduct, size.ToSizeModel());
             //{
             //    ProductId = entity.PrdoductId,
             //    ModelName = entity.ModelName,

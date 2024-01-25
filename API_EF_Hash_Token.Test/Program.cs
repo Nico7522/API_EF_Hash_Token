@@ -1137,6 +1137,34 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test Insert Order 
+
+OrderEntity order = new OrderEntity() { OrderDate = DateTime.Now, UserId = 12 };
+ProductOrderEntity productOrder = new ProductOrderEntity { Order = order, Price = 1, Quantity = 1, SizeId = 6, ProductId = 66 };
+order.Products.Add(productOrder);
+
+
+try
+{
+    OrderEntity? insertedOrder = await orderRepository.Insert(order);
+
+    if (insertedOrder is null) throw new Exception();
+
+    foreach (var p in insertedOrder.Products)
+    {
+        Console.WriteLine(p.Size.Size);
+    }
+
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
+
+#endregion
+
 
 // TEST Services BLL
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
@@ -1146,7 +1174,7 @@ IAdressService adressService = new AdressService(adressRepository);
 IProductService productService = new ProductService(productRepository, sizeRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
-IOrderService orderService = new OrderService(orderRepository, userRepository, productRepository);
+IOrderService orderService = new OrderService(orderRepository, userRepository, productRepository, sizeRepository);
 
 
 // TEST Users
@@ -1803,6 +1831,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //        {
 //            Console.WriteLine(products.ModelName);
 //            Console.WriteLine($"Quantity : {products.Quantity}");
+//            Console.WriteLine($"Size :  {products.Size.Size}");
 //            Console.WriteLine($"Total price : {products.Price}");
 //        }
 //        Console.WriteLine($"Total order price : {order.TotalPrice}");
@@ -1867,6 +1896,34 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //}
 
 #endregion
+
+#region Test Insert Order
+
+//List<OrderProductModel> opml = new List<OrderProductModel>();
+//opml.Add(new OrderProductModel(66, 6, 2, 1, 0));
+//OrderModel order = new OrderModel(12, 0, opml);
+
+//try
+//{
+//	OrderModel? insertedOrder = await orderService.Insert(order);
+//	if (insertedOrder is null) throw new Exception();
+
+//    foreach (var item in opml)
+//    {
+//        Console.WriteLine(item.Size.SizeId);
+
+//    }
+//}
+//catch (Exception ew)
+//{
+
+//	throw;
+//}
+
+#endregion
+
+
+
 
 
 // TEST appart
