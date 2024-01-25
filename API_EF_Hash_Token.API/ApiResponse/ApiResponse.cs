@@ -15,7 +15,7 @@
         }
 
 
-        public static ApiResponse<T> Success(T data, bool isSuccess = true, string? message = "Success", int status = 200)
+        public static ApiResponse<T> Success(T? data = null, bool isSuccess = true, string? message = "Success", int status = 200)
         {
             return new ApiResponse<T>(data, isSuccess, message, status);
         }
