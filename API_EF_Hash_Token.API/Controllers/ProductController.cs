@@ -95,7 +95,7 @@ namespace API_EF_Hash_Token.API.Controllers
                     image.File.CopyTo(stream);
                 }
 
-                if (!isUpdated) return BadRequest();
+                if (!isUpdated) return BadRequest(ApiResponse<ProductDTO>.Failed());
 
                 bool isSaved = await _productService.SaveChange();
 

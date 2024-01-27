@@ -1,0 +1,2 @@
+Récupérer l'url de l'image pour les produits
+Ajouter GetByCategorie Products
