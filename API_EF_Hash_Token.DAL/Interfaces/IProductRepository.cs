@@ -11,6 +11,8 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     {
         // Pagination
         Task<IEnumerable<ProductEntity>> GetByStep(int offset);
+
+        Task<IEnumerable<ProductEntity>> GetByCategory(int categoryId);
         Task<bool> UpdateStock(int sizeId, int productId, int stock);
 
         Task<IEnumerable<ProductEntity>> GetByTopSales();

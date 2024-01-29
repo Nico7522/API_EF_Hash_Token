@@ -18,11 +18,13 @@ namespace API_EF_Hash_Token.BLL.Services
 
         private readonly IProductRepository _productRepository;
         private readonly ISizeRepository _sizeRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ProductService(IProductRepository productRepository, ISizeRepository sizeRepository)
+        public ProductService(IProductRepository productRepository, ISizeRepository sizeRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
             _sizeRepository = sizeRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<ProductModel?> Delete(int id)
@@ -39,6 +41,13 @@ namespace API_EF_Hash_Token.BLL.Services
         {
             return await _productRepository.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
             
+        }
+
+        public async Task<IEnumerable<ProductModel>?> GetByCategory(int categoryId)
+        {
+            CategoryEntity? category = await _categoryRepository.GetById(categoryId);
+            if (category is null) return null;
+            return await _productRepository.GetByCategory(categoryId).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
         }
 
         public async Task<ProductModel> GetById(int id)

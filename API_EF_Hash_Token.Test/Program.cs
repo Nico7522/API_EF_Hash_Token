@@ -861,6 +861,35 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test GetByCategory Products
+
+
+//try
+//{
+//    IEnumerable<ProductEntity> products = await productRepository.GetByCategory(11);
+
+
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Price);
+
+//        foreach (var c in product.Categories)
+//        {
+//            Console.WriteLine(c.Category.CategoryName);
+//        }
+//        Console.WriteLine();
+
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 
 
 // TEST Categories
@@ -1139,28 +1168,28 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #region Test Insert Order 
 
-OrderEntity order = new OrderEntity() { OrderDate = DateTime.Now, UserId = 12 };
-ProductOrderEntity productOrder = new ProductOrderEntity { Order = order, Price = 1, Quantity = 1, SizeId = 6, ProductId = 66 };
-order.Products.Add(productOrder);
+//OrderEntity order = new OrderEntity() { OrderDate = DateTime.Now, UserId = 12 };
+//ProductOrderEntity productOrder = new ProductOrderEntity { Order = order, Price = 1, Quantity = 1, SizeId = 6, ProductId = 66 };
+//order.Products.Add(productOrder);
 
 
-try
-{
-    OrderEntity? insertedOrder = await orderRepository.Insert(order);
+//try
+//{
+//    OrderEntity? insertedOrder = await orderRepository.Insert(order);
 
-    if (insertedOrder is null) throw new Exception();
+//    if (insertedOrder is null) throw new Exception();
 
-    foreach (var p in insertedOrder.Products)
-    {
-        Console.WriteLine(p.Size.Size);
-    }
+//    foreach (var p in insertedOrder.Products)
+//    {
+//        Console.WriteLine(p.Size.Size);
+//    }
 
-}
-catch (Exception ex)
-{
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 
 #endregion
@@ -1171,7 +1200,7 @@ IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
 IAuthService authService = new AuthService(authRepository, userRepository);
 IAdressService adressService = new AdressService(adressRepository);
-IProductService productService = new ProductService(productRepository, sizeRepository);
+IProductService productService = new ProductService(productRepository, sizeRepository, categoryRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
 IOrderService orderService = new OrderService(orderRepository, userRepository, productRepository, sizeRepository);
@@ -1617,6 +1646,32 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //    foreach (var product in products)
 //    {
 //        Console.WriteLine(product.ProductId);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetByCategory Products
+//try
+//{
+//    IEnumerable<ProductModel>? products = await productService.GetByCategory(115);
+//    if (products is null) throw new Exception();
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Price);
+
+//        foreach (var c in product.Categories)
+//        {
+//            Console.WriteLine(c.CategoryName);
+//        }
+//        Console.WriteLine();
+
 //    }
 //}
 //catch (Exception ex)

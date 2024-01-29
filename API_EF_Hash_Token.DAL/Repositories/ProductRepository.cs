@@ -19,6 +19,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public ProductRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
+           
         }
 
         public async Task<ProductEntity?> Delete(ProductEntity entity)
@@ -32,6 +33,14 @@ namespace API_EF_Hash_Token.DAL.Repositories
         {
             return await _dataContext.Products.Include(p => p.Categories).ThenInclude(p => p.Category)
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+        }
+
+        public async Task<IEnumerable<ProductEntity>> GetByCategory(int categoryId)
+        {
+
+            // Fonctionne pas
+            return await _dataContext.Products.Where(p => p.Categories.Any(c => c.CategoryId == categoryId)).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                  .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
         public async Task<ProductEntity?> GetById(int id)

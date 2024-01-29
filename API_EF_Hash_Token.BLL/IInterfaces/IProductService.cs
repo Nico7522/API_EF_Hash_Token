@@ -11,6 +11,8 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
     public interface IProductService
     {
         Task<IEnumerable<ProductModel>> GetAll();
+
+        Task<IEnumerable<ProductModel>?> GetByCategory(int categoryId);
         Task<ProductModel> GetById(int id);
 
         Task<IEnumerable<ProductModel>> GetByStep(int offset);
