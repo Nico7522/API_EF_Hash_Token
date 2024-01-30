@@ -22,6 +22,8 @@ namespace API_EF_Hash_Token.DAL.Repositories
            
         }
 
+   
+
         public async Task<ProductEntity?> Delete(ProductEntity entity)
         {
             _dataContext.Products.Remove(entity);
@@ -35,11 +37,9 @@ namespace API_EF_Hash_Token.DAL.Repositories
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
-        public async Task<IEnumerable<ProductEntity>> GetByCategory(int categoryId)
+        public async Task<IEnumerable<ProductEntity>> GetByCategory(string[] categories)
         {
-
-            // Fonctionne pas
-            return await _dataContext.Products.Where(p => p.Categories.Any(c => c.CategoryId == categoryId)).Include(p => p.Categories).ThenInclude(p => p.Category)
+            return await _dataContext.Products.Where(p => p.Categories.Any(c => categories.Contains(c.Category.CategoryName))).Include(p => p.Categories).ThenInclude(c => c.Category)
                                   .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 

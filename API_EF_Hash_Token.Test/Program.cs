@@ -866,7 +866,8 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//    IEnumerable<ProductEntity> products = await productRepository.GetByCategory(11);
+//    int[] categoriesId = new int[] { 12 };
+//    IEnumerable<ProductEntity> products = await productRepository.GetByCategory(categoriesId);
 
 
 //    foreach (var product in products)
@@ -993,6 +994,22 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+#region Test CheckIfExist Category
+
+//try
+//{
+//    bool isCategoryExist = await categoryRepository.CehckIfExist("chaussure de sécurité");
+//    Console.WriteLine(isCategoryExist);
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
 #endregion
 
 
@@ -1659,7 +1676,8 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 #region Test GetByCategory Products
 //try
 //{
-//    IEnumerable<ProductModel>? products = await productService.GetByCategory(115);
+//    string[] categories = new string[] { "chaussure de sécurité" };
+//    IEnumerable<ProductModel>? products = await productService.GetByCategory(categories);
 //    if (products is null) throw new Exception();
 //    foreach (var product in products)
 //    {
@@ -1774,6 +1792,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //}
 
 #endregion
+
 
 // TEST Sizes
 

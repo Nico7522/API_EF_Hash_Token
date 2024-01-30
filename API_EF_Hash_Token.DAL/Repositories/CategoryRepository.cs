@@ -18,6 +18,13 @@ namespace API_EF_Hash_Token.DAL.Repositories
         {
             _dataContext = dataContext;
         }
+
+        public async Task<bool> CehckIfExist(string category)
+        {
+          CategoryEntity? categoryFound = await _dataContext.Categories.Where(c => c.CategoryName.ToLower() == category.ToLower()).SingleOrDefaultAsync();
+          return categoryFound is not null;
+        }
+
         public async Task<CategoryEntity?> Delete(CategoryEntity entity)
         {
              _dataContext.Remove(entity);

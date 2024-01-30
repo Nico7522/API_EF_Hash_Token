@@ -35,10 +35,10 @@ namespace API_EF_Hash_Token.API.Controllers
 
         }
 
-        [HttpGet("categories/{categoryId}")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByCategory(int categoryId)
+        [HttpGet("search")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByCategory([FromQuery] string[] categories)
         {
-            IEnumerable<ProductDTO>? products = await _productService.GetByCategory(categoryId).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
+            IEnumerable<ProductDTO>? products = await _productService.GetByCategory(categories).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
             return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Id not found", status: 404));
         }
 

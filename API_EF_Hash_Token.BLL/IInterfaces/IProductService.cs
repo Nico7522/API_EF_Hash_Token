@@ -12,7 +12,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
     {
         Task<IEnumerable<ProductModel>> GetAll();
 
-        Task<IEnumerable<ProductModel>?> GetByCategory(int categoryId);
+        Task<IEnumerable<ProductModel>?> GetByCategory(string[] categories);
         Task<ProductModel> GetById(int id);
 
         Task<IEnumerable<ProductModel>> GetByStep(int offset);
