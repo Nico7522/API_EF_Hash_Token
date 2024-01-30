@@ -891,6 +891,63 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test GetByBrand Products
+
+//try
+//{
+//    string[] brands = new string[] { "Nike" };
+//    IEnumerable<ProductEntity> products = await productRepository.GetByBrand(brands);
+
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Brand);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine(category.Category.CategoryName);
+//        }
+//        foreach (var size in product.Sizes)
+//        {
+//            Console.WriteLine(size.Size.Size);
+//        }
+//    }
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test getByPrice products
+
+//try
+//{
+//  IEnumerable<ProductEntity> products = await productRepository.GetByPrice(299.99M, 399.89M);
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Brand);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine(category.Category.CategoryName);
+//        }
+//        foreach (var size in product.Sizes)
+//        {
+//            Console.WriteLine(size.Size.Size);
+//        }
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 
 
 // TEST Categories
@@ -1690,6 +1747,63 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //        }
 //        Console.WriteLine();
 
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test GetByBrand Products 
+
+//try
+//{
+//    string[] brands = new string[] { "mss" };
+//    IEnumerable<ProductModel> products = await productService.GetByBrand(brands);
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Brand);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine(category.CategoryName);
+//        }
+//        foreach (var size in product.AvailableSizes)
+//        {
+//            Console.WriteLine(size.Size);
+//        }
+//    }
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test getByPrice products
+
+//try
+//{
+//    IEnumerable<ProductModel>? products = await productService.GetByPrice(299.99M, 399.89M);
+//    if (products is null) throw new Exception();
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Brand);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine(category.CategoryName);
+//        }
+//        foreach (var size in product.AvailableSizes)
+//        {
+//            Console.WriteLine(size.Size);
+//        }
 //    }
 //}
 //catch (Exception ex)

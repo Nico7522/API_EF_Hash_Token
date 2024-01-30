@@ -1,5 +1,6 @@
 ﻿using API_EF_Hash_Token.BLL.Models;
 using API_EF_Hash_Token.BLL.Response;
+using API_EF_Hash_Token.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<IEnumerable<ProductModel>> GetAll();
 
         Task<IEnumerable<ProductModel>?> GetByCategory(string[] categories);
+        Task<IEnumerable<ProductModel>> GetByBrand(string[] brands);
+        Task<IEnumerable<ProductModel>?> GetByPrice(decimal minPrice, decimal maxPrice);
+
         Task<ProductModel> GetById(int id);
 
         Task<IEnumerable<ProductModel>> GetByStep(int offset);

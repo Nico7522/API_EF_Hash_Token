@@ -43,11 +43,17 @@ namespace API_EF_Hash_Token.BLL.Services
             
         }
 
+        public async Task<IEnumerable<ProductModel>> GetByBrand(string[] brands)
+        {
+            brands = brands.Select(b => b.ToLower()).ToArray();
+            return await _productRepository.GetByBrand(brands).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
+        }
+
         public async Task<IEnumerable<ProductModel>?> GetByCategory(string[] categories)
         {
             foreach (var category in categories)
             {
-                bool isCategoryExist = await _categoryRepository.CehckIfExist(category);
+                bool isCategoryExist = await _categoryRepository.CheckIfExist(category);
                 if (!isCategoryExist) return null;
             }
             return await _productRepository.GetByCategory(categories).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
@@ -59,6 +65,12 @@ namespace API_EF_Hash_Token.BLL.Services
             if (product is null) return null;  
 
             return product;
+        }
+
+        public async Task<IEnumerable<ProductModel>?> GetByPrice(decimal minPrice, decimal maxPrice)
+        {
+            if ((minPrice < 0 || maxPrice < 0 ) || (maxPrice < minPrice)) return null;
+            return await _productRepository.GetByPrice(minPrice, maxPrice).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
         }
 
         public async Task<IEnumerable<ProductModel>> GetByStep(int offset)

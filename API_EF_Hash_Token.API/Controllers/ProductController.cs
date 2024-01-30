@@ -35,11 +35,25 @@ namespace API_EF_Hash_Token.API.Controllers
 
         }
 
-        [HttpGet("search")]
+        [HttpGet("search/categories")]
         public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByCategory([FromQuery] string[] categories)
         {
             IEnumerable<ProductDTO>? products = await _productService.GetByCategory(categories).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
-            return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Id not found", status: 404));
+            return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 400));
+        }
+
+        [HttpGet("search/brands")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByBrand([FromQuery] string[] brands)
+        {
+            IEnumerable<ProductDTO>? products = await _productService.GetByBrand(brands).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
+            return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 404));
+        }
+
+        [HttpGet("search/price")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByPrice([FromQuery] decimal minPrice, decimal maxPrice)
+        {
+            IEnumerable<ProductDTO>? products = await _productService.GetByPrice(minPrice, maxPrice).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
+            return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 404));
         }
 
         [HttpGet("{id}")]

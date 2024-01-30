@@ -37,16 +37,29 @@ namespace API_EF_Hash_Token.DAL.Repositories
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
+        public async Task<IEnumerable<ProductEntity>> GetByBrand(string[] brands)
+        {
+            return await _dataContext.Products.Where(p => brands.Contains(p.Brand.ToLower())).Include(p => p.Categories).ThenInclude(c => c.Category)
+                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+        }
+    
+
         public async Task<IEnumerable<ProductEntity>> GetByCategory(string[] categories)
         {
             return await _dataContext.Products.Where(p => p.Categories.Any(c => categories.Contains(c.Category.CategoryName))).Include(p => p.Categories).ThenInclude(c => c.Category)
-                                  .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
         public async Task<ProductEntity?> GetById(int id)
         {
             return await _dataContext.Products.Where(p => p.PrdoductId == id).Include(p => p.Categories).ThenInclude(p => p.Category)
                                                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<ProductEntity>> GetByPrice(decimal minPrice, decimal maxPrice)
+        {
+            return await _dataContext.Products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
         public async Task<IEnumerable<ProductEntity>> GetByStep(int offset = 0)

@@ -10,6 +10,6 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     public interface ICategoryRepository : ICrudRepository<int, CategoryEntity>
     {
 
-        Task<bool> CehckIfExist(string category);
+        Task<bool> CheckIfExist(string category);
     }
 }
