@@ -43,7 +43,7 @@ namespace API_EF_Hash_Token.BLL.Models
 
         }
 
-        public ProductModel(string modelName, string description, string brand, string sexe, string image, decimal price, decimal discount, int productId, List<CategoryModel>? categories = null, List<SizeModel> sizes = null) : this(modelName, description, brand, sexe, price,  discount, categories)
+        public ProductModel(string modelName, string description, string brand, string sexe, string image, decimal price, decimal discount, int productId, List<CategoryModel>? categories = null, List<SizeModel>? sizes = null) : this(modelName, description, brand, sexe, price,  discount, categories)
         {
             AvailableSizes = sizes ?? new List<SizeModel>();
             this.ProductId = productId;
