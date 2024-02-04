@@ -16,6 +16,7 @@ namespace API_EF_Hash_Token.API.Mappers
                 Description = model.Description,
                 Brand = model.Brand,
                 Price = model.Price,
+                Image = model.Image,
                 Discount = model.Discount,
                 Sexe = model.Sexe,
                 Categories =  model.Categories?.Select(c => c.ToCategoryDTO()).ToList() ?? new List<CategoryDTO>(),

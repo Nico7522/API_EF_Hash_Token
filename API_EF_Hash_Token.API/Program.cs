@@ -49,7 +49,7 @@ builder.Services.AddSingleton<TokenManager>();
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
-    builder.WithOrigins("http://localhost:4200")
+    builder.WithOrigins("http://localhost:4200", "https://localhost:7011")
            .AllowAnyMethod()
            .AllowAnyHeader()
            .AllowCredentials();

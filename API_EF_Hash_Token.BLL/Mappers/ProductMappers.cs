@@ -9,7 +9,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
         internal static ProductModel ToProductModel(this ProductEntity entity)
         {
             #pragma warning disable CS8604 // Possible null reference argument.
-            return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Price, entity.Discount, entity.PrdoductId, entity.Categories.Where(c => c.Category != null).Select(c => c.Category.ToCategoryModel()).ToList(), entity.Sizes.Where(s => s.Size != null).Select(s => s.Size.ToSizeModel(s.Stock)).ToList());
+            return new ProductModel(entity.ModelName, entity.Description, entity.Brand, entity.Sexe, entity.Image, entity.Price, entity.Discount, entity.PrdoductId, entity.Categories.Where(c => c.Category != null).Select(c => c.Category.ToCategoryModel()).ToList(), entity.Sizes.Where(s => s.Size != null).Select(s => s.Size.ToSizeModel(s.Stock)).ToList());
         }
 
 
@@ -27,6 +27,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Description = model.Description,
                 Brand = model.Brand,
                 Sexe = model.Sexe,
+                Image = model.Image,
                 Price = model.Price,
                 Discount = model.Discount,
                 CategoriesId = categoriesId.ToList(),
