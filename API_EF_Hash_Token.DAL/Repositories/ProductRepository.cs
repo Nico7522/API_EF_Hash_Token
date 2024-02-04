@@ -21,9 +21,6 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _dataContext = dataContext;
            
         }
-
-   
-
         public async Task<ProductEntity?> Delete(ProductEntity entity)
         {
             _dataContext.Products.Remove(entity);
@@ -129,6 +126,17 @@ namespace API_EF_Hash_Token.DAL.Repositories
             oldEntity.Discount = modifiedEntity.Discount;
             await _dataContext.SaveChangesAsync();
             return oldEntity;
+        }
+
+        public async Task<bool> UpdateCategory(ProductEntity product, int[] categoriesId)
+        {
+            foreach (var categoryId in categoriesId)
+            {
+                product.Categories.Add(new ProductCategoryEntity { CategoryId = categoryId });
+            }
+            await _dataContext.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<bool> UpdatePicture(ProductEntity product, string imageUrl)

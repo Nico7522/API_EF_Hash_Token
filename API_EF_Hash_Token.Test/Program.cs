@@ -948,6 +948,26 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test UpdateCategory Products 
+
+//try
+//{
+//	int[] categoriesId = { 11, 7 };
+//	ProductEntity? product = await productRepository.GetById(93);
+//	if (product is null) throw new Exception();
+
+//	bool isUpdated = await productRepository.UpdateCategory(product, categoriesId);
+//    Console.WriteLine("OK");
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 
 
 // TEST Categories
