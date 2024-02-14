@@ -11,15 +11,17 @@
 
         public int PhoneNumber { get; set; }
         public string Role { get; set; }
+        public List<AdressDTO> Adresses { get; set; } = new List<AdressDTO>();
 
-        public UserDTO(int userId, string firstName, string lastName, string Email, int phoneNumber, string role)
+        public UserDTO(int userId, string firstName, string lastName, string Email, int phoneNumber, string role, List<AdressDTO>? adresses = null)
         {
             this.UserId = userId;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = Email;
             this.PhoneNumber = phoneNumber;
-            Role = role;
+            this.Role = role;
+            this.Adresses = adresses ?? new List<AdressDTO>();
 
         }
     }

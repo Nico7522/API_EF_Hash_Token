@@ -23,7 +23,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
         {
             _configuration = configuration;
             _context = context;
-            _pepper = _configuration.GetSection("secret").Value;
+            _pepper = _configuration["secret:pepper"];
         }
 
         public async Task<UserEntity?> Delete(UserEntity userToDelete)
@@ -48,7 +48,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<UserEntity?> GetById(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users.Where(u => u.UserId == id).Include(a => a.Addresses).ThenInclude(a => a.Adress).SingleOrDefaultAsync();
         }
 
         public async Task<UserEntity?> Login(string email, string password)

@@ -15,6 +15,7 @@ namespace API_EF_Hash_Token.BLL.Models
         public int PhoneNumber { get; set; }
         public string Role { get; set; }
         public bool IsActive { get; set; }
+        public List<AdressModel> Adresses { get; set; } = new List<AdressModel>();
         private string _password;
         public string Password
         {   internal get { return _password; }
@@ -30,10 +31,11 @@ namespace API_EF_Hash_Token.BLL.Models
         {
             this.Email = email;
         }
-        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber, string role) : this(lastName, firstName, phoneNumber, email)
+        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber, string role, List<AdressModel>? adresses = null) : this(lastName, firstName, phoneNumber, email)
         {
             this.UserId = id;
             this.Role = role;
+            this.Adresses = adresses ?? new List<AdressModel>();
         }
 
         public UserModel(string lastName, string firstName, string email, int phoneNumber, string password) : this(lastName, firstName, phoneNumber, email)

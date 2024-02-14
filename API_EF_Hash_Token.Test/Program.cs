@@ -411,8 +411,15 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//    UserEntity? user = await userRepository.GetById(6);
+
+//    UserEntity? user = await userRepository.GetById(20);
+//    if (user is null) throw new Exception();
+
 //    Console.WriteLine(user?.FirstName);
+//    foreach (var adress in user.Addresses)
+//    {
+//        Console.WriteLine(adress.Adress.CityName);
+//    }
 
 //}
 //catch (Exception ex)
@@ -1329,10 +1336,14 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //    if (user is null) throw new Exception();
 
 //    Console.WriteLine(user.FirstName);
+//    foreach (var adress in user.Adresses)
+//    {
+//        Console.WriteLine(adress.Street);
+//    }
 //}
 //catch (Exception ex)
 //{
-//    Console.WriteLine(ex.Message); 
+//    Console.WriteLine(ex.Message);
 //}
 #endregion
 

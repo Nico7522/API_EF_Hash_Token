@@ -29,7 +29,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return Ok(users);
         }
 
-        [Authorize("AdminPolicy")]
+        //[Authorize("AdminPolicy")]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO?>> GetById(int id)
         {

@@ -10,7 +10,7 @@ namespace API_EF_Hash_Token.API.Mappers
 
         internal static UserDTO ToUserDTO(this UserModel model)
         {
-            return new UserDTO(model.UserId, model.FirstName, model.LastName, model.Email, model.PhoneNumber, model.Role);
+            return new UserDTO(model.UserId, model.FirstName, model.LastName, model.Email, model.PhoneNumber, model.Role, model.Adresses?.Select(a => a.ToAdressDTO()).ToList());
         
         }
 
