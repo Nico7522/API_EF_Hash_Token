@@ -43,20 +43,19 @@ namespace API_EF_Hash_Token.BLL.Services
             
         }
 
-        public async Task<IEnumerable<ProductModel>> GetByBrand(string[] brands)
+        public async Task<IEnumerable<ProductModel>> GetByBrand(string brand)
         {
-            brands = brands.Select(b => b.ToLower()).ToArray();
-            return await _productRepository.GetByBrand(brands).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
+            return await _productRepository.GetByBrand(brand).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
         }
 
-        public async Task<IEnumerable<ProductModel>?> GetByCategory(string[] categories)
+        public async Task<IEnumerable<ProductModel>?> GetByCategory(string category)
         {
-            foreach (var category in categories)
-            {
-                bool isCategoryExist = await _categoryRepository.CheckIfExist(category);
-                if (!isCategoryExist) return null;
-            }
-            return await _productRepository.GetByCategory(categories).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
+            //foreach (var category in categories)
+            //{
+            //    bool isCategoryExist = await _categoryRepository.CheckIfExist(category);
+            //    if (!isCategoryExist) return null;
+            //}
+            return await _productRepository.GetByCategory(category).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
         }
 
         public async Task<ProductModel> GetById(int id)

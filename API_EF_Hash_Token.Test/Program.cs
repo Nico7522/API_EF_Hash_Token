@@ -873,8 +873,8 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//    int[] categoriesId = new int[] { 12 };
-//    IEnumerable<ProductEntity> products = await productRepository.GetByCategory(categoriesId);
+//    string categorie = "chaussure de sécurité";
+//    IEnumerable<ProductEntity> products = await productRepository.GetByCategory(categorie);
 
 
 //    foreach (var product in products)
@@ -902,8 +902,8 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//    string[] brands = new string[] { "Nike" };
-//    IEnumerable<ProductEntity> products = await productRepository.GetByBrand(brands);
+//    string brand =  "Nike";
+//    IEnumerable<ProductEntity> products = await productRepository.GetByBrand(brand);
 
 //    foreach (var product in products)
 //    {
@@ -966,6 +966,35 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //	bool isUpdated = await productRepository.UpdateCategory(product, categoriesId);
 //    Console.WriteLine("OK");
 
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test filter Products 
+
+//try
+//{
+//    FilterEntity filter = new FilterEntity() { Brand = "puma", Category = "après-ski" };
+//    IEnumerable<ProductEntity> products = productRepository.Filter(filter);
+
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Brand);
+//        foreach (var category in product.Categories)
+//        {
+//            Console.WriteLine(category.Category.CategoryName);
+//        }
+//        foreach (var size in product.Sizes)
+//        {
+//            Console.WriteLine(size.Size.Size);
+//        }
+//    }
 //}
 //catch (Exception ex)
 //{

@@ -35,17 +35,17 @@ namespace API_EF_Hash_Token.API.Controllers
 
         }
 
-        [HttpGet("search/categories")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByCategory([FromQuery] string[] categories)
+        [HttpGet("search/category")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByCategory([FromQuery] string category)
         {
-            IEnumerable<ProductDTO>? products = await _productService.GetByCategory(categories).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
+            IEnumerable<ProductDTO>? products = await _productService.GetByCategory(category).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
             return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 400));
         }
 
-        [HttpGet("search/brands")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByBrand([FromQuery] string[] brands)
+        [HttpGet("search/brand")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByBrand([FromQuery] string brand)
         {
-            IEnumerable<ProductDTO>? products = await _productService.GetByBrand(brands).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
+            IEnumerable<ProductDTO>? products = await _productService.GetByBrand(brand).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
             return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 404));
         }
 

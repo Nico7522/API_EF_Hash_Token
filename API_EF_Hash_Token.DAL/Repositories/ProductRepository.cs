@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace API_EF_Hash_Token.DAL.Repositories
 {
@@ -34,16 +35,16 @@ namespace API_EF_Hash_Token.DAL.Repositories
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
-        public async Task<IEnumerable<ProductEntity>> GetByBrand(string[] brands)
+        public async Task<IEnumerable<ProductEntity>> GetByBrand(string brand)
         {
-            return await _dataContext.Products.Where(p => brands.Contains(p.Brand.ToLower())).Include(p => p.Categories).ThenInclude(c => c.Category)
+            return await _dataContext.Products.Where(p => brand.Contains(p.Brand.ToLower())).Include(p => p.Categories).ThenInclude(c => c.Category)
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
     
 
-        public async Task<IEnumerable<ProductEntity>> GetByCategory(string[] categories)
+        public async Task<IEnumerable<ProductEntity>> GetByCategory(string category)
         {
-            return await _dataContext.Products.Where(p => p.Categories.Any(c => categories.Contains(c.Category.CategoryName))).Include(p => p.Categories).ThenInclude(c => c.Category)
+            return await _dataContext.Products.Where(p => p.Categories.Any(c => category.Contains(c.Category.CategoryName))).Include(p => p.Categories).ThenInclude(c => c.Category)
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
         }
 
@@ -153,6 +154,36 @@ namespace API_EF_Hash_Token.DAL.Repositories
             sizeProduct.Stock = stock;
             await _dataContext.SaveChangesAsync();
             return true;
+        }
+
+        public IEnumerable<ProductEntity> Filter(FilterEntity filter)
+        {
+
+            IQueryable<ProductEntity> products =  _dataContext.Products.Include(p => p.Categories).ThenInclude(p => p.Category)
+                                                                       .Include(p => p.Sizes).ThenInclude(p => p.Size);
+
+            if (!string.IsNullOrEmpty(filter.ModelName))
+            {
+                products = products.Where(p => p.ModelName.Contains(filter.ModelName));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Sexe))
+            {
+                products = products.Where(p => p.Sexe.Contains(filter.Sexe));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Brand))
+            {
+                products = products.Where(p => p.Brand.Contains(filter.Brand));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Category))
+            {
+                products =  products.Where(p => p.Categories.Any(c => filter.Category.Contains(c.Category.CategoryName)));
+            }
+
+            return products;
+
         }
     }
 }
