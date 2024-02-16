@@ -55,11 +55,6 @@ namespace API_EF_Hash_Token.BLL.Services
 
         public async Task<IEnumerable<ProductModel>?> GetByCategory(string category)
         {
-            //foreach (var category in categories)
-            //{
-            //    bool isCategoryExist = await _categoryRepository.CheckIfExist(category);
-            //    if (!isCategoryExist) return null;
-            //}
             return await _productRepository.GetByCategory(category).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
         }
 

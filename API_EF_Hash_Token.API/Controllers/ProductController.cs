@@ -35,6 +35,13 @@ namespace API_EF_Hash_Token.API.Controllers
 
         }
 
+        [HttpGet("search/filter")]
+        public ActionResult<ApiResponse<IEnumerable<ProductDTO>>> Filter([FromQuery] FilterForm form)
+        {
+            IEnumerable<ProductDTO>? products = _productService.Filter(form.ToFilterModel()).Select(p => p.ToProductDTO());
+            return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 400));
+        }
+
         [HttpGet("search/category")]
         public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByCategory([FromQuery] string category)
         {

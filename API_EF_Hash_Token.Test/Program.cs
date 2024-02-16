@@ -1791,29 +1791,29 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 #endregion
 
 #region Test GetByCategory Products
-//try
-//{
-//    string[] categories = new string[] { "chaussure de sécurité" };
-//    IEnumerable<ProductModel>? products = await productService.GetByCategory(categories);
-//    if (products is null) throw new Exception();
-//    foreach (var product in products)
-//    {
-//        Console.WriteLine(product.ModelName);
-//        Console.WriteLine(product.Price);
+try
+{
+    string category =  "chaussure de sécurité" ;
+    IEnumerable<ProductModel>? products = await productService.GetByCategory(category);
+    if (products is null) throw new Exception();
+    foreach (var product in products)
+    {
+        Console.WriteLine(product.ModelName);
+        Console.WriteLine(product.Price);
 
-//        foreach (var c in product.Categories)
-//        {
-//            Console.WriteLine(c.CategoryName);
-//        }
-//        Console.WriteLine();
+        foreach (var c in product.Categories)
+        {
+            Console.WriteLine(c.CategoryName);
+        }
+        Console.WriteLine();
 
-//    }
-//}
-//catch (Exception ex)
-//{
+    }
+}
+catch (Exception ex)
+{
 
-//    Console.WriteLine(ex.Message);
-//}
+    Console.WriteLine(ex.Message);
+}
 
 #endregion
 
