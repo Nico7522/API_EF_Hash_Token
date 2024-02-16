@@ -1874,6 +1874,42 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 #endregion
 
+#region Test Filter Products
+
+//try
+//{
+//    try
+//    {
+//        FilterModel filter = new FilterModel(category:"chaussure de sécurité");
+//        IEnumerable<ProductModel> products = productService.Filter(filter);
+
+//        foreach (var product in products)
+//        {
+//            Console.WriteLine(product.ModelName);
+//            Console.WriteLine(product.Brand);
+//            foreach (var category in product.Categories)
+//            {
+//                Console.WriteLine(category.CategoryName);
+//            }
+//            foreach (var size in product.AvailableSizes)
+//            {
+//                Console.WriteLine(size.Size);
+//            }
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+
+//        Console.WriteLine(ex.Message);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+#endregion
+
 
 // TEST Categories
 

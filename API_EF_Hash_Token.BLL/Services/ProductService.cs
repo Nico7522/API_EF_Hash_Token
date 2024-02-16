@@ -37,6 +37,11 @@ namespace API_EF_Hash_Token.BLL.Services
             return deletedProduct;
         }
 
+        public IEnumerable<ProductModel> Filter(FilterModel filter)
+        {
+            return _productRepository.Filter(filter.ToFilterEntity()).Select(p => p.ToProductModel());
+        }
+
         public async Task<IEnumerable<ProductModel>> GetAll()
         {
             return await _productRepository.GetAll().ContinueWith(r => r.Result.Select(p => p.ToProductModel()));

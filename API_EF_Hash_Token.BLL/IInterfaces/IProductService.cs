@@ -28,5 +28,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<IEnumerable<ProductModel>> GetByTopSales();
         Task<bool> UpdatePicture(int id, string imageUrl);
         Task<bool> SaveChange();
+
+        IEnumerable<ProductModel> Filter(FilterModel filter);
     }
 }
