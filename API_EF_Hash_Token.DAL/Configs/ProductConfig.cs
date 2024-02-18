@@ -26,5 +26,6 @@ namespace API_EF_Hash_Token.DAL.Configs
             builder.Ignore(p => p.CategoriesId);
             builder.Ignore(p => p.SizeStock);
         }
+
     }
 }

@@ -52,6 +52,10 @@ namespace API_EF_Hash_Token.DAL.Domain
             modelBuilder.ApplyConfiguration(new ProductCategoryConfig());
             modelBuilder.ApplyConfiguration(new SizeConfig());
             modelBuilder.ApplyConfiguration(new SizeProductConfig());
+            modelBuilder.Entity<ProductEntity>()
+                        .HasMany(e => e.CategoriesEntity)
+                        .WithMany(e => e.ProductsEntity)
+                        .UsingEntity<ProductCategoryEntity>();
         }
  
     }

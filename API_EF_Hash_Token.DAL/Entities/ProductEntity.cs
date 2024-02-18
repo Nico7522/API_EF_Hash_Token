@@ -19,7 +19,7 @@ namespace API_EF_Hash_Token.DAL.Entities
         public decimal Discount { get; set; }
         public List<ProductOrderEntity> Orders { get; set; }
         public List<ProductCategoryEntity> Categories { get; set; }
-        //public List<CategoryEntity> CategoriesEntity { get; set; }
+        public List<CategoryEntity> CategoriesEntity { get; set; }
         public List<SizeProductEntity> Sizes { get; set; }
         public List<int> CategoriesId { get; set; }
         public List<SizeStock> SizeStock { get; set; }

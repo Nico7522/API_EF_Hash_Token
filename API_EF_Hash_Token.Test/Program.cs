@@ -1791,29 +1791,29 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 #endregion
 
 #region Test GetByCategory Products
-try
-{
-    string category =  "chaussure de sécurité" ;
-    IEnumerable<ProductModel>? products = await productService.GetByCategory(category);
-    if (products is null) throw new Exception();
-    foreach (var product in products)
-    {
-        Console.WriteLine(product.ModelName);
-        Console.WriteLine(product.Price);
+//try
+//{
+//    string category =  "chaussure de sécurité" ;
+//    IEnumerable<ProductModel>? products = await productService.GetByCategory(category);
+//    if (products is null) throw new Exception();
+//    foreach (var product in products)
+//    {
+//        Console.WriteLine(product.ModelName);
+//        Console.WriteLine(product.Price);
 
-        foreach (var c in product.Categories)
-        {
-            Console.WriteLine(c.CategoryName);
-        }
-        Console.WriteLine();
+//        foreach (var c in product.Categories)
+//        {
+//            Console.WriteLine(c.CategoryName);
+//        }
+//        Console.WriteLine();
 
-    }
-}
-catch (Exception ex)
-{
+//    }
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
@@ -2237,7 +2237,32 @@ catch (Exception ex)
 
 #endregion
 
+#region Test Insert
+
+//using(DataContext dc = new DataContext()) {
+    //try
+    //{
+    //    var cate = dc.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == 4);
+    //    Console.WriteLine(cate.CategoryName);
+    //    ProductEntity p = new ProductEntity() { ModelName = "test12312355", Price = 4.99M, Brand = "Nike", Description = "Testtest", Sexe = "femme", Discount = 0 };
+    //    cate.Products.Add(new ProductCategoryEntity { Product = p });
+    //    //dc.Entry(cate).State = EntityState.Modified;
+    //    //dc.Entry(p).State = EntityState.Modified;
+    //    dc.SaveChanges();
 
 
+
+    //}
+    //catch (Exception ex)
+    //{
+
+    //    Console.WriteLine(ex.Message);
+    //}
+
+
+//}
+
+
+#endregion
 
 
