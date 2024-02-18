@@ -31,10 +31,11 @@ namespace API_EF_Hash_Token.BLL.Models
         {
             this.Email = email;
         }
-        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber, string role, List<AdressModel>? adresses = null) : this(lastName, firstName, phoneNumber, email)
+        public UserModel(int id, string lastName, string firstName, string email, int phoneNumber, string role, bool isActive, List<AdressModel>? adresses = null) : this(lastName, firstName, phoneNumber, email)
         {
             this.UserId = id;
             this.Role = role;
+            this.IsActive = isActive;
             this.Adresses = adresses ?? new List<AdressModel>();
         }
 

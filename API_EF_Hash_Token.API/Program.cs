@@ -7,14 +7,19 @@ using API_EF_Hash_Token.DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
+RSA rsa = RSA.Create();
+string key = Encoding.Default.GetString(API_EF_Hash_Token.API.Properties.Resources.key);
+rsa.ImportFromPem(key);
+
 // DB
 builder.Services.AddDbContext<DataContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+    opt.UseSqlServer(Encoding.Default.GetString(rsa.Decrypt(API_EF_Hash_Token.API.Properties.Resources.connectionString, RSAEncryptionPadding.OaepSHA512))));
 
 // User
 builder.Services.AddScoped<IUserRepository, UserRepository>();

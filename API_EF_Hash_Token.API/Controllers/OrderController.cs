@@ -42,7 +42,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return userOrders is not null ? Ok(userOrders) : NotFound(); 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public async Task<ActionResult<OrderResponseDTO?>> Insert(CreateOrderForm form)
         {
