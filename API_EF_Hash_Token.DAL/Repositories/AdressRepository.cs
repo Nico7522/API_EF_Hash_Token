@@ -22,7 +22,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public async Task<bool> AddUserAdress(AdressEntity adress, UserEntity user)
         {
             await _dataContext.Adresses.AddAsync(adress);
-            user.Addresses.Add(new UserAdressEntity { User = user });
+            user.Addresses.Add(new UserAdressEntity { Adress = adress });
             int row = await _dataContext.SaveChangesAsync().ContinueWith(r => r.Result);
             return row > 0 ? true : false;
 

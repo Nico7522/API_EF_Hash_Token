@@ -14,5 +14,6 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<AdressModel?> Insert(AdressModel adressModel);
         Task<AdressModel?> Update(AdressModel modifiedAdress, int id);
         Task<AdressModel?> Delete(int id);
+        Task<bool> AddUserAdress(AdressModel adress, int userId);
     }
 }

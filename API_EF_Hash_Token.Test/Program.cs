@@ -680,23 +680,23 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //}
 #endregion
 
-#region Test AddUserAdress
+#region Test AddUserAdress Adress
 
-try
-{
-	AdressEntity adress = new AdressEntity { CityName = "Testadd", Country = "Belgique", Number = 25, Street = "Allée-Verte" };
-	UserEntity? user = await userRepository.GetById(25);
-	if (user is null)
-		throw new Exception();
+//try
+//{
+//	AdressEntity adress = new AdressEntity { CityName = "Testadd", Country = "Belgique", Number = 25, Street = "Allée-Verte" };
+//	UserEntity? user = await userRepository.GetById(25);
+//	if (user is null)
+//		throw new Exception();
 
-	bool isInserted = await adressRepository.AddUserAdress(adress, user);
-    Console.WriteLine("ok");
-}
-catch (Exception ex)
-{
+//	bool isInserted = await adressRepository.AddUserAdress(adress, user);
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
@@ -1351,7 +1351,7 @@ catch (Exception ex)
 IAuthRepository authRepository = new UserRepository(dataContext, configuration);
 IUserService userService = new UserService(userRepository);
 IAuthService authService = new AuthService(authRepository, userRepository);
-IAdressService adressService = new AdressService(adressRepository);
+IAdressService adressService = new AdressService(adressRepository, userRepository);
 IProductService productService = new ProductService(productRepository, sizeRepository, categoryRepository);
 ICategoryService categoryService = new CategoryService(categoryRepository);
 ISizeService sizeService = new SizeService(sizeRepository);
@@ -1648,6 +1648,29 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+#region Test AddUserAdress Adress
+
+try
+{
+    AdressModel adress = new AdressModel(25, "LL", "Une rue", "Belgique"); 
+    UserEntity? user = await userRepository.GetById(25);
+    if (user is null)
+        throw new Exception();
+
+    bool isInserted = await adressService.AddUserAdress(adress, 25);
+    if (!isInserted)
+        throw new Exception();
+
+    Console.WriteLine("ok");
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
 #endregion
 
 

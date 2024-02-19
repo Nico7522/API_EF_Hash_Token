@@ -14,10 +14,23 @@ namespace API_EF_Hash_Token.BLL.Services
     public class AdressService : IAdressService
     {
         private readonly IAdressRepository _adressRepository;
+        private readonly IUserRepository _userRepository;
 
-        public AdressService(IAdressRepository adressRepository)
+
+        public AdressService(IAdressRepository adressRepository, IUserRepository userRepository)
         {
             _adressRepository = adressRepository;
+            _userRepository = userRepository;
+        }
+
+        public async Task<bool> AddUserAdress(AdressModel adress, int userId)
+        {
+            UserEntity? user = await _userRepository.GetById(userId);
+            if (user is null)
+                return false;
+
+            bool isCreated = await _adressRepository.AddUserAdress(adress.ToAdressEntity(), user);
+            return isCreated;
         }
 
         public async Task<AdressModel?> Delete(int id)
