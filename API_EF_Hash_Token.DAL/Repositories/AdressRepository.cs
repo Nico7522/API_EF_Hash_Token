@@ -19,6 +19,15 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _dataContext = dataContext;
         }
 
+        public async Task<bool> AddUserAdress(AdressEntity adress, UserEntity user)
+        {
+            await _dataContext.Adresses.AddAsync(adress);
+            user.Addresses.Add(new UserAdressEntity { User = user });
+            int row = await _dataContext.SaveChangesAsync().ContinueWith(r => r.Result);
+            return row > 0 ? true : false;
+
+        }
+
         public async Task<bool> CheckIfExist(AdressEntity entityToFind)
         {
             AdressEntity? isAdressExist = await _dataContext.Adresses.Where(a => a.Number == entityToFind.Number && a.Street == entityToFind.Street && a.CityName == entityToFind.CityName && a.Country == entityToFind.Country).SingleOrDefaultAsync();

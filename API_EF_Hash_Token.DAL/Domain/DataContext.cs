@@ -56,6 +56,16 @@ namespace API_EF_Hash_Token.DAL.Domain
                         .HasMany(e => e.CategoriesEntity)
                         .WithMany(e => e.ProductsEntity)
                         .UsingEntity<ProductCategoryEntity>();
+
+            modelBuilder.Entity<UserEntity>()
+                       .HasMany(e => e.AdressesList)
+                       .WithMany(e => e.UsersList)
+                       .UsingEntity<UserAdressEntity>();
+
+            modelBuilder.Entity<AdressEntity>()
+                       .HasMany(e => e.UsersList)
+                       .WithMany(e => e.AdressesList)
+                       .UsingEntity<UserAdressEntity>();
         }
  
     }

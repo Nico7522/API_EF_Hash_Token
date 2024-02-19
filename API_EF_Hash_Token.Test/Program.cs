@@ -592,6 +592,8 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //}
 #endregion
 
+
+
 // TEST Adresses
 #region Test GetAll Adresses
 
@@ -676,6 +678,26 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+#region Test AddUserAdress
+
+try
+{
+	AdressEntity adress = new AdressEntity { CityName = "Testadd", Country = "Belgique", Number = 25, Street = "Allée-Verte" };
+	UserEntity? user = await userRepository.GetById(25);
+	if (user is null)
+		throw new Exception();
+
+	bool isInserted = await adressRepository.AddUserAdress(adress, user);
+    Console.WriteLine("ok");
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
 #endregion
 
 
@@ -2240,24 +2262,24 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 #region Test Insert
 
 //using(DataContext dc = new DataContext()) {
-    //try
-    //{
-    //    var cate = dc.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == 4);
-    //    Console.WriteLine(cate.CategoryName);
-    //    ProductEntity p = new ProductEntity() { ModelName = "test12312355", Price = 4.99M, Brand = "Nike", Description = "Testtest", Sexe = "femme", Discount = 0 };
-    //    cate.Products.Add(new ProductCategoryEntity { Product = p });
-    //    //dc.Entry(cate).State = EntityState.Modified;
-    //    //dc.Entry(p).State = EntityState.Modified;
-    //    dc.SaveChanges();
+//try
+//{
+//    var cate = dc.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == 4);
+//    Console.WriteLine(cate.CategoryName);
+//    ProductEntity p = new ProductEntity() { ModelName = "test12312355", Price = 4.99M, Brand = "Nike", Description = "Testtest", Sexe = "femme", Discount = 0 };
+//    cate.Products.Add(new ProductCategoryEntity { Product = p });
+//    //dc.Entry(cate).State = EntityState.Modified;
+//    //dc.Entry(p).State = EntityState.Modified;
+//    dc.SaveChanges();
 
 
 
-    //}
-    //catch (Exception ex)
-    //{
+//}
+//catch (Exception ex)
+//{
 
-    //    Console.WriteLine(ex.Message);
-    //}
+//    Console.WriteLine(ex.Message);
+//}
 
 
 //}
@@ -2265,4 +2287,35 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 #endregion
 
+#region Test création user et ajout adresse existante
 
+//try
+//{
+//    UserEntity user = new UserEntity() { Email = "testavecadresse2@gmail.com", PasswordSalt = PasswordHasher.GenerateSalt(), FirstName = "D'Addabbo", LastName = "Nicolas" };
+//    user.PasswordHash = PasswordHasher.ComputeHash(password, user.PasswordSalt, pepper, iteration);
+//    dataContext.Users.Add(user);
+//    var adresse = dataContext.Adresses.Include(a => a.Users).SingleOrDefault(a => a.AdressId == 19);
+//    Console.WriteLine(adresse.Street);
+//    if (adresse is not null)
+//    {
+//        adresse.UsersList.Add(user);
+//        dataContext.SaveChanges();
+//        Console.WriteLine("ok");
+//    }
+
+//    //var adresse = dataContext.Adresses.Include(a => a.UsersList).SingleOrDefault(a => a.AdressId == 19);
+//    //if (adresse is not null)
+//    //{
+//    //    Console.WriteLine(adresse.Street);
+//    //    foreach(var user in adresse.UsersList)
+//    //    {
+//    //        Console.WriteLine(user.FirstName);
+//    //    }
+//    //}
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.InnerException.Message);
+//}
+#endregion
