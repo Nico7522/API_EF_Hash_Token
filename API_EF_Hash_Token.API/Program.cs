@@ -13,13 +13,16 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-RSA rsa = RSA.Create();
+RSA rsa = RSA.Create(2048);
 string key = Encoding.Default.GetString(API_EF_Hash_Token.API.Properties.Resources.key);
-rsa.ImportFromPem(key);
+rsa.ImportRSAPrivateKey(API_EF_Hash_Token.API.Properties.Resources.key, out int bytesRead);
+//rsa.ImportFromPem(key);
 
 // DB
 builder.Services.AddDbContext<DataContext>(opt =>
-    opt.UseSqlServer(Encoding.Default.GetString(rsa.Decrypt(API_EF_Hash_Token.API.Properties.Resources.connectionString, RSAEncryptionPadding.OaepSHA512))));
+    opt.UseSqlServer(Encoding.Default.GetString(rsa.Decrypt(API_EF_Hash_Token.API.Properties.Resources.connectionString, RSAEncryptionPadding.OaepSHA512)))
+    //opt.UseSqlServer(builder.Configuration.GetConnectionString("default"))
+    );
 
 // User
 builder.Services.AddScoped<IUserRepository, UserRepository>();
