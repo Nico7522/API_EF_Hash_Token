@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /API_EF_Hash_Token.API/Secure/connectionString.bin
 /API_EF_Hash_Token.API/Secure/key.bin
+/API_EF_Hash_Token.API/Resources/connectionString.bin
+/API_EF_Hash_Token.API/Resources/key.bin
+/API_EF_Hash_Token.API/Secure/connectionString.bin
