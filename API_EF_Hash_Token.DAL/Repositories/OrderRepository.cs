@@ -37,12 +37,15 @@ namespace API_EF_Hash_Token.DAL.Repositories
         public async Task<OrderEntity?> Insert(OrderEntity entity)
         {
             await _dataContext.Orders.AddAsync(entity);
+
+
+
             foreach (var po in entity.Products)
             {
-                bool isDecreased = await DecreaseStock(po.SizeId, po.ProductId, po.Quantity).ContinueWith(r => r.Result);
+                bool isDecreased = DecreaseStock(po.SizeId, po.ProductId, po.Quantity);
                 if (!isDecreased) return null;
 
-                await _dataContext.ProductOrder.AddAsync(po);
+                //await _dataContext.ProductOrder.AddAsync(po);
             }
             await _dataContext.SaveChangesAsync();
             //OrderEntity? insertedEntity = await _dataContext.Orders.Include(o => o.User).Include(c => c.Products).ThenInclude(p => p.Size).Include(p => p.Products).ThenInclude(p => p.Product).Include(p => p.Products).Where(p => p.OrderId == entity.OrderId).SingleOrDefaultAsync();
@@ -57,10 +60,10 @@ namespace API_EF_Hash_Token.DAL.Repositories
         /// <param name="productId">L'id du produit</param>
         /// <param name="quantity">La quantité</param>
         /// <returns></returns>
-        private async Task<bool> DecreaseStock(int sizeId,int productId, int quantity)
+        private bool DecreaseStock(int sizeId,int productId, int quantity)
         {
             // Check si le produit existe et si le stock n'est pas == 0. 
-            SizeProductEntity? product = await _dataContext.SizeProduct.Where(ps => ps.ProductId == productId && ps.SizeId == sizeId).SingleOrDefaultAsync();
+            SizeProductEntity? product =  _dataContext.SizeProduct.Where(ps => ps.ProductId == productId && ps.SizeId == sizeId).SingleOrDefault();
             if (product is null || product.Stock == 0) return false;
 
             // Check le stock - la quantité commandé n'est pas > 0.

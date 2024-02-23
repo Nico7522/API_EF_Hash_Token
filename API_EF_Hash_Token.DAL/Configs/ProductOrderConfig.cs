@@ -13,7 +13,7 @@ namespace API_EF_Hash_Token.DAL.Configs
     {
         public void Configure(EntityTypeBuilder<ProductOrderEntity> builder)
         {
-            builder.HasKey(po => new { po.ProductId, po.OrderId });
+            builder.HasKey(po => new { po.ProductId, po.OrderId, po.SizeId });
             builder.HasOne(po => po.Product).WithMany(o => o.Orders).HasForeignKey(po => po.ProductId);
             builder.HasOne(po => po.Order).WithMany(o => o.Products).HasForeignKey(po => po.OrderId);
             builder.Property(po => po.Quantity).IsRequired();

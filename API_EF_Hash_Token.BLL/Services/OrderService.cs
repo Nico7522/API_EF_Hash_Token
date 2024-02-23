@@ -59,12 +59,12 @@ namespace API_EF_Hash_Token.BLL.Services
             foreach (var product in orderModel.OrderProducts)
             {
                 // Check si le produit existe.
-                ProductEntity? productFound = await _productRepository.GetById(product.ProductId);
+               ProductEntity? productFound = await _productRepository.GetById(product.ProductId);
                 if (productFound is null) return null;
 
                 // Check si la taille existe
                 SizeEntity? sizeFound = await _sizeRepository.GetById(product.SizeId);
-                if(sizeFound is null) return null;
+                if (sizeFound is null) return null;
 
                 // Pour chaque produit, on applique les réductions si il y en a, et on multiplie par la quantité acheté. Pour avoir le prix à l'unité * la quantité.
                 product.Price = (product.Price - (product.Price*product.ReductionPerProduct)) * product.Quantity;

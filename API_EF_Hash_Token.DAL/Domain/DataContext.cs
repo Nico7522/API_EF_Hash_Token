@@ -13,7 +13,7 @@ namespace API_EF_Hash_Token.DAL.Domain
     public class DataContext : DbContext
     {
         //private string _connectionString = "Data Source=DESKTOP-IFNFMI9;Initial Catalog=EF_LABO_SHOES;Integrated Security=True;Connect Timeout=60;";
-        //private string _connectionString = "Data Source=GOS-VDI202\\TFTIC;Initial Catalog=dbtest;Integrated Security=True;Connect Timeout=60;";
+        //private string _connectionString = "Data Source=GOS-VDI202\\TFTIC;Initial Catalog=EF_Hash_Token;Integrated Security=True;Connect Timeout=60;";
 
         public DbSet<UserEntity> Users { get { return Set<UserEntity>(); } }
         public DbSet<AdressEntity> Adresses { get { return Set<AdressEntity>(); } }
