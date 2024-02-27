@@ -52,6 +52,7 @@ namespace API_EF_Hash_Token.API.Mappers
                 Price = model.Price,
                 Quantity = model.Quantity,
                 Size = model.Size.ToSizeDTO(),
+                ImgUrl = model.ImgUrl,
                 ReductionPerProduct = model.ReductionPerProduct
             };
         }

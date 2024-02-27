@@ -7,6 +7,7 @@
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public SizeDTO Size { get; set; }
+        public string ImgUrl { get; set; }
         public decimal ReductionPerProduct { get; set; }
 
     }

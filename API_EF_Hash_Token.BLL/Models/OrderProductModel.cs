@@ -13,23 +13,25 @@ namespace API_EF_Hash_Token.BLL.Models
         public string? ModelName { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+        public string ImgUrl { get; set; }
         public decimal ReductionPerProduct { get; set; }
         public SizeModel? Size { get; set; }
 
-        public OrderProductModel(int productId, int SizeId,  decimal price, int quantity, decimal reductionPerproduct)
+        public OrderProductModel(int productId, int SizeId,  decimal price, int quantity, decimal reductionPerProduct)
         {
             this.ProductId = productId;
             this.SizeId = SizeId;
             this.Price = price;
             this.Quantity = quantity;
-            this.ReductionPerProduct = reductionPerproduct;
+            this.ReductionPerProduct = reductionPerProduct;
         }
 
-        public OrderProductModel(int productId, int SizeId,  string modelName, decimal price, int quantity, decimal reductionPerproduct, SizeModel size)
+        public OrderProductModel(int productId, string imgUrl, int SizeId,  string modelName, decimal price, int quantity, decimal reductionPerproduct, SizeModel size)
             : this (productId, SizeId, price, quantity, reductionPerproduct)
         {
             this.ModelName = modelName;
             this.Size = size;
+            this.ImgUrl = imgUrl;
 
         }
 

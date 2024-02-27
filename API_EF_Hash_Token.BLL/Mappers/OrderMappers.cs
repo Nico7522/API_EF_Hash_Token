@@ -18,7 +18,7 @@ namespace API_EF_Hash_Token.BLL.Mappers
 
         internal static OrderProductModel ToOrderProductModel(this ProductEntity entity, int quantity, decimal price, decimal reductionPerProduct, int sizeId, SizeEntity size)
         {
-            return new OrderProductModel(entity.PrdoductId, sizeId, entity.ModelName, price, quantity, reductionPerProduct, size.ToSizeModel());
+            return new OrderProductModel(entity.PrdoductId, entity.Image, sizeId, entity.ModelName, price, quantity, reductionPerProduct, size.ToSizeModel());
 
         }
 

@@ -369,6 +369,30 @@ string password = "@Test1234=";
 
 #endregion
 
+#region Test ajout Order et ProductOrder
+//try
+//{
+//    OrderEntity order = new OrderEntity() { TotalPrice = 99, OrderDate = DateTime.Now, UserId = 28  };
+//    ProductOrderEntity product = new ProductOrderEntity { Price = 2, Quantity = 1, SizeId = 5, ProductId = 44 };
+//    dataContext.Orders.Add(order);
+//    dataContext.SaveChanges();
+//    int id = order.OrderId;
+//    OrderEntity? newOrder = dataContext.Orders.Include(o => o.Products).SingleOrDefault(o => o.OrderId == id);
+//    Console.WriteLine(newOrder.OrderId);
+//    newOrder.Products.Add(new ProductOrderEntity { Price = 2, Quantity = 1, SizeId = 5, ProductId = 44 });
+//    dataContext.SaveChanges();
+
+//    Console.WriteLine("ok");
+
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine("error");
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 // Pour utiliser appsetting.json
 IConfiguration configuration = new ConfigurationBuilder()
  .SetBasePath(Directory.GetCurrentDirectory())
@@ -1652,24 +1676,24 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 #region Test AddUserAdress Adress
 
-try
-{
-    AdressModel adress = new AdressModel(25, "LL", "Une rue", "Belgique"); 
-    UserEntity? user = await userRepository.GetById(25);
-    if (user is null)
-        throw new Exception();
+//try
+//{
+//    AdressModel adress = new AdressModel(25, "LL", "Une rue", "Belgique"); 
+//    UserEntity? user = await userRepository.GetById(25);
+//    if (user is null)
+//        throw new Exception();
 
-    bool isInserted = await adressService.AddUserAdress(adress, 25);
-    if (!isInserted)
-        throw new Exception();
+//    bool isInserted = await adressService.AddUserAdress(adress, 25);
+//    if (!isInserted)
+//        throw new Exception();
 
-    Console.WriteLine("ok");
-}
-catch (Exception ex)
-{
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
 
-    Console.WriteLine(ex.Message);
-}
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
