@@ -29,6 +29,9 @@ namespace API_EF_Hash_Token.BLL.Services
             if (user is null)
                 return false;
 
+            bool isAdressExist = await _adressRepository.CheckIfExist(adress.ToAdressEntity());
+            if (isAdressExist) return false;
+
             bool isCreated = await _adressRepository.AddUserAdress(adress.ToAdressEntity(), user);
             return isCreated;
         }

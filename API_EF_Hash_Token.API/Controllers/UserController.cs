@@ -45,7 +45,7 @@ namespace API_EF_Hash_Token.API.Controllers
             return user is not null ? Ok(user) : NotFound();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDTO?>> Update(UpdateUserForm form, int id)
         {
