@@ -111,8 +111,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("MyPolicy");
-app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

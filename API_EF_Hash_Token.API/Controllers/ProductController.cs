@@ -113,12 +113,16 @@ namespace API_EF_Hash_Token.API.Controllers
         public async Task<ActionResult<ApiResponse<ProductDTO>>> UpdatePicture(int id, [FromForm] FileForm image)
         {
             if (image is null) return BadRequest(ApiResponse<ProductDTO>.Failed());
+            string now = DateTime.UtcNow.ToString("yyyyMMdd");
+            string rng = Guid.NewGuid().ToString();
+            string ext = Path.GetExtension(image.File.FileName);
+            string filename = now + "-" + rng + ext;
 
             try
             {
-                bool isUpdated = await _productService.UpdatePicture(id, image.File.FileName);
-                string path = Path.Combine(image.Directory, image.File.FileName);
-                using (Stream stream = new FileStream(path, FileMode.Create))
+                bool isUpdated = await _productService.UpdatePicture(id, filename);
+                string path = Path.Combine(image.Directory, filename);
+                using (Stream stream = new FileStream(path, FileMode.CreateNew))
                 {
                     image.File.CopyTo(stream);
                 }
@@ -129,7 +133,7 @@ namespace API_EF_Hash_Token.API.Controllers
 
                 return (isUpdated && isSaved) ? NoContent() : throw new Exception();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest(ApiResponse<ProductDTO>.Failed());
             }

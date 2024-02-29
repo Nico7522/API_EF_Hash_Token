@@ -7,7 +7,7 @@
 
         public FileForm()
         {
-            Directory = "C:\\Users\\n.daddabbo\\source\\repos\\API_EF_Hash_Token\\API_EF_Hash_Token.API\\wwwroot\\Images";
+            Directory = "C:\\Users\\n.daddabbo\\Desktop\\Labo\\Labo_Api\\API_EF_Hash_Token.API\\wwwroot\\Images";
         }
     }
 }

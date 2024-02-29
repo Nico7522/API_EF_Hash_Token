@@ -46,10 +46,10 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpPatch("{id}/update/email")]
-        public async Task<ActionResult> UpdateEmail(UpdateEmailForm form, int id)
+        public async Task<ActionResult<bool>> UpdateEmail(UpdateEmailForm form, int id)
         {
             bool isUpdated = await _authService.UpdateEmail(form.Email, id);
-            return isUpdated ? Ok() : BadRequest();
+            return isUpdated ? Ok("Email modifiée avec succèss") : BadRequest();
         }
 
         [HttpPatch("{id}/update/password")]
