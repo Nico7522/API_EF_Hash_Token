@@ -185,5 +185,22 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return products;
 
         }
+
+        public async Task<bool> RemoveCategoryFromProduct(ProductEntity product, CategoryEntity categoryToRemove)
+        {
+            ProductCategoryEntity? category = await _dataContext.ProductCategory.FirstOrDefaultAsync(c => c.Category == categoryToRemove);
+
+            if (category != null)
+            {
+                product.Categories.Remove(category);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+
+
+
+        }
     }
 }

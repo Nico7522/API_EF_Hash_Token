@@ -393,6 +393,38 @@ string password = "@Test1234=";
 
 #endregion
 
+
+#region RemoveCategoryFromProduct
+//try
+//{
+//    var product = await dataContext.Products
+//        .Include(p => p.Categories) // Inclure les catégories liées au produit
+//        .FirstOrDefaultAsync(p => p.PrdoductId == 57);
+
+//    if (product != null)
+//    {
+//        var categoryToRemove = product.Categories.FirstOrDefault(c => c.CategoryId == 4);
+
+//        if (categoryToRemove != null)
+//        {
+//            product.Categories.Remove(categoryToRemove);
+
+//            await dataContext.SaveChangesAsync();
+//    Console.WriteLine("ok");
+//        }
+//    }
+
+//}
+//catch (Exception ex)
+//{
+//    // Gérer les exceptions ici
+//    throw ex;
+//}
+
+
+#endregion
+
+
 // Pour utiliser appsetting.json
 IConfiguration configuration = new ConfigurationBuilder()
  .SetBasePath(Directory.GetCurrentDirectory())
@@ -1041,6 +1073,28 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //            Console.WriteLine(size.Size.Size);
 //        }
 //    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test RemoveCategoryFromProduct
+
+//try
+//{
+//	ProductEntity? product = await productRepository.GetById(61);
+//    if (product is null) throw new Exception();
+
+//    CategoryEntity? categoryToRemove = await categoryRepository.GetById(577);
+//    if (categoryToRemove is null) throw new Exception();
+
+
+//    bool isCategoryRemoved = await productRepository.RemoveCategoryFromProduct(product, categoryToRemove);
+//    Console.WriteLine("ok");
 //}
 //catch (Exception ex)
 //{
@@ -1977,6 +2031,20 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+#region Test RemoveCategoryFromProduct
+
+//try
+//{
+//    bool isCategoryRemoved = await productService.RemoveCategoryFromProduct(59, 4);
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+
 #endregion
 
 

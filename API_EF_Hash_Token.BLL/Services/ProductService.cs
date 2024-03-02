@@ -3,6 +3,7 @@ using API_EF_Hash_Token.BLL.Mappers;
 using API_EF_Hash_Token.BLL.Models;
 using API_EF_Hash_Token.BLL.Response;
 using API_EF_Hash_Token.BLL.Utils;
+using API_EF_Hash_Token.DAL.Domain;
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
 using System;
@@ -129,6 +130,17 @@ namespace API_EF_Hash_Token.BLL.Services
 
             bool isUpdated = await _productRepository.UpdateStock(sizeId, productId, stock);
             return isUpdated;
+        }
+
+        public async Task<bool> RemoveCategoryFromProduct(int productId, int CategoryId)
+        {
+            ProductEntity? product = await _productRepository.GetById(productId);
+            if (product is null) return false;
+            CategoryEntity? categoryToRemove = await _categoryRepository.GetById(CategoryId);
+            if (categoryToRemove is null) return false;
+
+            return await _productRepository.RemoveCategoryFromProduct(product, categoryToRemove);
+
         }
     }
 }

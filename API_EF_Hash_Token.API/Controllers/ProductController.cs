@@ -138,5 +138,12 @@ namespace API_EF_Hash_Token.API.Controllers
                 return BadRequest(ApiResponse<ProductDTO>.Failed());
             }
         }
+
+        [HttpDelete("product/{productId:int}/category/{categoryId:int}")]
+        public async Task<ActionResult<bool>> RemoveCategoryFromProduct(int productId, int categoryId)
+        {
+            bool isCategoryRemoved = await _productService.RemoveCategoryFromProduct(productId, categoryId);
+            return isCategoryRemoved ? Ok() : BadRequest();
+        }
     }
 }
