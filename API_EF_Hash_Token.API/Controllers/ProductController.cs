@@ -145,5 +145,20 @@ namespace API_EF_Hash_Token.API.Controllers
             bool isCategoryRemoved = await _productService.RemoveCategoryFromProduct(productId, categoryId);
             return isCategoryRemoved ? Ok() : BadRequest();
         }
+
+        [HttpPost("/product/{productId:int}/size/{sizeId:int}")]
+        public async Task<ActionResult<bool>> AddSize(int productId, int sizeId, AddSizeForm form)
+        {
+            bool isSizeAdded = await _productService.AddSize(productId, sizeId, form.Stock);
+            return isSizeAdded ? Ok() : BadRequest();
+        }
+
+        [HttpDelete("product/{productId:int}/size/{sizeId:int}")]
+        public async Task<ActionResult<bool>> RemoveSizeFromProduct(int productId, int sizeId)
+        {
+            bool isCategoryRemoved = await _productService.RemoveSizeFormProduct(productId, sizeId);
+            return isCategoryRemoved ? Ok() : BadRequest();
+        }
+
     }
 }

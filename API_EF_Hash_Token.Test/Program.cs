@@ -1082,14 +1082,14 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
-#region Test RemoveCategoryFromProduct
+#region Test RemoveCategoryFromProduct Product
 
 //try
 //{
-//	ProductEntity? product = await productRepository.GetById(61);
+//    ProductEntity? product = await productRepository.GetById(61);
 //    if (product is null) throw new Exception();
 
-//    CategoryEntity? categoryToRemove = await categoryRepository.GetById(577);
+//    CategoryEntity? categoryToRemove = await categoryRepository.GetById(4);
 //    if (categoryToRemove is null) throw new Exception();
 
 
@@ -1102,6 +1102,25 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //    Console.WriteLine(ex.Message);
 //}
 
+#endregion
+
+#region Test RemoveSizeFromProduct Product
+
+//try
+//{
+//	ProductEntity? product = await productRepository.GetById(66);
+//	if (product is null) throw new Exception();
+//	SizeEntity? sizeToRemove = await sizeRepository.GetById(9);
+//	if (sizeToRemove is null) throw new Exception();
+
+//	bool isSizeDeleted = await productRepository.RemoveSizeFromProduct(product, sizeToRemove);
+//	Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//	Console.WriteLine(ex.Message);
+//}
 #endregion
 
 
@@ -2033,7 +2052,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //}
 #endregion
 
-#region Test RemoveCategoryFromProduct
+#region Test RemoveCategoryFromProduct Product
 
 //try
 //{
@@ -2043,6 +2062,38 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //catch (Exception ex)
 //{
 //    Console.WriteLine(ex.Message);
+//}
+
+#endregion p
+
+#region Test AddSize Product
+
+//try
+//{
+//	bool isSizeAdded = await productService.AddSize(66, 9, 77);
+//    Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
+#region Test RemoveSizeFromProduct Product
+
+//try
+//{
+
+
+//	bool isSizeDeleted = await productService.RemoveSizeFormProduct(5, 5);
+//	Console.WriteLine(isSizeDeleted);
+//}
+//catch (Exception ex)
+//{
+
+//	Console.WriteLine(ex.Message);
 //}
 
 #endregion

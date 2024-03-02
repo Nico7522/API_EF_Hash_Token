@@ -190,7 +190,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
         {
             ProductCategoryEntity? category = await _dataContext.ProductCategory.FirstOrDefaultAsync(c => c.Category == categoryToRemove);
 
-            if (category != null)
+            if (category is not null)
             {
                 product.Categories.Remove(category);
                 await _dataContext.SaveChangesAsync();
@@ -199,8 +199,27 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
             return false;
 
+        }
 
+        public async Task<bool> AddSize(ProductEntity product, SizeEntity sizeToAdd, int stock) {
 
+            product.Sizes.Add(new SizeProductEntity { Size = sizeToAdd, Stock = stock });
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveSizeFromProduct(ProductEntity product, SizeEntity sizeToRemove)
+        {
+            SizeProductEntity? size = await _dataContext.SizeProduct.FirstOrDefaultAsync(s => s.Size == sizeToRemove);
+
+            if (size is not null)
+            {
+                product.Sizes.Remove(size);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

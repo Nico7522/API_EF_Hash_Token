@@ -32,5 +32,8 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         IEnumerable<ProductModel> Filter(FilterModel filter);
 
         Task<bool> RemoveCategoryFromProduct(int productId, int categoryId);
+        Task<bool> AddSize(int productId, int sizeId, int stock);
+
+        Task<bool> RemoveSizeFormProduct(int productId, int sizeId);
     }
 }

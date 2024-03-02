@@ -21,7 +21,8 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<bool> SaveChange();
         IEnumerable<ProductEntity> Filter(FilterEntity filter);
         Task<bool> RemoveCategoryFromProduct(ProductEntity product, CategoryEntity category);
-
+        Task<bool> AddSize(ProductEntity product, SizeEntity sizeToAdd, int stock);
+        Task<bool> RemoveSizeFromProduct(ProductEntity product, SizeEntity sizeToRemove);
 
 
     }

@@ -142,5 +142,23 @@ namespace API_EF_Hash_Token.BLL.Services
             return await _productRepository.RemoveCategoryFromProduct(product, categoryToRemove);
 
         }
+
+        public async Task<bool> AddSize(int productId, int sizeId, int stock)
+        {
+            ProductEntity? product = await _productRepository.GetById(productId);
+            SizeEntity? sizeToAdd = await _sizeRepository.GetById(sizeId);
+
+           return await _productRepository.AddSize(product, sizeToAdd, stock);
+        }
+
+        public async Task<bool> RemoveSizeFormProduct(int productId, int sizeId)
+        {
+            ProductEntity? product = await _productRepository.GetById(productId);
+            if (product is null) return false;
+            SizeEntity? sizeToRemove = await _sizeRepository.GetById(sizeId);
+            if (sizeToRemove is null) return false;
+            await Console.Out.WriteLineAsync("cc");
+            return await _productRepository.RemoveSizeFromProduct(product, sizeToRemove);
+        }
     }
 }
