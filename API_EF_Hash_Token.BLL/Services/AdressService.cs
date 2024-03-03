@@ -23,17 +23,17 @@ namespace API_EF_Hash_Token.BLL.Services
             _userRepository = userRepository;
         }
 
-        public async Task<bool> AddUserAdress(AdressModel adress, int userId)
+        public async Task<AdressModel?> AddUserAdress(AdressModel adress, int userId)
         {
             UserEntity? user = await _userRepository.GetById(userId);
             if (user is null)
-                return false;
+                return null;
 
             bool isAdressExist = await _adressRepository.CheckIfExist(adress.ToAdressEntity());
-            if (isAdressExist) return false;
+            if (isAdressExist) return null;
 
-            bool isCreated = await _adressRepository.AddUserAdress(adress.ToAdressEntity(), user);
-            return isCreated;
+            AdressModel? createdAddress = await _adressRepository.AddUserAdress(adress.ToAdressEntity(), user).ContinueWith(r => r.Result?.ToAdressModel());
+            return createdAddress;
         }
 
         public async Task<AdressModel?> Delete(int id)

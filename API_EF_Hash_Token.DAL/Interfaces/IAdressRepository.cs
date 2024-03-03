@@ -11,6 +11,6 @@ namespace API_EF_Hash_Token.DAL.Interfaces
     public interface IAdressRepository : ICrudRepository<int, AdressEntity>
     {
         Task<bool> CheckIfExist(AdressEntity entityToFind);
-        Task<bool> AddUserAdress(AdressEntity adress, UserEntity user);
+        Task<AdressEntity?> AddUserAdress(AdressEntity adress, UserEntity user);
     }
 }

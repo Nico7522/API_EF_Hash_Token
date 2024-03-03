@@ -55,10 +55,10 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpPost("addadress/{userId:int}")]
-        public async Task<ActionResult<bool>> AddUserAdress(CreateAdressForm form, int userId)
+        public async Task<ActionResult<AdressDTO>> AddUserAdress(CreateAdressForm form, int userId)
         {
-           bool isCreated =  await _adressService.AddUserAdress(form.ToAdressModel(), userId);
-           return isCreated ? Ok() : BadRequest();
+           AdressDTO? createdAddress =  await _adressService.AddUserAdress(form.ToAdressModel(), userId).ContinueWith(r => r.Result?.ToAdressDTO());
+           return createdAddress is not null ? Ok(createdAddress) : BadRequest();
         }
     }
 }

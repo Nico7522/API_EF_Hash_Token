@@ -19,12 +19,12 @@ namespace API_EF_Hash_Token.DAL.Repositories
             _dataContext = dataContext;
         }
 
-        public async Task<bool> AddUserAdress(AdressEntity adress, UserEntity user)
+        public async Task<AdressEntity?> AddUserAdress(AdressEntity address, UserEntity user)
         {
-            await _dataContext.Adresses.AddAsync(adress);
-            user.Addresses.Add(new UserAdressEntity { Adress = adress });
+            await _dataContext.Adresses.AddAsync(address);
+            user.Addresses.Add(new UserAdressEntity { Adress = address });
             int row = await _dataContext.SaveChangesAsync().ContinueWith(r => r.Result);
-            return row > 0 ? true : false;
+            return row > 0 ? address : null;
 
         }
 
