@@ -895,7 +895,7 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //}
 #endregion
 
-#region Test Update Stock
+#region Test UpdateStock Product
 
 //try
 //{
@@ -1938,14 +1938,21 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 //try
 //{
-//	bool isUpdated = await productRepository.UpdateStock(5, 57, 100);
-//	if (!isUpdated) throw new Exception();
+//    ProductModel? updatedProduct = await productService.UpdateStock(5, 57, 101);
+//    if (updatedProduct is null) throw new Exception();
+
+//    foreach (var size in updatedProduct.AvailableSizes)
+//    {
+//        Console.WriteLine("Id : " + size.SizeId + " Taille : " + size.Size + " Stock : " + size.Stock);
+//    }
+
 //}
 //catch (Exception ex)
 //{
 
-//	Console.WriteLine(ex.Message);
+//    Console.WriteLine(ex);
 //}
+
 
 #endregion
 

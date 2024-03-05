@@ -24,7 +24,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<ProductModel?> Insert(ProductModel model, List<int> categoriesId, List<SizeModel> sizeStock);
         Task<ProductModel?> Update(ProductModel modifiedProduct, int id);
         Task<ProductModel?> Delete(int id);
-        //Task<bool> UpdateStock(int sizeId, int productId, int stock);
+        Task<ProductModel?> UpdateStock(int sizeId, int productId, int stock);
         Task<IEnumerable<ProductModel>> GetByTopSales();
         Task<bool> UpdatePicture(int id, string imageUrl);
         Task<bool> SaveChange();

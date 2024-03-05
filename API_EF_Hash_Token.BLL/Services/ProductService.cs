@@ -118,19 +118,19 @@ namespace API_EF_Hash_Token.BLL.Services
             return isUpdated;
         }
 
-        //public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
-        //{
-        //    // Check si le produit existe
-        //    ProductEntity? productFound = await _productRepository.GetById(productId);
-        //    if (productFound is null) return false;
+        public async Task<ProductModel?> UpdateStock(int sizeId, int productId, int stock)
+        {
+            // Check si le produit existe
+            ProductEntity? productToUpdate = await _productRepository.GetById(productId);
+            if (productToUpdate is null) return null;
 
-        //    // check si la taille existe
-        //    SizeEntity? sizeFound = await _sizeRepository.GetById(sizeId);
-        //    if (sizeFound is null) return false;
+            // check si la taille existe
+            SizeEntity? size = await _sizeRepository.GetById(sizeId);
+            if (size is null) return null;
 
-        //    bool isUpdated = await _productRepository.UpdateStock(sizeId, productId, stock);
-        //    return isUpdated;
-        //}
+            ProductModel? updatedProduct = await _productRepository.UpdateStock(size, productToUpdate, stock).ContinueWith(r => r.Result?.ToProductModel());
+            return updatedProduct;
+        }
 
 
 
