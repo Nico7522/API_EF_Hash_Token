@@ -13,7 +13,7 @@ namespace API_EF_Hash_Token.DAL.Entities
         public string CityName { get; set; }
         public string Street { get; set; }
         public string Country { get; set; }
-        public List<UserEntity> UsersList { get; set; }
+        public List<UserEntity> UsersList { get; set; } = new List<UserEntity>();
         public List<UserAdressEntity> Users { get; set; }
 
     }

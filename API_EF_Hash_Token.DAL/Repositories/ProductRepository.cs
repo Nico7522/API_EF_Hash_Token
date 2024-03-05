@@ -124,20 +124,30 @@ namespace API_EF_Hash_Token.DAL.Repositories
             oldEntity.Brand = modifiedEntity.Brand;
             oldEntity.Description = modifiedEntity.Description;
             oldEntity.Price = modifiedEntity.Price;
+            oldEntity.Sexe = modifiedEntity.Sexe;
             oldEntity.Discount = modifiedEntity.Discount;
             await _dataContext.SaveChangesAsync();
             return oldEntity;
         }
 
-        public async Task<bool> UpdateCategory(ProductEntity product, int[] categoriesId)
+        public async Task<ProductEntity?> AddCategoryToProduct(ProductEntity product, List<CategoryEntity> categories)
         {
-            foreach (var categoryId in categoriesId)
+            // Try Catch pour ne pas planter le programme en cas d'insertion d'une catégorie déjà liée.
+            try
             {
-                product.Categories.Add(new ProductCategoryEntity { CategoryId = categoryId });
-            }
-            await _dataContext.SaveChangesAsync();
+                foreach (var category in categories)
+                {
+                    product.Categories.Add(new ProductCategoryEntity { Category = category });
+                }
+                await _dataContext.SaveChangesAsync();
 
-            return true;
+                return product;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task<bool> UpdatePicture(ProductEntity product, string imageUrl)

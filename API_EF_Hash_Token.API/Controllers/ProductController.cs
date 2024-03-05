@@ -139,6 +139,13 @@ namespace API_EF_Hash_Token.API.Controllers
             }
         }
 
+        [HttpPost("/product/{productId:int}/category")]
+        public async Task<ActionResult<ApiResponse<ProductDTO>>> AddCategoryToProduct(int productId, AddCategoryToProductForm form )
+        {
+            ProductDTO? updatedProduct = await _productService.AddCategoryToProduct(productId, form.CategoryId).ContinueWith(r => r.Result?.ToProductDTO());
+            return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
+        }
+
         [HttpDelete("product/{productId:int}/category/{categoryId:int}")]
         public async Task<ActionResult<bool>> RemoveCategoryFromProduct(int productId, int categoryId)
         {

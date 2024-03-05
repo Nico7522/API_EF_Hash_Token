@@ -30,8 +30,8 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Image = model.Image,
                 Price = model.Price,
                 Discount = model.Discount,
-                CategoriesId = categoriesId.ToList(),
-                SizeStock = sizeStock.Select(st => st.ToSizeStock()).ToList() ?? new List<SizeStock>()
+                CategoriesId = categoriesId?.ToList() ?? new List<int>(),
+                SizeStock = sizeStock?.Select(st => st.ToSizeStock()).ToList() ?? new List<SizeStock>()
             };
         }
     }

@@ -17,11 +17,11 @@ namespace API_EF_Hash_Token.DAL.Entities
         public string Image { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
-        public List<ProductOrderEntity> Orders { get; set; }
-        public List<ProductCategoryEntity> Categories { get; set; }
-        public List<CategoryEntity> CategoriesEntity { get; set; }
-        public List<SizeProductEntity> Sizes { get; set; }
-        public List<int> CategoriesId { get; set; }
-        public List<SizeStock> SizeStock { get; set; }
+        public List<ProductOrderEntity> Orders { get; set; } = new List<ProductOrderEntity>();
+        public List<ProductCategoryEntity> Categories { get; set; }  = new List<ProductCategoryEntity>();
+        public List<CategoryEntity> CategoriesEntity { get; set; } = new List<CategoryEntity>();
+        public List<SizeProductEntity> Sizes { get; set; } = new List<SizeProductEntity>();
+        public List<int> CategoriesId { get; set; } = new List<int>();
+        public List<SizeStock> SizeStock { get; set; } = new List<SizeStock>();
     }
 }

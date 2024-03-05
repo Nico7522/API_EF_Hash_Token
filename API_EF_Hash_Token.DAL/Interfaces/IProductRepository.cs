@@ -15,7 +15,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<IEnumerable<ProductEntity>> GetByBrand(string brands);
         Task<IEnumerable<ProductEntity>> GetByPrice(decimal minPrice, decimal maxPrice);
         Task<IEnumerable<ProductEntity>> GetByTopSales();
-        Task<bool> UpdateCategory(ProductEntity product, int[]categoriesId);
+        Task<ProductEntity?> AddCategoryToProduct(ProductEntity product, List<CategoryEntity> categories);
         Task<bool> UpdateStock(int sizeId, int productId, int stock);
         Task<bool> UpdatePicture(ProductEntity product, string imgUrl);
         Task<bool> SaveChange();

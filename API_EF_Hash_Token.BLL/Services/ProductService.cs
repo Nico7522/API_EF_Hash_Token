@@ -132,6 +132,8 @@ namespace API_EF_Hash_Token.BLL.Services
             return isUpdated;
         }
 
+
+
         public async Task<bool> RemoveCategoryFromProduct(int productId, int CategoryId)
         {
             ProductEntity? product = await _productRepository.GetById(productId);
@@ -159,6 +161,25 @@ namespace API_EF_Hash_Token.BLL.Services
             if (sizeToRemove is null) return false;
             await Console.Out.WriteLineAsync("cc");
             return await _productRepository.RemoveSizeFromProduct(product, sizeToRemove);
+        }
+
+        public async Task<ProductModel?> AddCategoryToProduct(int productId, List<int> categoryId)
+        {
+          ProductEntity? product = await _productRepository.GetById(productId);
+            if (product is null) return null;
+
+            List<CategoryEntity> categoriesToAdd = new List<CategoryEntity>();
+            foreach (var id in categoryId)
+            {
+                CategoryEntity? category = await _categoryRepository.GetById(id);
+                if (category is null) return null;
+
+                categoriesToAdd.Add(category);
+            }
+
+            ProductModel? updatedProduct = await _productRepository.AddCategoryToProduct(product, categoriesToAdd).ContinueWith(r => r.Result?.ToProductModel());
+
+            return updatedProduct;
         }
     }
 }

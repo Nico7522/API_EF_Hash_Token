@@ -425,6 +425,8 @@ string password = "@Test1234=";
 #endregion
 
 
+
+
 // Pour utiliser appsetting.json
 IConfiguration configuration = new ConfigurationBuilder()
  .SetBasePath(Directory.GetCurrentDirectory())
@@ -1033,22 +1035,36 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
-#region Test UpdateCategory Products 
+#region Test AddCategoryToProduct Products 
 
 //try
 //{
-//	int[] categoriesId = { 11, 7 };
-//	ProductEntity? product = await productRepository.GetById(93);
-//	if (product is null) throw new Exception();
 
-//	bool isUpdated = await productRepository.UpdateCategory(product, categoriesId);
-//    Console.WriteLine("OK");
+//	ProductEntity? product = await productRepository.GetById(6);
+//    CategoryEntity? cate1 = await categoryRepository.GetById(8);
+//    CategoryEntity? cate2 = await categoryRepository.GetById(5);
+//    CategoryEntity? cate3 = await categoryRepository.GetById(6);
+//    List<CategoryEntity> categoryList = new List<CategoryEntity>() { cate1 };
+
+//    if (product is null) throw new Exception();
+
+//	ProductEntity? updatedProduct = await productRepository.AddCategoryToProduct(product, categoryList);
+//    if (updatedProduct is not null)
+//    {
+//        Console.WriteLine("ok");
+//        foreach (var category in updatedProduct.Categories)
+//        {
+//            Console.WriteLine(category.Category.CategoryName);
+
+//        }
+//    }
+
 
 //}
 //catch (Exception ex)
 //{
 
-//    Console.WriteLine(ex.Message);
+//	Console.WriteLine(ex.Message);
 //}
 
 #endregion
@@ -2050,6 +2066,29 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+#region Test AddCategoryToProduct Product
+
+//try
+//{
+//    List<int> categoryId = new List<int>() { 4 };
+//    ProductModel? updatedProduct = await productService.AddCategoryToProduct(20, categoryId);
+//    if (updatedProduct is null) throw new Exception();
+
+//    foreach (var category in updatedProduct.Categories)
+//    {
+//        Console.WriteLine(category.CategoryName);
+//    }
+
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
 #endregion
 
 #region Test RemoveCategoryFromProduct Product
