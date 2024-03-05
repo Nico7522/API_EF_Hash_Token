@@ -24,7 +24,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<ProductModel?> Insert(ProductModel model, List<int> categoriesId, List<SizeModel> sizeStock);
         Task<ProductModel?> Update(ProductModel modifiedProduct, int id);
         Task<ProductModel?> Delete(int id);
-        Task<bool> UpdateStock(int sizeId, int productId, int stock);
+        //Task<bool> UpdateStock(int sizeId, int productId, int stock);
         Task<IEnumerable<ProductModel>> GetByTopSales();
         Task<bool> UpdatePicture(int id, string imageUrl);
         Task<bool> SaveChange();
@@ -33,7 +33,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
 
         Task<ProductModel?> AddCategoryToProduct(int productId, List<int> categoryId);
         Task<bool> RemoveCategoryFromProduct(int productId, int categoryId);
-        Task<ProductModel?> AddSize(int productId, int sizeId, int stock);
+        Task<ProductModel?> AddSizeToProduct(int productId, int sizeId, int stock);
 
         Task<bool> RemoveSizeFormProduct(int productId, int sizeId);
     }

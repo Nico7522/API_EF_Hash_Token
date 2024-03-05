@@ -899,7 +899,19 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//	bool isUpdated = await productRepository.UpdateStock(5, 44, 40);
+//    ProductEntity? product = await productRepository.GetById(50);
+//    if (product is null) throw new Exception("Produit non trouvé");
+//    SizeEntity? size = await sizeRepository.GetById(5);
+//    if (size is null) throw new Exception("taille non trouvée");
+
+//    ProductEntity? updatedProduct = await productRepository.UpdateStock(size, product, 777);
+//    if (updatedProduct is null) throw new Exception("La modification a échouée");
+
+//    foreach (var s in updatedProduct.Sizes)
+//    {
+//        Console.WriteLine("Id : " + s.Size.SizeId + " Taille : " + s.Size.Size + " Stock : " + s.Stock );
+
+//    }
 
 //}
 //catch (Exception ex)
@@ -1129,7 +1141,7 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //	SizeEntity? size = await sizeRepository.GetById(5);
 //    if (size is null) throw new Exception();
 
-//	ProductEntity? updatedProduct = await productRepository.AddSize(product, size, 20);
+//	ProductEntity? updatedProduct = await productRepository.AddSizeToProduct(product, size, 20);
 
 //	if(updatedProduct is null) throw new Exception();
 
@@ -2131,12 +2143,17 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 #endregion p
 
-#region Test AddSize Product
+#region Test AddSizeToProduct Product
 
 //try
 //{
-//	bool isSizeAdded = await productService.AddSize(66, 9, 77);
-//    Console.WriteLine("ok");
+//    ProductModel? product = await productService.AddSizeToProduct(5, 7, 77);
+//    if (product is null) throw new Exception();
+
+//    foreach (var size in product.AvailableSizes)
+//    {
+//        Console.WriteLine(size.Size);
+//    }
 //}
 //catch (Exception ex)
 //{

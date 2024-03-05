@@ -118,19 +118,19 @@ namespace API_EF_Hash_Token.BLL.Services
             return isUpdated;
         }
 
-        public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
-        {
-            // Check si le produit existe
-            ProductEntity? productFound = await _productRepository.GetById(productId);
-            if (productFound is null) return false;
+        //public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
+        //{
+        //    // Check si le produit existe
+        //    ProductEntity? productFound = await _productRepository.GetById(productId);
+        //    if (productFound is null) return false;
 
-            // check si la taille existe
-            SizeEntity? sizeFound = await _sizeRepository.GetById(sizeId);
-            if (sizeFound is null) return false;
+        //    // check si la taille existe
+        //    SizeEntity? sizeFound = await _sizeRepository.GetById(sizeId);
+        //    if (sizeFound is null) return false;
 
-            bool isUpdated = await _productRepository.UpdateStock(sizeId, productId, stock);
-            return isUpdated;
-        }
+        //    bool isUpdated = await _productRepository.UpdateStock(sizeId, productId, stock);
+        //    return isUpdated;
+        //}
 
 
 
@@ -145,12 +145,13 @@ namespace API_EF_Hash_Token.BLL.Services
 
         }
 
-        public async Task<ProductModel?> AddSize(int productId, int sizeId, int stock)
+        public async Task<ProductModel?> AddSizeToProduct(int productId, int sizeId, int stock)
         {
+
             ProductEntity? product = await _productRepository.GetById(productId);
             SizeEntity? sizeToAdd = await _sizeRepository.GetById(sizeId);
             // TODO : tester cette méthode. 
-            return await _productRepository.AddSize(product, sizeToAdd, stock).ContinueWith(r => r.Result?.ToProductModel());
+            return await _productRepository.AddSizeToProduct(product, sizeToAdd, stock).ContinueWith(r => r.Result?.ToProductModel());
         }
 
         public async Task<bool> RemoveSizeFormProduct(int productId, int sizeId)

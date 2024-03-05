@@ -95,12 +95,12 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpPatch(("stock/{sizeId}/{productId}"))]
-        public async Task<ActionResult<ApiResponse<ProductDTO>>> UpdateStock(UpdateStockForm form,int sizeId, int productId)
-        {
-            bool isUpdated = await _productService.UpdateStock(sizeId, productId, form.Stock);
+        //public async Task<ActionResult<ApiResponse<ProductDTO>>> UpdateStock(UpdateStockForm form,int sizeId, int productId)
+        //{
+        //    bool isUpdated = await _productService.UpdateStock(sizeId, productId, form.Stock);
 
-            return isUpdated ? Ok(ApiResponse<ProductDTO>.Success(message: "updated")) : BadRequest(ApiResponse<ProductDTO>.Failed(message: "Product not deleted", status: 404));
-        }
+        //    return isUpdated ? Ok(ApiResponse<ProductDTO>.Success(message: "updated")) : BadRequest(ApiResponse<ProductDTO>.Failed(message: "Product not deleted", status: 404));
+        //}
 
         [HttpGet("top")]
         public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>>> GetByTopSales()
@@ -154,10 +154,10 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpPost("{productId:int}/size/{sizeId:int}")]
-        public async Task<ActionResult<bool>> AddSize(int productId, int sizeId, AddSizeForm form)
+        public async Task<ActionResult<ApiResponse<ProductDTO>>> AddSizeToProduct(int productId, int sizeId, AddSizeForm form)
         {
-            bool isSizeAdded = await _productService.AddSize(productId, sizeId, form.Stock);
-            return isSizeAdded ? Ok() : BadRequest();
+            ProductDTO? updatedProduct = await _productService.AddSizeToProduct(productId, sizeId, form.Stock).ContinueWith(r => r.Result?.ToProductDTO());
+            return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
         }
 
         [HttpDelete("{productId:int}/size/{sizeId:int}")]

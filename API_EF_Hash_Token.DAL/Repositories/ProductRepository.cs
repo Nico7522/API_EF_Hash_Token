@@ -156,14 +156,15 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return true;
         }
 
-        public async Task<bool> UpdateStock(int sizeId, int productId, int stock)
+        public async Task<ProductEntity?> UpdateStock(SizeEntity size, ProductEntity productToUpdate, int stock)
         {
-            SizeProductEntity? sizeProduct = await _dataContext.SizeProduct.Where(sp => sp.ProductId == productId && sp.SizeId == sizeId).FirstOrDefaultAsync();
-            if (sizeProduct is null) return false;
+            SizeProductEntity? sizeProduct = await _dataContext.SizeProduct.Where(sp => sp.Product == productToUpdate && sp.Size == size).FirstOrDefaultAsync();
+            if (sizeProduct is null) return null;
+            ProductEntity? product = sizeProduct.Product;
 
             sizeProduct.Stock = stock;
             await _dataContext.SaveChangesAsync();
-            return true;
+            return product;
         }
 
         public IEnumerable<ProductEntity> Filter(FilterEntity filter)
@@ -211,11 +212,20 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         }
 
-        public async Task<ProductEntity?> AddSize(ProductEntity product, SizeEntity sizeToAdd, int stock) {
+        public async Task<ProductEntity?> AddSizeToProduct(ProductEntity product, SizeEntity sizeToAdd, int stock) {
 
+            try
+            {
             product.Sizes.Add(new SizeProductEntity { Size = sizeToAdd, Stock = stock });
             await _dataContext.SaveChangesAsync();
             return product;
+
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public async Task<bool> RemoveSizeFromProduct(ProductEntity product, SizeEntity sizeToRemove)

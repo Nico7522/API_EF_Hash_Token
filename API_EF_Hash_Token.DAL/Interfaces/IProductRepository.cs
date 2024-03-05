@@ -16,12 +16,12 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<IEnumerable<ProductEntity>> GetByPrice(decimal minPrice, decimal maxPrice);
         Task<IEnumerable<ProductEntity>> GetByTopSales();
         Task<ProductEntity?> AddCategoryToProduct(ProductEntity product, List<CategoryEntity> categories);
-        Task<bool> UpdateStock(int sizeId, int productId, int stock);
+        Task<ProductEntity?> UpdateStock(SizeEntity sizeId, ProductEntity product, int stock);
         Task<bool> UpdatePicture(ProductEntity product, string imgUrl);
         Task<bool> SaveChange();
         IEnumerable<ProductEntity> Filter(FilterEntity filter);
         Task<bool> RemoveCategoryFromProduct(ProductEntity product, CategoryEntity category);
-        Task<ProductEntity?> AddSize(ProductEntity product, SizeEntity sizeToAdd, int stock);
+        Task<ProductEntity?> AddSizeToProduct(ProductEntity product, SizeEntity sizeToAdd, int stock);
         Task<bool> RemoveSizeFromProduct(ProductEntity product, SizeEntity sizeToRemove);
 
 
