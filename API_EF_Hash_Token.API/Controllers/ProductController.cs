@@ -139,28 +139,28 @@ namespace API_EF_Hash_Token.API.Controllers
             }
         }
 
-        [HttpPost("/product/{productId:int}/category")]
+        [HttpPost("{productId:int}/category")]
         public async Task<ActionResult<ApiResponse<ProductDTO>>> AddCategoryToProduct(int productId, AddCategoryToProductForm form )
         {
             ProductDTO? updatedProduct = await _productService.AddCategoryToProduct(productId, form.CategoryId).ContinueWith(r => r.Result?.ToProductDTO());
             return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
         }
 
-        [HttpDelete("product/{productId:int}/category/{categoryId:int}")]
+        [HttpDelete("{productId:int}/category/{categoryId:int}")]
         public async Task<ActionResult<bool>> RemoveCategoryFromProduct(int productId, int categoryId)
         {
             bool isCategoryRemoved = await _productService.RemoveCategoryFromProduct(productId, categoryId);
             return isCategoryRemoved ? Ok() : BadRequest();
         }
 
-        [HttpPost("/product/{productId:int}/size/{sizeId:int}")]
+        [HttpPost("{productId:int}/size/{sizeId:int}")]
         public async Task<ActionResult<bool>> AddSize(int productId, int sizeId, AddSizeForm form)
         {
             bool isSizeAdded = await _productService.AddSize(productId, sizeId, form.Stock);
             return isSizeAdded ? Ok() : BadRequest();
         }
 
-        [HttpDelete("product/{productId:int}/size/{sizeId:int}")]
+        [HttpDelete("{productId:int}/size/{sizeId:int}")]
         public async Task<ActionResult<bool>> RemoveSizeFromProduct(int productId, int sizeId)
         {
             bool isCategoryRemoved = await _productService.RemoveSizeFormProduct(productId, sizeId);

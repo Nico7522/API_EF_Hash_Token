@@ -33,7 +33,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
 
         Task<ProductModel?> AddCategoryToProduct(int productId, List<int> categoryId);
         Task<bool> RemoveCategoryFromProduct(int productId, int categoryId);
-        Task<bool> AddSize(int productId, int sizeId, int stock);
+        Task<ProductModel?> AddSize(int productId, int sizeId, int stock);
 
         Task<bool> RemoveSizeFormProduct(int productId, int sizeId);
     }

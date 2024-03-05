@@ -211,11 +211,11 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         }
 
-        public async Task<bool> AddSize(ProductEntity product, SizeEntity sizeToAdd, int stock) {
+        public async Task<ProductEntity?> AddSize(ProductEntity product, SizeEntity sizeToAdd, int stock) {
 
             product.Sizes.Add(new SizeProductEntity { Size = sizeToAdd, Stock = stock });
             await _dataContext.SaveChangesAsync();
-            return true;
+            return product;
         }
 
         public async Task<bool> RemoveSizeFromProduct(ProductEntity product, SizeEntity sizeToRemove)

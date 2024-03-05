@@ -145,12 +145,12 @@ namespace API_EF_Hash_Token.BLL.Services
 
         }
 
-        public async Task<bool> AddSize(int productId, int sizeId, int stock)
+        public async Task<ProductModel?> AddSize(int productId, int sizeId, int stock)
         {
             ProductEntity? product = await _productRepository.GetById(productId);
             SizeEntity? sizeToAdd = await _sizeRepository.GetById(sizeId);
-
-           return await _productRepository.AddSize(product, sizeToAdd, stock);
+            // TODO : tester cette méthode. 
+            return await _productRepository.AddSize(product, sizeToAdd, stock).ContinueWith(r => r.Result?.ToProductModel());
         }
 
         public async Task<bool> RemoveSizeFormProduct(int productId, int sizeId)

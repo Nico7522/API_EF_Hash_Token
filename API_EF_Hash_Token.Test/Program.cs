@@ -1120,6 +1120,32 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #endregion
 
+#region Test AddSizeToProduct Product
+
+//try
+//{
+//	ProductEntity? product = await productRepository.GetById(50);
+//	if (product is null) throw new Exception();
+//	SizeEntity? size = await sizeRepository.GetById(5);
+//    if (size is null) throw new Exception();
+
+//	ProductEntity? updatedProduct = await productRepository.AddSize(product, size, 20);
+
+//	if(updatedProduct is null) throw new Exception();
+
+//    foreach (var s in updatedProduct.Sizes)
+//    {
+//        Console.WriteLine(s.Size.Size);
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 #region Test RemoveSizeFromProduct Product
 
 //try
