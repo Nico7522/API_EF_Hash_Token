@@ -150,10 +150,10 @@ namespace API_EF_Hash_Token.DAL.Repositories
             }
         }
 
-        public async Task<bool> UpdatePicture(ProductEntity product, string imageUrl)
+        public string? UpdatePicture(ProductEntity product, string imageUrl)
         {
             product.Image = imageUrl;
-            return true;
+            return product.Image;
         }
 
         public async Task<ProductEntity?> UpdateStock(SizeEntity size, ProductEntity productToUpdate, int stock)
@@ -199,7 +199,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<bool> RemoveCategoryFromProduct(ProductEntity product, CategoryEntity categoryToRemove)
         {
-            ProductCategoryEntity? category = await _dataContext.ProductCategory.FirstOrDefaultAsync(c => c.Category == categoryToRemove);
+            ProductCategoryEntity? category = await _dataContext.ProductCategory.FirstOrDefaultAsync(c => c.Product == product && c.Category == categoryToRemove);
 
             if (category is not null)
             {
@@ -230,8 +230,8 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
         public async Task<bool> RemoveSizeFromProduct(ProductEntity product, SizeEntity sizeToRemove)
         {
-            SizeProductEntity? size = await _dataContext.SizeProduct.FirstOrDefaultAsync(s => s.Size == sizeToRemove);
-
+            SizeProductEntity? size = await _dataContext.SizeProduct.FirstOrDefaultAsync(s => s.Product == product && s.Size == sizeToRemove);
+            
             if (size is not null)
             {
                 product.Sizes.Remove(size);

@@ -1160,21 +1160,21 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #region Test RemoveSizeFromProduct Product
 
-//try
-//{
-//	ProductEntity? product = await productRepository.GetById(66);
-//	if (product is null) throw new Exception();
-//	SizeEntity? sizeToRemove = await sizeRepository.GetById(9);
-//	if (sizeToRemove is null) throw new Exception();
+try
+{
+	ProductEntity? product = await productRepository.GetById(8);
+	if (product is null) throw new Exception();
+	SizeEntity? sizeToRemove = await sizeRepository.GetById(9);
+	if (sizeToRemove is null) throw new Exception();
 
-//	bool isSizeDeleted = await productRepository.RemoveSizeFromProduct(product, sizeToRemove);
-//	Console.WriteLine("ok");
-//}
-//catch (Exception ex)
-//{
+	bool isSizeDeleted = await productRepository.RemoveSizeFromProduct(product, sizeToRemove);
+	Console.WriteLine("ok");
+}
+catch (Exception ex)
+{
 
-//	Console.WriteLine(ex.Message);
-//}
+	Console.WriteLine(ex.Message);
+}
 #endregion
 
 
@@ -2176,7 +2176,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //{
 
 
-//	bool isSizeDeleted = await productService.RemoveSizeFormProduct(5, 5);
+//	bool isSizeDeleted = await productService.RemoveSizeFromProduct(8, 9);
 //	Console.WriteLine(isSizeDeleted);
 //}
 //catch (Exception ex)

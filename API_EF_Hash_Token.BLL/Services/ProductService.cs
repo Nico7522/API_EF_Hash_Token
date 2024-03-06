@@ -107,15 +107,15 @@ namespace API_EF_Hash_Token.BLL.Services
             return updatedProduct;
         }
 
-        public async Task<bool> UpdatePicture(int productId, string imageUrl)
+        public async Task<string?> UpdatePicture(int productId, string imageUrl)
         {
-            if (!Method.VerifyExtension(imageUrl)) return false;
+            if (!Method.VerifyExtension(imageUrl)) return null;
 
             ProductEntity? productFound = await _productRepository.GetById(productId);
-            if(productFound is null) return false;
+            if(productFound is null) return null;
 
-            bool isUpdated = await _productRepository.UpdatePicture(productFound, imageUrl);
-            return isUpdated;
+            string? newImage = _productRepository.UpdatePicture(productFound, imageUrl);
+            return newImage;
         }
 
         public async Task<ProductModel?> UpdateStock(int sizeId, int productId, int stock)
@@ -149,18 +149,21 @@ namespace API_EF_Hash_Token.BLL.Services
         {
 
             ProductEntity? product = await _productRepository.GetById(productId);
+            if(product is null) return null;
+
+            
             SizeEntity? sizeToAdd = await _sizeRepository.GetById(sizeId);
-            // TODO : tester cette méthode. 
+            if(sizeToAdd is null) return null;
+
             return await _productRepository.AddSizeToProduct(product, sizeToAdd, stock).ContinueWith(r => r.Result?.ToProductModel());
         }
 
-        public async Task<bool> RemoveSizeFormProduct(int productId, int sizeId)
+        public async Task<bool> RemoveSizeFromProduct(int productId, int sizeId)
         {
             ProductEntity? product = await _productRepository.GetById(productId);
             if (product is null) return false;
             SizeEntity? sizeToRemove = await _sizeRepository.GetById(sizeId);
             if (sizeToRemove is null) return false;
-            await Console.Out.WriteLineAsync("cc");
             return await _productRepository.RemoveSizeFromProduct(product, sizeToRemove);
         }
 

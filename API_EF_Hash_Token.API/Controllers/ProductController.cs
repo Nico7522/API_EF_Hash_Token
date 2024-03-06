@@ -110,7 +110,7 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpPut("{id}/image")]
-        public async Task<ActionResult<ApiResponse<ProductDTO>>> UpdatePicture(int id, [FromForm] FileForm image)
+        public async Task<ActionResult<ApiResponse<string>>> UpdatePicture(int id, [FromForm] FileForm image)
         {
             if (image is null) return BadRequest(ApiResponse<ProductDTO>.Failed());
             string now = DateTime.UtcNow.ToString("yyyyMMdd");
@@ -120,18 +120,18 @@ namespace API_EF_Hash_Token.API.Controllers
 
             try
             {
-                bool isUpdated = await _productService.UpdatePicture(id, filename);
+                string? newImage = await _productService.UpdatePicture(id, filename);
                 string path = Path.Combine(image.Directory, filename);
                 using (Stream stream = new FileStream(path, FileMode.CreateNew))
                 {
                     image.File.CopyTo(stream);
                 }
 
-                if (!isUpdated) return BadRequest(ApiResponse<ProductDTO>.Failed());
+                if (newImage is null) return BadRequest(ApiResponse<ProductDTO>.Failed());
 
                 bool isSaved = await _productService.SaveChange();
 
-                return (isUpdated && isSaved) ? NoContent() : throw new Exception();
+                return (newImage is not null && isSaved) ? Ok(ApiResponse<string>.Success(data: newImage, message: "updated")) : throw new Exception();
             }
             catch (Exception)
             {
@@ -143,28 +143,28 @@ namespace API_EF_Hash_Token.API.Controllers
         public async Task<ActionResult<ApiResponse<ProductDTO>>> AddCategoryToProduct(int productId, AddCategoryToProductForm form )
         {
             ProductDTO? updatedProduct = await _productService.AddCategoryToProduct(productId, form.CategoryId).ContinueWith(r => r.Result?.ToProductDTO());
-            return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
+            return updatedProduct is not null ? Ok(ApiResponse<ProductDTO>.Success(data: updatedProduct, message: "updated")) : BadRequest();
         }
 
         [HttpDelete("{productId:int}/category/{categoryId:int}")]
         public async Task<ActionResult<bool>> RemoveCategoryFromProduct(int productId, int categoryId)
         {
             bool isCategoryRemoved = await _productService.RemoveCategoryFromProduct(productId, categoryId);
-            return isCategoryRemoved ? Ok() : BadRequest();
+            return isCategoryRemoved ? Ok(isCategoryRemoved) : BadRequest();
         }
 
         [HttpPost("{productId:int}/size/{sizeId:int}")]
         public async Task<ActionResult<ApiResponse<ProductDTO>>> AddSizeToProduct(int productId, int sizeId, AddSizeForm form)
         {
             ProductDTO? updatedProduct = await _productService.AddSizeToProduct(productId, sizeId, form.Stock).ContinueWith(r => r.Result?.ToProductDTO());
-            return updatedProduct is not null ? Ok(updatedProduct) : BadRequest();
+            return updatedProduct is not null ? Ok(ApiResponse<ProductDTO>.Success(data: updatedProduct, message: "updated")) : BadRequest();
         }
 
         [HttpDelete("{productId:int}/size/{sizeId:int}")]
         public async Task<ActionResult<bool>> RemoveSizeFromProduct(int productId, int sizeId)
         {
-            bool isCategoryRemoved = await _productService.RemoveSizeFormProduct(productId, sizeId);
-            return isCategoryRemoved ? Ok() : BadRequest();
+            bool isSizeRemoved = await _productService.RemoveSizeFromProduct(productId, sizeId);
+            return isSizeRemoved ? Ok(isSizeRemoved) : BadRequest();
         }
 
     }
