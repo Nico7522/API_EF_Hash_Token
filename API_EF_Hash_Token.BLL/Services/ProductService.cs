@@ -67,10 +67,10 @@ namespace API_EF_Hash_Token.BLL.Services
             return product;
         }
 
-        public async Task<IEnumerable<ProductModel>?> GetByPrice(decimal minPrice, decimal maxPrice)
+        public async Task<IEnumerable<ProductModel>?> GetByPrice(decimal? minPrice, decimal? maxPrice)
         {
-            if ((minPrice < 0 || maxPrice < 0 ) || (maxPrice < minPrice)) return null;
-            return await _productRepository.GetByPrice(minPrice, maxPrice).ContinueWith(r => r.Result.Select(p => p.ToProductModel()));
+            if ((minPrice <= 0 && maxPrice <= 0 ) || (maxPrice < minPrice)) return null;
+            return await _productRepository.GetByPrice(minPrice, maxPrice).ContinueWith(r => r.Result?.Select(p => p.ToProductModel()));
         }
 
         public async Task<IEnumerable<ProductModel>> GetByStep(int offset)

@@ -13,7 +13,7 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<IEnumerable<ProductEntity>> GetByStep(int offset);
         Task<IEnumerable<ProductEntity>> GetByCategory(string categories);
         Task<IEnumerable<ProductEntity>> GetByBrand(string brands);
-        Task<IEnumerable<ProductEntity>> GetByPrice(decimal minPrice, decimal maxPrice);
+        Task<IEnumerable<ProductEntity>?> GetByPrice(decimal? minPrice, decimal? maxPrice);
         Task<IEnumerable<ProductEntity>> GetByTopSales();
         Task<ProductEntity?> AddCategoryToProduct(ProductEntity product, List<CategoryEntity> categories);
         Task<ProductEntity?> UpdateStock(SizeEntity sizeId, ProductEntity product, int stock);

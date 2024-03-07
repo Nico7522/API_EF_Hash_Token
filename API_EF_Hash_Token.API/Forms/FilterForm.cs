@@ -6,5 +6,7 @@
         public string? Category { get; set; }
         public string? Brand { get; set; }
         public string? Sexe { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
     }
 }

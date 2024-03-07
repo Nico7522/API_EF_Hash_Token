@@ -54,10 +54,26 @@ namespace API_EF_Hash_Token.DAL.Repositories
                                                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<ProductEntity>> GetByPrice(decimal minPrice, decimal maxPrice)
+        public async Task<IEnumerable<ProductEntity>?> GetByPrice(decimal? minPrice, decimal? maxPrice)
         {
+            if(minPrice is not null && maxPrice is not null )
+            {
             return await _dataContext.Products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
                                               .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+            }
+
+            if(minPrice is not null)
+            {
+                return await _dataContext.Products.Where(p => p.Price >= minPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                  .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+            }
+            if (maxPrice is not null)
+            {
+                return await _dataContext.Products.Where(p => p.Price <= maxPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                  .Include(p => p.Sizes).ThenInclude(p => p.Size).ToListAsync();
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<ProductEntity>> GetByStep(int offset = 0)
@@ -190,7 +206,25 @@ namespace API_EF_Hash_Token.DAL.Repositories
 
             if (!string.IsNullOrEmpty(filter.Category))
             {
-                products =  products.Where(p => p.Categories.Any(c => filter.Category.Contains(c.Category.CategoryName)));
+                products = products.Where(p => p.Categories.Any(c => filter.Category.Contains(c.Category.CategoryName)));
+            }
+
+
+            if (filter.MinPrice is not null && filter.MaxPrice is not null)
+            {
+                return products.Where(p => p.Price >= filter.MinPrice && p.Price <= filter.MaxPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                              .Include(p => p.Sizes).ThenInclude(p => p.Size).ToList();
+            }
+
+            if (filter.MinPrice is not null)
+            {
+                return products.Where(p => p.Price >= filter.MinPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
+                              .Include(p => p.Sizes).ThenInclude(p => p.Size).ToList();
+            }
+            if (filter.MaxPrice is not null)
+            {
+                return products.Where(p => p.Price <= filter.MaxPrice).Include(p => p.Categories).ThenInclude(p => p.Category)
+                                  .Include(p => p.Sizes).ThenInclude(p => p.Size).ToList();
             }
 
             return products;

@@ -18,6 +18,8 @@ namespace API_EF_Hash_Token.BLL.Mappers
                 Category = filterModel.Category ?? null,
                 Sexe = filterModel.Sexe ?? null,
                 Brand = filterModel.Brand ?? null,
+                MinPrice = filterModel.MinPrice ?? null,
+                MaxPrice = filterModel.MaxPrice ?? null,
             };
         }
     }

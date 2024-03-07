@@ -1024,19 +1024,14 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//  IEnumerable<ProductEntity> products = await productRepository.GetByPrice(299.99M, 399.89M);
+//    IEnumerable<ProductEntity>? products = await productRepository.GetByPrice(51, 707.99M);
+//    if (products is null) throw new Exception();
+
 //    foreach (var product in products)
 //    {
 //        Console.WriteLine(product.ModelName);
 //        Console.WriteLine(product.Brand);
-//        foreach (var category in product.Categories)
-//        {
-//            Console.WriteLine(category.Category.CategoryName);
-//        }
-//        foreach (var size in product.Sizes)
-//        {
-//            Console.WriteLine(size.Size.Size);
-//        }
+//        Console.WriteLine(product.Price);
 //    }
 //}
 //catch (Exception ex)
@@ -1085,21 +1080,15 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //try
 //{
-//    FilterEntity filter = new FilterEntity() { Brand = "puma", Category = "après-ski" };
+//    FilterEntity filter = new FilterEntity() { Brand = "NIKE", Category = "Test BLL", MaxPrice = 51};
 //    IEnumerable<ProductEntity> products = productRepository.Filter(filter);
 
 //    foreach (var product in products)
 //    {
 //        Console.WriteLine(product.ModelName);
 //        Console.WriteLine(product.Brand);
-//        foreach (var category in product.Categories)
-//        {
-//            Console.WriteLine(category.Category.CategoryName);
-//        }
-//        foreach (var size in product.Sizes)
-//        {
-//            Console.WriteLine(size.Size.Size);
-//        }
+//        Console.WriteLine(product.Price);
+
 //    }
 //}
 //catch (Exception ex)
@@ -1160,21 +1149,21 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 #region Test RemoveSizeFromProduct Product
 
-try
-{
-	ProductEntity? product = await productRepository.GetById(8);
-	if (product is null) throw new Exception();
-	SizeEntity? sizeToRemove = await sizeRepository.GetById(9);
-	if (sizeToRemove is null) throw new Exception();
+//try
+//{
+//	ProductEntity? product = await productRepository.GetById(8);
+//	if (product is null) throw new Exception();
+//	SizeEntity? sizeToRemove = await sizeRepository.GetById(9);
+//	if (sizeToRemove is null) throw new Exception();
 
-	bool isSizeDeleted = await productRepository.RemoveSizeFromProduct(product, sizeToRemove);
-	Console.WriteLine("ok");
-}
-catch (Exception ex)
-{
+//	bool isSizeDeleted = await productRepository.RemoveSizeFromProduct(product, sizeToRemove);
+//	Console.WriteLine("ok");
+//}
+//catch (Exception ex)
+//{
 
-	Console.WriteLine(ex.Message);
-}
+//	Console.WriteLine(ex.Message);
+//}
 #endregion
 
 
@@ -2053,20 +2042,14 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 //try
 //{
-//    IEnumerable<ProductModel>? products = await productService.GetByPrice(299.99M, 399.89M);
+//    IEnumerable<ProductModel>? products = await productService.GetByPrice(100, 150.02M);
 //    if (products is null) throw new Exception();
 //    foreach (var product in products)
 //    {
 //        Console.WriteLine(product.ModelName);
 //        Console.WriteLine(product.Brand);
-//        foreach (var category in product.Categories)
-//        {
-//            Console.WriteLine(category.CategoryName);
-//        }
-//        foreach (var size in product.AvailableSizes)
-//        {
-//            Console.WriteLine(size.Size);
-//        }
+//        Console.WriteLine(product.Price);
+
 //    }
 //}
 //catch (Exception ex)
@@ -2083,21 +2066,15 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //{
 //    try
 //    {
-//        FilterModel filter = new FilterModel(category:"chaussure de sécurité");
+//        FilterModel filter = new FilterModel(category: "Test BLL", brand: "Adidas", minPrice: 100);
 //        IEnumerable<ProductModel> products = productService.Filter(filter);
 
 //        foreach (var product in products)
 //        {
 //            Console.WriteLine(product.ModelName);
 //            Console.WriteLine(product.Brand);
-//            foreach (var category in product.Categories)
-//            {
-//                Console.WriteLine(category.CategoryName);
-//            }
-//            foreach (var size in product.AvailableSizes)
-//            {
-//                Console.WriteLine(size.Size);
-//            }
+//            Console.WriteLine(product.Price);
+    
 //        }
 //    }
 //    catch (Exception ex)

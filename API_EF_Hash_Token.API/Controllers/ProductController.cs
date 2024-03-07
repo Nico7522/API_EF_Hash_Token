@@ -57,7 +57,7 @@ namespace API_EF_Hash_Token.API.Controllers
         }
 
         [HttpGet("search/price")]
-        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByPrice([FromQuery] decimal minPrice, decimal maxPrice)
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductDTO>>?>> GetByPrice([FromQuery] decimal? minPrice, decimal? maxPrice)
         {
             IEnumerable<ProductDTO>? products = await _productService.GetByPrice(minPrice, maxPrice).ContinueWith(r => r.Result?.Select(p => p.ToProductDTO()));
             return products is not null ? Ok(ApiResponse<IEnumerable<ProductDTO>>.Success(products)) : NotFound(ApiResponse<ProductDTO>.Failed(message: "Error", status: 404));
