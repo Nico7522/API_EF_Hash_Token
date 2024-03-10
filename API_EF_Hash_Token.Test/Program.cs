@@ -8,6 +8,7 @@ using API_EF_Hash_Token.DAL.Interfaces;
 using API_EF_Hash_Token.DAL.Methods;
 using API_EF_Hash_Token.DAL.Repositories;
 using API_EF_Hash_Token.Test.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
@@ -425,6 +426,26 @@ string password = "@Test1234=";
 #endregion
 
 
+#region Test stored procedure
+//var id = 29;
+//UserEntity? u = dataContext.Users.FromSqlRaw<UserEntity>($"EXEC dbo.Test {id}").AsEnumerable().FirstOrDefault();
+
+//try
+//{
+
+
+//            Console.WriteLine(u.FirstName);
+        
+//}
+//catch (Exception ex )
+//{
+
+//    Console.WriteLine(ex);
+//}
+
+
+#endregion
+
 
 
 // Pour utiliser appsetting.json
@@ -648,6 +669,24 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 
 //    Console.WriteLine(ex.Message);
 //}
+#endregion
+
+#region Test UpdatePassword User
+
+try
+{
+    UserEntity? userToUpdate = await userRepository.GetById(30);
+    if (userToUpdate is null) throw new Exception("User not found");
+
+    bool isUserUpdated = userRepository.UpdatePassword(userToUpdate, "@Test1212UU", userToUpdate.UserId);
+    Console.WriteLine(isUserUpdated);
+}
+catch (Exception ex)
+{
+
+    Console.WriteLine(ex.Message);
+}
+
 #endregion
 
 

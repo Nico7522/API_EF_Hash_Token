@@ -12,7 +12,7 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<UserModel> Register(UserModel user);
         Task<UserModel> Login(string username, string password);
         Task<bool> UpdateEmail(string email, int id);
-        Task<bool> UpdatePassword(string password, int id);
+        //Task<bool> UpdatePassword(string password, int id);
 
 
     }

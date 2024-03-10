@@ -52,11 +52,11 @@ namespace API_EF_Hash_Token.BLL.Services
             return isUpdated;
         }
 
-        public async Task<bool> UpdatePassword(string password, int id)
-        {
-          bool isUpdated = await _authRepository.UpdatePassword(password, id);
+        //public async Task<bool> UpdatePassword(string password, int id)
+        //{
+        //  bool isUpdated = await _authRepository.UpdatePassword(password, "ddd", id);
 
-            return isUpdated;
-        }
+        //    return isUpdated;
+        //}
     }
 }

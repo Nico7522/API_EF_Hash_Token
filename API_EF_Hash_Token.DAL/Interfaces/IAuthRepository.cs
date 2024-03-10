@@ -13,6 +13,6 @@ namespace API_EF_Hash_Token.DAL.Interfaces
         Task<UserEntity?> Login(string email, string password);
         Task<bool> UpdateEmail(string email, int id);
 
-        Task<bool> UpdatePassword(string password, int id);
+        bool UpdatePassword(UserEntity userToUpdate, string newPassword, int id);
     }
 }

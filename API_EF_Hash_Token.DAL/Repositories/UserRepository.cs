@@ -2,10 +2,12 @@
 using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
 using API_EF_Hash_Token.DAL.Methods;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,16 +97,13 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return true;
         }
 
-        public async Task<bool> UpdatePassword(string newPassword, int id)
+        public bool UpdatePassword(UserEntity userToUpdate, string newPassword, int id)
         {
-            UserEntity? user = await GetById(id);
+            string passwordSalt = PasswordHasher.GenerateSalt();
+            string passwordHash = PasswordHasher.ComputeHash(newPassword, userToUpdate.PasswordSalt, _pepper, _iteration);
 
-            if (user is null) return false;
-
-            user.PasswordSalt = PasswordHasher.GenerateSalt();
-            user.PasswordHash = PasswordHasher.ComputeHash(newPassword, user.PasswordSalt, _pepper, _iteration);
-            await _context.SaveChangesAsync();
-            return true;
+            int row = _context.Database.ExecuteSqlInterpolated($"EXEC dbo.UpdatePassword @Id = {id}, @PasswordSalt = {passwordSalt}, @PasswordHash = {passwordHash}");
+            return row == 1;
         }
 
         public async Task<IEnumerable<UserEntity>> GetAllWithAdresses()
