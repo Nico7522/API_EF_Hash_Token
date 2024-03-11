@@ -3,6 +3,8 @@ using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Infrastructure;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
+using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,13 +54,18 @@ namespace API_EF_Hash_Token.API.Controllers
             return isUpdated ? Ok("Email modifiée avec succèss") : BadRequest();
         }
 
-        [HttpPatch("{id}/update/password")]
+        [HttpPost("reset/password")]
+        public async Task<ActionResult<bool>> RequestResetPassword(ResetPasswordRequestForm form)
+        {
+            bool isEmailSend = await _authService.RequestResetPassword(form.Email);
+            return isEmailSend ? Ok(isEmailSend) : BadRequest();
+        }
+
+        [HttpPatch("{id:int}/update/password")]
         public async Task<ActionResult> UpdatePassword(UpdatePasswordForm form, int id)
         {
             bool isUpdated = await _authService.UpdatePassword(form.Password, id);
-            return isUpdated ? Ok() : BadRequest();
-
-
+            return isUpdated ? Ok(isUpdated) : BadRequest();
         }
     }
 }

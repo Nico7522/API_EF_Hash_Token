@@ -1,4 +1,5 @@
 ﻿using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace API_EF_Hash_Token.BLL.IInterfaces
         Task<UserModel> Register(UserModel user);
         Task<UserModel> Login(string username, string password);
         Task<bool> UpdateEmail(string email, int id);
-        //Task<bool> UpdatePassword(string password, int id);
-
+        Task<bool> UpdatePassword(string password, int id);
+        Task<bool> RequestResetPassword(string email);
 
     }
 }

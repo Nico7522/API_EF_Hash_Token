@@ -2,6 +2,8 @@
 using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Mappers;
 using API_EF_Hash_Token.BLL.IInterfaces;
+using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -77,5 +79,7 @@ namespace API_EF_Hash_Token.API.Controllers
             bool isActivate = await _userService.ActiveAccount(userId);
             return isActivate ? Ok() : BadRequest();
         }
+
+
     }
 }

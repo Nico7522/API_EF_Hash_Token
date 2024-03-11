@@ -97,12 +97,14 @@ namespace API_EF_Hash_Token.DAL.Repositories
             return true;
         }
 
-        public bool UpdatePassword(UserEntity userToUpdate, string newPassword, int id)
+        public async Task<bool> UpdatePassword(UserEntity userToUpdate, string newPassword)
         {
-            string passwordSalt = PasswordHasher.GenerateSalt();
-            string passwordHash = PasswordHasher.ComputeHash(newPassword, userToUpdate.PasswordSalt, _pepper, _iteration);
-
-            int row = _context.Database.ExecuteSqlInterpolated($"EXEC dbo.UpdatePassword @Id = {id}, @PasswordSalt = {passwordSalt}, @PasswordHash = {passwordHash}");
+            userToUpdate.PasswordSalt = PasswordHasher.GenerateSalt();
+            userToUpdate.PasswordHash = PasswordHasher.ComputeHash(newPassword, userToUpdate.PasswordSalt, _pepper, _iteration);
+            
+            await Console.Out.WriteLineAsync("ici");
+            int row =  _context.Database.ExecuteSqlInterpolated($"EXEC dbo.UpdatePassword @Id = {userToUpdate.UserId}, @PasswordSalt = {userToUpdate.PasswordSalt}, @PasswordHash = {userToUpdate.PasswordHash}");
+            await _context.SaveChangesAsync();
             return row == 1;
         }
 
@@ -121,6 +123,21 @@ namespace API_EF_Hash_Token.DAL.Repositories
             user.IsActive = true;
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<bool> RequestResetPassword(string email)
+        {
+            try
+            {
+                 await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC dbo.SendLinkFormNewPassword @email = {email}");
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
         }
     }
 }

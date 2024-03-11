@@ -671,21 +671,36 @@ IOrderRepository orderRepository = new OrderRepository(dataContext);
 //}
 #endregion
 
-#region Test UpdatePassword User
+#region Test RequestResetPassword User 
 
 try
 {
-    UserEntity? userToUpdate = await userRepository.GetById(30);
-    if (userToUpdate is null) throw new Exception("User not found");
-
-    bool isUserUpdated = userRepository.UpdatePassword(userToUpdate, "@Test1212UU", userToUpdate.UserId);
-    Console.WriteLine(isUserUpdated);
+    bool ok = await userRepository.RequestResetPassword("nico.daddabbo7@gmail.com");
+    Console.WriteLine(ok);
 }
 catch (Exception ex)
 {
 
     Console.WriteLine(ex.Message);
 }
+
+#endregion
+
+#region Test UpdatePassword User
+
+//try
+//{
+//    UserEntity? userToUpdate = await userRepository.GetById(40);
+//    if (userToUpdate is null) throw new Exception("User not found");
+
+//    bool isUserUpdated = await userRepository.UpdatePassword(userToUpdate, "@MyNewPassword1234");
+//    Console.WriteLine(isUserUpdated);
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
 
 #endregion
 
@@ -1737,6 +1752,26 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 
 #endregion
 
+#region Tes UpdatePassword User
+
+//try
+//{
+//    bool isPasswordUpdated = await authService.UpdatePassword("ZZZ1212@gmdsqdq", "nico.daddabbo7100@gmail.com");
+//    if (!isPasswordUpdated) throw new Exception("Error");
+
+//    Console.WriteLine("OK");
+
+
+
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+#endregion
+
 // TEST Adress
 
 #region Test GetAll Adress
@@ -2113,7 +2148,7 @@ IOrderService orderService = new OrderService(orderRepository, userRepository, p
 //            Console.WriteLine(product.ModelName);
 //            Console.WriteLine(product.Brand);
 //            Console.WriteLine(product.Price);
-    
+
 //        }
 //    }
 //    catch (Exception ex)

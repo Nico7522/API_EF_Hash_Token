@@ -1,6 +1,7 @@
 ﻿using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Mappers;
 using API_EF_Hash_Token.BLL.Models;
+using API_EF_Hash_Token.DAL.Entities;
 using API_EF_Hash_Token.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -46,17 +47,29 @@ namespace API_EF_Hash_Token.BLL.Services
             return newUser;
         }
 
+        public async Task<bool> RequestResetPassword(string email)
+        {
+            UserEntity? user = await _userRepository.GetByEmail(email);
+            if (user is null) return false;
+            bool isEmailSend = await _userRepository.RequestResetPassword(email);
+            return isEmailSend;
+        }
+
         public async Task<bool> UpdateEmail(string email, int id)
         {
             bool isUpdated = await _authRepository.UpdateEmail(email, id);
             return isUpdated;
         }
 
-        //public async Task<bool> UpdatePassword(string password, int id)
-        //{
-        //  bool isUpdated = await _authRepository.UpdatePassword(password, "ddd", id);
+        public async Task<bool> UpdatePassword(string password, int id)
+        {
+            UserEntity? user = await _userRepository.GetById(id);
+            if (user is null) return false;
 
-        //    return isUpdated;
-        //}
+
+            bool isUpdated = await _authRepository.UpdatePassword(user, password);
+
+            return isUpdated;
+        }
     }
 }
