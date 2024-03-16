@@ -6,6 +6,7 @@ using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.IO;
 
 namespace API_EF_Hash_Token.API.Controllers
@@ -15,9 +16,11 @@ namespace API_EF_Hash_Token.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IConfiguration _configuration;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IConfiguration configuration )
         {
+            _configuration = configuration;
             _productService = productService;
         }
 
@@ -112,6 +115,7 @@ namespace API_EF_Hash_Token.API.Controllers
         [HttpPut("{id}/image")]
         public async Task<ActionResult<ApiResponse<string>>> UpdatePicture(int id, [FromForm] FileForm image)
         {
+            
             if (image is null) return BadRequest(ApiResponse<ProductDTO>.Failed());
             string now = DateTime.UtcNow.ToString("yyyyMMdd");
             string rng = Guid.NewGuid().ToString();
@@ -121,9 +125,10 @@ namespace API_EF_Hash_Token.API.Controllers
             try
             {
                 string? newImage = await _productService.UpdatePicture(id, filename);
-                string path = Path.Combine(image.Directory, filename);
+                string path = Path.Combine(_configuration.GetValue<string>("upload:directory"), filename);
                 using (Stream stream = new FileStream(path, FileMode.CreateNew))
                 {
+                    await Console.Out.WriteLineAsync("ici");
                     image.File.CopyTo(stream);
                 }
 

@@ -90,7 +90,7 @@ namespace API_EF_Hash_Token.DAL.Repositories
                         .Select(x => new { ProductId = x.Key, QuantitySum = x.Sum(a => a.Quantity)})
                         .OrderByDescending(x => x.QuantitySum)
                         .Select(x => x.ProductId)
-                        .Take(3)
+                        .Take(10)
                         .ToListAsync();
             foreach (var productId in list)
             {

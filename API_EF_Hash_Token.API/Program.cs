@@ -1,3 +1,4 @@
+using API_EF_Hash_Token.API.Forms;
 using API_EF_Hash_Token.API.Infrastructure;
 using API_EF_Hash_Token.BLL.IInterfaces;
 using API_EF_Hash_Token.BLL.Services;
@@ -54,6 +55,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Token
 builder.Services.AddSingleton<TokenManager>();
+
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
